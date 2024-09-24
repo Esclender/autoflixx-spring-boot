@@ -1,8 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/main/resources/templates/**/*.{html,js}",
+    "./src/main/resources/templates/*.{html,js}",
   ],
+  mode: 'jit',
   theme: {
     extend: {
       colors: {
@@ -14,6 +15,9 @@ module.exports = {
         'dark-3': '#D9D9D9',
         'dark-4': '#495057',
         'light-1': '#F9F9F9',
+      },
+      height: {
+        '128': '32rem',
       },
       boxShadow: {
         'card': '0px 2px 11.1px 0px rgba(0, 0, 0, 0.10)',
