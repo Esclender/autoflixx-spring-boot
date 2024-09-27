@@ -17,6 +17,7 @@ module.exports = {
         'light-1': '#F9F9F9',
       },
       height: {
+        '112': '28rem',
         '128': '32rem',
       },
       boxShadow: {
@@ -25,9 +26,12 @@ module.exports = {
       },
       fontFamily: {
         archivo: ['Archivo Black', 'sans-serif'],
-        sans: ['Roboto', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
         
-      }
+      },
+      boxShadow: {
+        'white-glow': '0 0 15px 5px rgba(255, 255, 255, 1)', // Sombra blanca difusa
+      },
     },
   },
   plugins: [
