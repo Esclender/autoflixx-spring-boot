@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoflixx - Home</title>
+    <link rel="stylesheet" href="../static/css/output.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"></head>
+<body class="overflow-x-hidden bg-light-1">
+    <!-- <img src="../static/imgs/Group 131.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+        
+    -->
+
+<div id="default-carousel" class="relative w-full" data-carousel="slide">
+    <!-- Carousel wrapper -->
+    <div class="relative h-dvh overflow-hidden md:h-[30rem]">
+         <!-- Item 1 -->
+        <div class="duration-700 ease-in-out h-dvh w-full md:h-[30rem]" data-carousel-item>
+            <img src="../static/imgs/Group-131.png" class="absolute block w-full object-cover h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."> 
+            <section class="absolute block w-full -translate-x-1/2 md:-translate-y-1/2  md:top-[45%] bottom-6 left-1/2">
+                <div class=" grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+                    <div class="mr-auto md:ml-16 place-self-center lg:col-span-7">
+                        <h5 class="uppercase text-light-1 font-regular mb-1 text-sm md:text-md font-roboto">De 14 a 20 de setiembre</h5>
+                        <h1 class="max-w-2xl text-light-1 mb-2 text-[40px] font-extrabold font-archivo tracking-tight leading-none md:text-[64px] xl:text-[84px]">Deadpool</h1>
+                        <p class="max-w-96 mb-4 font-light text-light-1 h-[76px] md:h-auto lg:mb-6 md:text-lg lg:text-xl font-roboto">Tras ser sometido a un cruel experimento científico, adquiere poderes especiales que le convierten en Deadpool.</p>
+                        
+                        <a href="#" class="inline-flex items-center bg-red-prim justify-center rounded-lg px-5 py-1.5 font-light text-center text-lg text-light-1 hover:bg-transparent hover:border font-roboto">
+                            <img class="mr-2" src="../static/icons/entradas.svg" alt="">
+                            Comprar
+                        </a> 
+                    </div>
+                              
+                </div>
+            </section>
+        </div>
+        <!-- Item 2 -->
+        <div class="duration-700 ease-in-out h-dvh w-full md:h-[30rem]" data-carousel-item>
+            <img src="../static/imgs/Group-132.png" class="absolute hidden md:block w-full object-cover h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."> 
+            <img src="../static/imgs/Group-135.png" class="absolute md:hidden block w-full object-cover h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."> 
+            <section class="absolute block w-full -translate-x-1/2 md:-translate-y-1/2  md:top-[45%] bottom-6 left-1/2">
+                <div class=" grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+                    <div class="mr-auto md:ml-16 place-self-center lg:col-span-7">
+                        <h5 class="uppercase text-light-1 font-regular mb-1 text-sm md:text-md font-roboto">De 14 a 20 de setiembre</h5>
+                        <h1 class="max-w-2xl text-light-1 mb-2 text-[40px] font-extrabold font-archivo tracking-tight leading-none md:text-[64px] xl:text-[84px]">Oppenheimer</h1>
+                        <p class="max-w-96 mb-4 font-light text-light-1 h-[76px] md:h-auto lg:mb-6 md:text-lg lg:text-xl ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.</p>
+                        
+                        <a href="#" class="inline-flex items-center bg-red-prim justify-center rounded-lg px-5 py-1.5 font-light text-center text-lg text-light-1 hover:bg-transparent hover:border ">
+                            <img class="mr-2 md:flex hidden" src="../static/icons/entradas.svg" alt="">
+                            
+                            Comprar
+                        </a> 
+                    </div>
+                              
+                </div>
+            </section>
+        </div>
+        <!-- Item 3 -->
+        <div class="duration-700 ease-in-out h-dvh w-full md:h-[30rem]" data-carousel-item>
+            <img src="../static/imgs/Group-133.png" class="absolute block w-full object-cover h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."> 
+            <section class="absolute block w-full -translate-x-1/2 md:-translate-y-1/2 md:top-[45%] bottom-6 left-1/2">
+                <div class=" grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+                    <div class="mr-auto md:ml-16 place-self-center lg:col-span-7">
+                        <h5 class="uppercase text-light-1 font-regular mb-1 text-sm md:text-md font-roboto">De 14 a 20 de setiembre</h5>
+                        <h1 class="max-w-2xl text-light-1 mb-2 text-[40px] font-extrabold font-archivo tracking-tight leading-none md:text-[64px] xl:text-[84px]">La la land</h1>
+                        <p class="max-w-96 mb-4 font-light text-light-1 h-[76px] md:h-auto lg:mb-6 md:text-lg lg:text-xl ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.</p>
+                        
+                        <a href="#" class="inline-flex items-center bg-red-prim justify-center rounded-lg px-5 py-1.5 font-light text-center text-lg text-light-1 hover:bg-transparent hover:border ">
+                            <img class="mr-2" src="../static/icons/entradas.svg" alt="">
+                            Comprar
+                        </a> 
+                    </div>
+                              
+                </div>
+            </section>
+        </div>
+        <!-- Item 4 -->
+        <div class="duration-700 ease-in-out h-dvh w-full md:h-[30rem]" data-carousel-item>
+            <img src="../static/imgs/Group-134.png" class="absolute hidden md:block w-full object-cover h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."> 
+            <img src="../static/imgs/Group-136.png" class="absolute md:hidden block w-full object-cover h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."> 
+            <section class="absolute block w-full -translate-x-1/2 md:-translate-y-1/2  md:top-[45%] bottom-6 left-1/2">
+                <div class=" grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+                    <div class="mr-auto md:ml-16 place-self-center lg:col-span-7">
+                        <h5 class="uppercase text-light-1 font-regular mb-1 text-sm md:text-md font-roboto">De 14 a 20 de setiembre</h5>
+                        <h1 class="max-w-2xl text-light-1 mb-2 text-[40px] font-extrabold font-archivo tracking-tight leading-none md:text-[64px] xl:text-[84px]">Grease</h1>
+                        <p class="max-w-96 mb-4 font-light text-light-1 h-[76px] md:h-auto lg:mb-6 md:text-lg lg:text-xl ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.</p>
+                        
+                        <a href="#" class="inline-flex items-center bg-red-prim justify-center rounded-lg px-5 py-1.5 font-light text-center text-lg text-light-1 hover:bg-transparent hover:border ">
+                            <img class="mr-2 md:flex hidden" src="../static/icons/entradas.svg" alt="">
+                            
+                            Comprar
+                        </a> 
+                    </div>
+                              
+                </div>
+            </section>
+        </div>
+     
+    </div>
+    <!-- Slider indicators -->
+    <div class="absolute z-30 flex -translate-x-1/2 bottom-2 left-1/2 space-x-3 rtl:space-x-reverse">
+        <button type="button" class="w-10 h-1.5 rounded-lg" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+        <button type="button" class="w-10 h-1.5 rounded-lg" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+        <button type="button" class="w-10 h-1.5 rounded-lg" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+        <button type="button" class="w-10 h-1.5 rounded-lg" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+    </div>
+    <!-- Slider controls -->
+    <button type="button" class="absolute hidden md:flex top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-dark-1/30 group-hover:bg-white/50">
+            <svg class="w-4 h-4 text-white  rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+            </svg>
+            <span class="sr-only">Previous</span>
+        </span>
+    </button>
+    <button type="button" class="absolute hidden md:flex top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-dark-1/30 group-hover:bg-white/50">
+            <svg class="w-4 h-4 text-white  rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+            </svg>
+            <span class="sr-only">Next</span>
+        </span>
+    </button>
+</div>
+<!-- Gallery -->
+ 
+<section class="mx-2 md:px-24 my-6 md:my-16 ">
+    <h1 class="text-red-sec font-archivo text-[40px] md:text-[64px] xl:text-[84px] mb-4">Películas</h1>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 ">
+    <div>
+        <img class="md:h-80 w-full max-w-full rounded-sm" src="../static/imgs/movies/grease.png" alt="">
+    </div>
+    <div>
+        <img class="md:h-80 w-full max-w-full rounded-sm" src="../static/imgs/movies/Lalaland.png" alt="">
+    </div>
+    <div>
+        <img class="md:h-80 w-full max-w-full rounded-sm" src="../static/imgs/movies/Oppenheimer.png" alt="">
+    </div>
+    <div>
+        <img class="md:h-80 w-full max-w-full rounded-sm" src="../static/imgs/movies/Deadpool.png" alt="">
+    </div>
+    <div>
+        <img class="md:h-80 w-full max-w-full rounded-sm" src="../static/imgs/movies/pobreangelito.png" alt="">
+    </div>
+    <div>
+        <img class="md:h-80 w-full max-w-full rounded-sm" src="../static/imgs/movies/Alien.png" alt="">
+    </div>
+</div>
+</section>
+
+ <!-- End Gallery -->
+    
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+</body>
+</html>
