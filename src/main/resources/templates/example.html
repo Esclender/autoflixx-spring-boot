@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Autoflixx - Home</title>
-  <link rel="stylesheet" href="../static/css/output.css">
+  <!-- En thymeleaf la ruta del css se escribe de la siguiente forma  -->
+  <link rel="stylesheet" th:href="@{/css/output.css}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
@@ -14,7 +15,7 @@
     rel="stylesheet">
 </head>
 
-<body class="overflow-x-hidden bg-light-1">
+<body class="overflow-x-hidden">
   <div th:replace="fragments/header"></div>
   <main>
     <div th:replace="fragments/sidebar :: sidebar"></div>
