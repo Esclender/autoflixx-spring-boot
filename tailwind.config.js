@@ -1,9 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/main/resources/templates/*.{html,js}",
+    "./src/main/resources/templates/**/*.{html,js}",
   ],
-  mode: 'jit',
   theme: {
     extend: {
       colors: {
@@ -14,7 +13,7 @@ module.exports = {
         'dark-2': '#7A7A7A',
         'dark-3': '#D9D9D9',
         'dark-4': '#495057',
-        'light-1': '#F9F9F9',
+        'light-1': '#F9F9F9'
       },
       height: {
         '112': '28rem',
