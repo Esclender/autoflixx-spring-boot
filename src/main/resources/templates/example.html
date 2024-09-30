@@ -17,11 +17,11 @@
 
 <body class="overflow-x-hidden">
   <div th:replace="fragments/header"></div>
-  <main>
+  <main class="flex">
     <div th:replace="fragments/sidebar :: sidebar"></div>
-    <!--
-        Contenido aqui
-    -->
+    <section class="grow flex justify-center">
+      <div th:replace="fragments/steps-indicator.html"></div>
+    </section>
   </main>
   <div th:replace="fragments/footer"></div>
 
