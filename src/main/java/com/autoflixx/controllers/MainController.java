@@ -10,4 +10,9 @@ public class MainController {
   public String getExamplePage() {
     return "example";
   }
+
+  @GetMapping("/entradas")
+  public String getEntradasPage() {
+    return "steps/entradas/index";
+  }
 }
