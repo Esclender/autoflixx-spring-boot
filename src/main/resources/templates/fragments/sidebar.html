@@ -1,0 +1,37 @@
+<aside th:fragment="sidebar">
+  <div class=" w-72 h-screen bg-white shadow-lg border-r-2 border-gray-200 flex flex-col p-6 space-y-4">
+    <!-- Cart Header -->
+    <div class="flex justify-between items-center">
+      <h3 class="text-lg font-bold text-gray-700">Tu carrito</h3>
+      <button class="text-gray-400 hover:text-gray-600">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Cart Item -->
+    <div class="flex flex-col space-y-4">
+      <div class="flex justify-between items-center">
+        <img src="https://via.placeholder.com/80x80?text=Product" alt="Product" class="w-20 h-20 object-cover">
+        <div class="flex flex-col space-y-1 flex-grow ml-4">
+          <span class="text-gray-700 font-semibold">Combo Autofiix 1 Balde + 2 Adicionales</span>
+          <span class="text-sm text-gray-500">Cantidad: 1</span>
+        </div>
+        <span class="text-red-600 font-bold">$199.0</span>
+      </div>
+    </div>
+
+    <!-- Cart Footer -->
+    <div class="mt-auto">
+      <hr class="my-4">
+      <div class="flex justify-between text-lg font-bold text-gray-700">
+        <span>Total:</span>
+        <span>$199.0</span>
+      </div>
+      <button class="w-full bg-red-600 text-white py-3 mt-4 rounded hover:bg-red-700 transition duration-200">
+        Pagar
+      </button>
+    </div>
+  </div>
+</aside>
