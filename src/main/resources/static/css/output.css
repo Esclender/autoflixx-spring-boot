@@ -1115,6 +1115,10 @@ input[type="range"]::-ms-fill-lower {
   margin-right: 0.5rem;
 }
 
+.mr-4 {
+  margin-right: 1rem;
+}
+
 .mr-auto {
   margin-right: auto;
 }
@@ -1200,7 +1204,7 @@ input[type="range"]::-ms-fill-lower {
 }
 
 .h-9 {
-  height: 2.25rem;
+  height: 2.75rem;
 }
 
 .h-96 {
@@ -1277,6 +1281,10 @@ input[type="range"]::-ms-fill-lower {
 
 .w-7 {
   width: 1.75rem;
+}
+
+.w-9 {
+  width: 2.75rem;
 }
 
 .w-72 {
