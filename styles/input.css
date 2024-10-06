@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 body{
     font-family: 'Roboto', sans-serif;
 }
@@ -23,8 +24,17 @@ body{
     background-color: rgba(0, 0, 0, 0.4); /* Color negro con opacidad del 50% */
     z-index: 1;
 }
-/* Asegúrate de que el contenido dentro del div esté por encima de la capa */
+
 .hero-tickets > * {
     position: relative;
     z-index: 2;
 }
+
+/* Shadow */
+
+.horrible-shadow {
+    box-shadow: 10px 10px 50px 20px rgba(0, 0, 0, 0.9), 
+                inset 5px 5px 30px 10px rgba(255, 0, 0, 0.8), 
+                0px 0px 100px 50px rgba(0, 255, 0, 0.6), 
+                0px 0px 150px 75px rgba(0, 0, 255, 0.4);
+  }
