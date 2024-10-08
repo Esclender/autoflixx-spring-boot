@@ -1,5 +1,5 @@
 package com.autoflixx.services;
 
-public interface MovieService {
+public interface IMovieService {
 
 }
