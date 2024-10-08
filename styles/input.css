@@ -28,3 +28,38 @@ body{
     position: relative;
     z-index: 2;
 }
+
+.steps_icons__containers {
+    margin-bottom: -10%;
+    transform: scale(1.2);
+}
+
+.inactive_container  {
+    color: #7A7A7A;
+}
+
+.active_container  {
+    color: #fff;
+}
+
+/*Responsive sidebar and steps-indicator*/
+@media (max-width: 390px) {
+  
+    .steps-indicators h3{
+        font-size: .9rem;
+    }
+
+    .steps-indicators .steps_icons__containers{
+        transform: scale(0.7);
+        margin-bottom: -30%;
+
+    }
+
+    .steps__container {
+        justify-content: space-between;
+        margin-top: 15px;
+
+    }
+
+  }
+  
