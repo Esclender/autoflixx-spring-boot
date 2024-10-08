@@ -8,6 +8,6 @@ public class MainController {
 
   @GetMapping("/example")
   public String getExamplePage() {
-    return "steps/factura/index";
+    return "login";
   }
 }
