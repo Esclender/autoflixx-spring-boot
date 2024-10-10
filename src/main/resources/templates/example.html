@@ -18,11 +18,11 @@
 <body class="overflow-x-hidden">
   <div th:replace="fragments/header"></div>
   <main class="flex">
-    <div th:replace="fragments/sidebar :: sidebar"></div>
+    <div th:replace="fragments/sidebar :: sidebar(etapa)"></div>
     <section class="grow flex flex-col items-center">
       <div th:replace="fragments/steps-indicator.html"></div>
       <div class="grow">
-        <!--Content here-->
+        
       </div>
     </section>
   </main>
