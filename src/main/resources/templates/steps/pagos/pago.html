@@ -18,12 +18,12 @@
     rel="stylesheet">
 </head>
 
-<body class="overflow-x-hidden bg-gray-100 grid grid-cols-10 gap-5">
+<body class="overflow-x-hidden bg-gray-100 grid grid-cols-10 ">
   <div th:replace="fragments/header"></div>
   <div th:replace="fragments/sidebar :: sidebar(pago)"></div>
   <main class="col-span-5 col-start-4 grow flex flex-col items-center">
     <!-- steps-indicator -->
-    <div th:replace="fragments/steps-indicator"></div>
+    <div th:replace="fragments/steps-indicator :: steps-indicator(3)"></div>
 
     <!-- pasarela de pagos -->
     <div class="mt-5 mb-7 w-[70%]">
@@ -119,7 +119,8 @@
             data-accordion-target="#accordion-color-body-4" aria-expanded="false"
             aria-controls="accordion-color-body-4">
             <div class="flex items-center gap-2">
-              <img th:src="@{/imgs/metodos_pago/pagoefectivo.svg}" class="h-11 w-15 object-cover" alt="PagoEfectivo logo" />
+              <img th:src="@{/imgs/metodos_pago/pagoefectivo.svg}" class="h-11 w-15 object-cover"
+                alt="PagoEfectivo logo" />
               <span class="text-xl font-bold ml-2">Pago Efectivo</span>
             </div>
           </button>
@@ -146,9 +147,10 @@
         <!-- Sección Esenciales -->
         <div class="flex justify-between items-center mb-4">
           <h3 class="text-2xl">Esenciales</h3>
-          <button class=" text-black py-1 px-2 rounded-full border-black border-2 text-xs hover:bg-white">Ver mas</button>
+          <button class=" text-black py-1 px-2 rounded-full border-black border-2 text-xs hover:bg-white">Ver
+            mas</button>
         </div>
-      
+
         <!-- Productos -->
         <div class="space-y-4">
           <!-- Producto 1 -->
@@ -167,7 +169,7 @@
               <p class="text-lg font-semibold">$10.00</p>
             </div>
           </div>
-      
+
           <!-- Producto 2 -->
           <div class="flex items-center p-4 border border-gray-200 rounded-lg bg-white shadow-md">
             <img src="https://via.placeholder.com/100" alt="Producto 2" class="w-16 h-16 object-cover mr-4 rounded">
@@ -184,7 +186,7 @@
               <p class="text-lg font-semibold">$20.00</p>
             </div>
           </div>
-      
+
           <!-- Producto 3 -->
           <div class="flex items-center p-4 border border-gray-200 rounded-lg bg-white shadow-md">
             <img src="https://via.placeholder.com/100" alt="Producto 3" class="w-16 h-16 object-cover mr-4 rounded">
@@ -201,7 +203,7 @@
               <p class="text-lg font-semibold">$15.00</p>
             </div>
           </div>
-      
+
           <!-- Producto 4 -->
           <div class="flex items-center p-4 border border-gray-200 rounded-lg bg-white shadow-md">
             <img src="https://via.placeholder.com/100" alt="Producto 4" class="w-16 h-16 object-cover mr-4 rounded">
@@ -221,8 +223,8 @@
         </div>
       </div>
     </div>
-    </div>
-    </div>
+  </div>
+  </div>
   </div>
   <div th:replace="fragments/footer"></div>
 
