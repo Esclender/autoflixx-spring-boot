@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 body{
     font-family: 'Roboto', sans-serif;
 }
@@ -23,43 +24,8 @@ body{
     background-color: rgba(0, 0, 0, 0.4); /* Color negro con opacidad del 50% */
     z-index: 1;
 }
-/* Asegúrate de que el contenido dentro del div esté por encima de la capa */
+
 .hero-tickets > * {
     position: relative;
     z-index: 2;
 }
-
-.steps_icons__containers {
-    margin-bottom: -10%;
-    transform: scale(1.2);
-}
-
-.inactive_container  {
-    color: #7A7A7A;
-}
-
-.active_container  {
-    color: #fff;
-}
-
-/*Responsive sidebar and steps-indicator*/
-@media (max-width: 390px) {
-  
-    .steps-indicators h3{
-        font-size: .9rem;
-    }
-
-    .steps-indicators .steps_icons__containers{
-        transform: scale(0.7);
-        margin-bottom: -30%;
-
-    }
-
-    .steps__container {
-        justify-content: space-between;
-        margin-top: 15px;
-
-    }
-
-  }
-  

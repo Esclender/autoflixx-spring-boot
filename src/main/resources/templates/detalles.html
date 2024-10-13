@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoflixx - Home</title>
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
+    <!-- En thymeleaf la ruta del css se escribe de la siguiente forma  -->
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <lnk href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="overflow-x-hidden bg-light-1">
+    <!-- Header -->
+    <div th:replace="fragments/header"></div>
+
+    <!-- Content -->
+    <div id="default-carousel" class="relative w-full" data-carousel="slide">
+        <!-- Carousel wrapper -->
+        <div class="relative h-dvh overflow-hidden md:h-[30rem]">
+            <!-- Item 1 -->
+            <div class="duration-700 ease-in-out h-dvh w-full md:h-[30rem]" data-carousel-item>
+                
+                <section
+                    class="absolute block w-full -translate-x-1/2 md:-translate-y-1/2  md:top-[45%] bottom-6 left-1/2">
+                    <div class=" grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+                        <div class="mr-auto md:ml-16 place-self-center lg:col-span-7">
+                           <h1 th:text="${movie.nombre}"
+                                class="max-w-2xl text-dark-1 mb-2 text-[40px] font-extrabold font-archivo tracking-tight leading-none md:text-[64px] xl:text-[84px]">
+                            </h1>
+                            <p th:text="${movie.sinopsis}"
+                                class="max-w-96 mb-4 font-light text-light-1 h-[76px] md:h-auto lg:mb-6 md:text-lg lg:text-xl font-roboto">
+                                .</p>
+
+                           
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div th:replace="fragments/footer"></div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+</body>
+
+</html>
