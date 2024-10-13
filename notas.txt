@@ -1,0 +1,3 @@
+mvn spring-boot:run = para ejecutar el proyecto
+ctrl + c = para detener el proyecto
+npx tailwindcss -i ./styles/input.css -o ./src/main/resources/static/css/output.css --watch = para visualizar los cambios en tailwind
