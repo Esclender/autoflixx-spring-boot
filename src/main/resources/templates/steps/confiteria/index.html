@@ -20,7 +20,7 @@
 <body class="overflow-x-hidden">
   <div th:replace="fragments/header"></div>
   <main class="flex">
-    <div th:replace="fragments/sidebar :: sidebar"></div>
+    <div th:replace="fragments/sidebar :: sidebar(null)"></div>
     <section class="grow flex flex-col items-center">
       <div th:replace="fragments/steps-indicator.html :: steps-indicator(2)"></div>
       <div class="grow">

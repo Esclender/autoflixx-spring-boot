@@ -13,13 +13,13 @@ import com.autoflixx.models.MovieModel;
 import com.autoflixx.services.IMovieService;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/movie")
 public class MovieController {
 
 	@Autowired
 	private IMovieService service;
 
-	@GetMapping("")
+	@GetMapping("/")
 	public String getAllMovies(Model model) {
 		List<MovieModel> movie = service.getAllMovies();
 		model.addAttribute("movie", movie);

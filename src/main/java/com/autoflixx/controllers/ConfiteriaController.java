@@ -19,7 +19,7 @@ public class ConfiteriaController {
 	@Autowired
 	private IConfiteriaService service;
 
-	@GetMapping("/")
+	@GetMapping("")
 	public String getConfiteriaPage(Model model) {
 		List<ConfiteriaModel> product = service.getProducts();
 

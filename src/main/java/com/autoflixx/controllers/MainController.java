@@ -8,6 +8,11 @@ public class MainController {
 
   @GetMapping("/")
   public String redirectHome() {
-    return "redirect:/home";
+    return "redirect:/movie/";
+  }
+
+  @GetMapping("/login")
+  public String redirectLogin() {
+    return "login";
   }
 }
