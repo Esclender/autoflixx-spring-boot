@@ -106,6 +106,7 @@ public class ConfiteriaServiceImpl implements IConfiteriaService{
         golosina1.setCategoria("Golosina");
         golosina1.setDisponible(1);  
         golosina1.setImagen("DUL-01.PNG");
+
         
         // Agregar productos a la lista
         productos.add(promo1);
