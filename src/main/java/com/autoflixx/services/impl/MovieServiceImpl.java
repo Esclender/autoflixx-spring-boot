@@ -31,7 +31,8 @@ public class MovieServiceImpl implements IMovieService {
             movie1.setDisponible(true);
             movie1.setDirector("Randal Kleiser");
             movie1.setGenero("Musical");
-            movie1.setDuracion(110); // in minutes
+            movie1.setDuracion(110); 
+            movie1.setTrailerUrl("https://www.youtube.com/watch?v=THd96gHV7Tg");
 
             // Movie 2: Deadpool
             MovieModel movie2 = new MovieModel();
@@ -45,6 +46,7 @@ public class MovieServiceImpl implements IMovieService {
             movie2.setDirector("Tim Miller");
             movie2.setGenero("Acción, Comedia");
             movie2.setDuracion(108);
+            movie2.setTrailerUrl("https://www.youtube.com/watch?v=0JnRdfiUMa8");
 
             // Movie 3: Home Alone
             MovieModel movie3 = new MovieModel();
@@ -58,6 +60,7 @@ public class MovieServiceImpl implements IMovieService {
             movie3.setDirector("Chris Columbus");
             movie3.setGenero("Comedia, Familia");
             movie3.setDuracion(103);
+            movie3.setTrailerUrl("https://www.youtube.com/watch?v=jEDaVHmw7r4");
 
             // Movie 4: Oppenheimer
             MovieModel movie4 = new MovieModel();
@@ -71,6 +74,7 @@ public class MovieServiceImpl implements IMovieService {
             movie4.setDirector("Christopher Nolan");
             movie4.setGenero("Drama, Historia");
             movie4.setDuracion(180);
+            movie4.setTrailerUrl("https://www.youtube.com/watch?v=gMPEbJQun68");
 
             // Movie 5: La La Land
             MovieModel movie5 = new MovieModel();
@@ -84,6 +88,7 @@ public class MovieServiceImpl implements IMovieService {
             movie5.setDirector("Damien Chazelle");
             movie5.setGenero("Drama, Romance");
             movie5.setDuracion(128);
+            movie1.setTrailerUrl("https://www.youtube.com/watch?v=0pdqf4P9MB8");
 
             // Movie 6: Alien
             MovieModel movie6 = new MovieModel();
@@ -98,6 +103,7 @@ public class MovieServiceImpl implements IMovieService {
             movie6.setDirector("Ridley Scott");
             movie6.setGenero("Horror, Sci-Fi");
             movie6.setDuracion(117);
+            movie1.setTrailerUrl("https://www.youtube.com/watch?v=5nWH2Pd-x-c");
 
             movies.add(movie1);
             movies.add(movie2);
