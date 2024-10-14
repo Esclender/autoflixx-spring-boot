@@ -7,6 +7,8 @@
     <title>Autoflixx - Home</title>
     <!-- Favicon -->
     <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
     <!-- En thymeleaf la ruta del css se escribe de la siguiente forma  -->
     <link rel="stylesheet" th:href="@{/css/output.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,7 +45,7 @@
                                 class="max-w-96 mb-4 font-light text-light-1 line-clamp-3 h-[76px] md:h-auto lg:mb-6 md:text-lg lg:text-xl font-roboto">
                                 .</p>
 
-                            <a href="#"
+                            <a th:href="@{/movie/view/{id}/entradas (id=${movie.id})}"
                                 class="inline-flex items-center bg-red-prim justify-center rounded-lg px-5 py-1.5 font-light text-center text-lg text-light-1 hover:bg-transparent hover:border font-roboto">
                                 <img class="mr-2" th:src="@{/icons/entradas.svg}" alt="">
                                 Comprar
@@ -103,10 +105,10 @@
     <!-- Grid para imágenes -->
     <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 
-        <div th:each="movie: ${movie}" class="relative group">
+        <div th:each="movie: ${movie}" class="relative  group">
             <a th:href="@{/movie/view/{id} (id=${movie.id})}">
                 <!-- Imagen de la película -->
-                <img class="h-64 w-full max-w-full rounded-sm object-cover"
+                <img class="h-full max-w-full rounded-sm object-cover"
                     th:src="@{/imgs/movies/{imagen}(imagen=${movie.posterImg})}" alt="Poster de la película">
             </a>
             
@@ -117,7 +119,7 @@
                     class="mb-2 px-4 py-2 bg-blue-500 text-white text-center rounded-lg hover:bg-blue-600">
                     Ver detalles
                 </a>
-                <a th:href="@{/entradas/comprar/}" 
+                <a th:href="@{/movie/view/{id}/entradas (id=${movie.id})}" 
                     class="px-4 py-2 bg-red-500 text-white text-center rounded-lg hover:bg-red-600">
                     Comprar
                 </a>
@@ -126,12 +128,12 @@
 
     </div>
 </section>
+
 <!-- End Gallery -->
-
     <!-- Footer -->
-    <div th:replace="fragments/footer"></div>
+    <div th:replace="fragments/footer"></div> 
 
-
+    <script src="../../../../node_modules/preline/dist/preline.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </body>
 

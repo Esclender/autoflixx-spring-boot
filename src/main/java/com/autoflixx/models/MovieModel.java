@@ -9,15 +9,22 @@ public class MovieModel {
     private String sinopsis;
     private String posterImg; 
     private String bannerImg; // URL o ruta de la imagen de banner, puede ser opcional
-    private Date fechaPub; // Fecha de ingreso de la película
+    private Date fechaPub; 
     private String genero;
     private boolean disponible;
     private Integer duracion; // Duración de la película en minutos
     private String director; 
     private String cast; // Lista de actores principales
+	private String trailerUrl; 
 
     
-    public Integer getId() {
+    public String getTrailerUrl() {
+		return trailerUrl;
+	}
+	public void setTrailerUrl(String trailerUrl) {
+		this.trailerUrl = trailerUrl;
+	}
+	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
