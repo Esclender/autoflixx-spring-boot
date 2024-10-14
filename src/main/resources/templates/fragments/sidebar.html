@@ -1,4 +1,4 @@
-<aside th:fragment="sidebar"></aside>
+<aside th:fragment="sidebar(etapa)">
   <div class=" w-72 h-screen bg-white shadow-lg border-r-2 border-gray-200 flex flex-col p-6 space-y-4">
     <!-- Cart Header -->
     <div class="flex justify-between items-center">
@@ -29,9 +29,24 @@
         <span>Total:</span>
         <span>$199.0</span>
       </div>
-      <button class="w-full bg-red-600 text-white py-3 mt-4 rounded hover:bg-red-700 transition duration-200">
+      <button class="w-full bg-red-sec text-white py-3 mt-4 rounded hover:bg-red-700 transition duration-200">
         Pagar
       </button>
+    </div>
+
+    <!-- Términos y condiciones (solo en etapa de pago) -->
+    <div th:if="${etapa == 'pago'}" class="mt-6 p-4 bg-gray-200 rounded-md">
+      <div class="flex items-center">
+        <input type="checkbox" id="terminos" name="terminos" class="mr-5 ">
+        <label for="terminos" class="text-gray-700 text-sm">Declaro que he leído y aceptado los <span
+            class="font-bold underline text-blue-600 hover:text-purple-600"><a href="#terminos-y-condiciones">Terminos y
+              condiciones</a></span></label>
+      </div>
+      <div class="flex justify-between items-center mt-4">
+        <span class="text-gray-700 text-xs">¿Necesitas fáctura?</span>
+        <button
+          class=" text-black py-1 px-2 rounded-full border-black border-2 text-xs hover:bg-white">SOLICITAR</button>
+      </div>
     </div>
   </div>
 </aside>

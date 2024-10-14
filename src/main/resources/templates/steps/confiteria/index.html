@@ -20,29 +20,30 @@
 <body class="overflow-x-hidden">
   <div th:replace="fragments/header"></div>
   <main class="flex">
-    <div th:replace="fragments/sidebar :: sidebar"></div>
+    <div th:replace="fragments/sidebar :: sidebar(null)"></div>
     <section class="grow flex flex-col items-center">
-      <div th:replace="fragments/steps-indicator.html"></div>
+      <div th:replace="fragments/steps-indicator.html :: steps-indicator(2)"></div>
       <div class="grow">
         <!--Content here-->
 
         <!-- Start Tabs -->
         <div class="border-b border-gray-200 mx-4 lg:mx-2 ">
           <ul class="flex flex-wrap -mb-px text-sm lg:text-md font-medium font-roboto text-center" id="default-tab"
-            data-tabs-toggle="#default-tab-content" data-tabs-active-classes="text-red-prim hover:text-red-prim dark:text-purple-500 border-red-prim text-red-prim" data-tabs-inactive-classes="text-gray-400 hover:text-red-sec border-gray-100 hover:border-red-sec" role="tablist">
+            data-tabs-toggle="#default-tab-content"
+            data-tabs-active-classes="text-red-prim hover:text-red-prim dark:text-purple-500 border-red-prim text-red-prim"
+            data-tabs-inactive-classes="text-gray-400 hover:text-red-sec border-gray-100 hover:border-red-sec"
+            role="tablist">
             <li class="me-2" role="presentation">
               <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#profile"
                 type="button" role="tab" aria-controls="profile" aria-selected="false">Promociones</button>
             </li>
             <li class="me-2" role="presentation">
-              <button
-                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-red-sec hover:border-red-sec"
+              <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-red-sec hover:border-red-sec"
                 id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard"
                 aria-selected="false">Combos</button>
             </li>
             <li class="me-2" role="presentation">
-              <button
-                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-red-sec hover:border-red-sec"
+              <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-red-sec hover:border-red-sec"
                 id="settings-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="settings"
                 aria-selected="false">Golosinas</button>
             </li>
@@ -52,68 +53,72 @@
         <!-- Tabs content -->
         <div id="default-tab-content" class="h-[800px]">
           <div class="hidden rounded-lg" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-           <!-- Start Promocional here -->
-           <section class="bg-white font-roboto mx-4 mb-8 lg:mx-2 mt-2 antialiased dark:bg-dark-1">
-            <div class="mx-auto max-w-screen-xl 2xl:px-0">
-  
-              <div class="md:gap-6 lg:flex lg:items-start xl:gap-8">
-                <div class="w-full flex-none lg:max-w-2xl xl:max-w-4xl">
-                  <div class="space-y-6">
-                    <div class="mt-4 md:mt-6 xl:mt-8">
-                      <h3 class="text-2xl font-semibold text-dark-1 ">Promociones</h3>
-                      
-                      <div class="mt-6 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:mt-8">
-  
-                        <!-- Start Promociones -->
-                         <!-- Thymeleaf para mostrar solo las promociones -->
-                        <div th:each="product : ${product}" th:if="${product.categoria} == 'Promocion'"
-                          class="flex flex-col justify-between md:space-y-6 overflow-hidden rounded-md border  md:w-64 border-gray-200 bg-white p-2 md:p-4 shadow-sm ">
-                          <a href="#" class="overflow-hidden rounded">
-                            <img class="mx-auto md:h-[8rem]" th:src="@{/imgs/confiteria/{imagen}(imagen=${product.imagen})}" alt="imac image" />
-                          </a>
-                          
-                          <div>
-                            <h2 class="text-[16px] md:text-[18px] font-semibold font-roboto hover:underline  text-dark-1" th:text="${product.nombre}"></h2>
-                            <p class="mt-2 text-[12px] md:text-[14px] leading-4 font-normal text-dark-1"
-                            th:text="${product.descripcion}"></p>
-                          </div>
-                          <div class="mt-6 flex justify-between content-end items-end gap-2">
-                            <div class="flex items-center">
-                              <button type="button" id="decrement-button" data-input-counter-decrement="counter-input"
-                                class="inline-flex h-5 md:h-7 w-5 md:w-7 shrink-0 items-center justify-center  rounded-full border border-red-prim hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 ">
-                                <svg class="h-3 w-3 text-red-prim rounded-full " aria-hidden="true"
-                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 1h16" />
-                                </svg>
-                              </button>
-                              <input type="text" id="counter-input" data-input-counter
-                                class="p-1 md:p-2 w-8 md:w-10 shrink-0 border-0 bg-transparent text-center text-md md:text-lg font-semibold text-dark-1  focus:ring-0 "
-                                placeholder="" value="0" required />
-                              <button type="button" id="increment-button" data-input-counter-increment="counter-input"
-                                class="inline-flex h-5 md:h-7 w-5 md:w-7 text-red-prim rounded-full shrink-0 items-center justify-center  border border-red-prim hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 ">
-                                <svg class="h-3 w-3 rounded-full " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                  fill="none" viewBox="0 0 18 18">
-                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M9 1v16M1 9h16" />
-                                </svg>
-                              </button>
-                            </div>
+            <!-- Start Promocional here -->
+            <section class="bg-white font-roboto mx-4 mb-8 lg:mx-2 mt-2 antialiased dark:bg-dark-1">
+              <div class="mx-auto max-w-screen-xl 2xl:px-0">
+
+                <div class="md:gap-6 lg:flex lg:items-start xl:gap-8">
+                  <div class="w-full flex-none lg:max-w-2xl xl:max-w-4xl">
+                    <div class="space-y-6">
+                      <div class="mt-4 md:mt-6 xl:mt-8">
+                        <h3 class="text-2xl font-semibold text-dark-1 ">Promociones</h3>
+
+                        <div class="mt-6 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:mt-8">
+
+                          <!-- Start Promociones -->
+                          <!-- Thymeleaf para mostrar solo las promociones -->
+                          <div th:each="product : ${product}" th:if="${product.categoria} == 'Promocion'"
+                            class="flex flex-col justify-between md:space-y-6 overflow-hidden rounded-md border  md:w-64 border-gray-200 bg-white p-2 md:p-4 shadow-sm ">
+                            <a href="#" class="overflow-hidden rounded">
+                              <img class="mx-auto md:h-[8rem]"
+                                th:src="@{/imgs/confiteria/{imagen}(imagen=${product.imagen})}" alt="imac image" />
+                            </a>
+
                             <div>
-                            
-                              <p class="text-md md:text-lg font-bold leading-tight text-dark-1">S/<span th:text="${product.precio}"></span></p>
+                              <h2
+                                class="text-[16px] md:text-[18px] font-semibold font-roboto hover:underline  text-dark-1"
+                                th:text="${product.nombre}"></h2>
+                              <p class="mt-2 text-[12px] md:text-[14px] leading-4 font-normal text-dark-1"
+                                th:text="${product.descripcion}"></p>
+                            </div>
+                            <div class="mt-6 flex justify-between content-end items-end gap-2">
+                              <div class="flex items-center">
+                                <button type="button" id="decrement-button" data-input-counter-decrement="counter-input"
+                                  class="inline-flex h-5 md:h-7 w-5 md:w-7 shrink-0 items-center justify-center  rounded-full border border-red-prim hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 ">
+                                  <svg class="h-3 w-3 text-red-prim rounded-full " aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" d="M1 1h16" />
+                                  </svg>
+                                </button>
+                                <input type="text" id="counter-input" data-input-counter
+                                  class="p-1 md:p-2 w-8 md:w-10 shrink-0 border-0 bg-transparent text-center text-md md:text-lg font-semibold text-dark-1  focus:ring-0 "
+                                  placeholder="" value="0" required />
+                                <button type="button" id="increment-button" data-input-counter-increment="counter-input"
+                                  class="inline-flex h-5 md:h-7 w-5 md:w-7 text-red-prim rounded-full shrink-0 items-center justify-center  border border-red-prim hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 ">
+                                  <svg class="h-3 w-3 rounded-full " aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" d="M9 1v16M1 9h16" />
+                                  </svg>
+                                </button>
+                              </div>
+                              <div>
+
+                                <p class="text-md md:text-lg font-bold leading-tight text-dark-1">S/<span
+                                    th:text="${product.precio}"></span></p>
+                              </div>
                             </div>
                           </div>
+                          <!-- End Card Promocional -->
+
                         </div>
-                        <!-- End Card Promocional -->
-                       
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
           </div>
           <!-- End Promocional here -->
 
@@ -121,7 +126,7 @@
             <!-- Start Combos here -->
             <section class="bg-white font-roboto mx-4 mb-8 mt-2 antialiased dark:bg-dark-1">
               <div class="mx-auto max-w-screen-xl 2xl:px-0">
-    
+
                 <div class="md:gap-6 lg:flex lg:items-start xl:gap-8">
                   <div class="w-full flex-none lg:max-w-2xl xl:max-w-4xl">
                     <div class="space-y-6">
@@ -129,47 +134,51 @@
                         <h3 class="text-2xl font-semibold text-dark-1 ">Combos</h3>
                         <div class="mt-6 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:mt-8">
                           <!-- Start Cards Combos-->
-                           <!-- Thymeleaf para mostrar solo los combos -->
-                        <div th:each="product : ${product}" th:if="${product.categoria} == 'Combo'"
-                        class="flex flex-col justify-between md:space-y-6 overflow-hidden rounded-md border  md:w-64 border-gray-200 bg-white p-2 md:p-4 shadow-sm ">
-                        <a href="#" class="overflow-hidden rounded">
-                          <img class="mx-auto md:h-[8rem]" th:src="@{/imgs/confiteria/{imagen}(imagen=${product.imagen})}" alt="imac image" />
-                        </a>
-                        
-                        <div>
-                          <h2 class="text-[16px] md:text-[18px] font-semibold font-roboto hover:underline  text-dark-1" th:text="${product.nombre}"></h2>
-                          <p class="mt-2 text-[12px] md:text-[14px] leading-4 font-normal text-dark-1"
-                          th:text="${product.descripcion}"></p>
-                        </div>
-                        <div class="mt-6 flex justify-between content-end items-end gap-2">
-                          <div class="flex items-center">
-                            <button type="button" id="decrement-button" data-input-counter-decrement="counter-input"
-                              class="inline-flex h-5 md:h-7 w-5 md:w-7 shrink-0 items-center justify-center  rounded-full border border-red-prim hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 ">
-                              <svg class="h-3 w-3 text-red-prim rounded-full " aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                  stroke-width="2" d="M1 1h16" />
-                              </svg>
-                            </button>
-                            <input type="text" id="counter-input" data-input-counter
-                              class="p-1 md:p-2 w-8 md:w-10 shrink-0 border-0 bg-transparent text-center text-md md:text-lg font-semibold text-dark-1  focus:ring-0 "
-                              placeholder="" value="0" required />
-                            <button type="button" id="increment-button" data-input-counter-increment="counter-input"
-                              class="inline-flex h-5 md:h-7 w-5 md:w-7 text-red-prim rounded-full shrink-0 items-center justify-center  border border-red-prim hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 ">
-                              <svg class="h-3 w-3 rounded-full " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 18 18">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                  stroke-width="2" d="M9 1v16M1 9h16" />
-                              </svg>
-                            </button>
+                          <!-- Thymeleaf para mostrar solo los combos -->
+                          <div th:each="product : ${product}" th:if="${product.categoria} == 'Combo'"
+                            class="flex flex-col justify-between md:space-y-6 overflow-hidden rounded-md border  md:w-64 border-gray-200 bg-white p-2 md:p-4 shadow-sm ">
+                            <a href="#" class="overflow-hidden rounded">
+                              <img class="mx-auto md:h-[8rem]"
+                                th:src="@{/imgs/confiteria/{imagen}(imagen=${product.imagen})}" alt="imac image" />
+                            </a>
+
+                            <div>
+                              <h2
+                                class="text-[16px] md:text-[18px] font-semibold font-roboto hover:underline  text-dark-1"
+                                th:text="${product.nombre}"></h2>
+                              <p class="mt-2 text-[12px] md:text-[14px] leading-4 font-normal text-dark-1"
+                                th:text="${product.descripcion}"></p>
+                            </div>
+                            <div class="mt-6 flex justify-between content-end items-end gap-2">
+                              <div class="flex items-center">
+                                <button type="button" id="decrement-button" data-input-counter-decrement="counter-input"
+                                  class="inline-flex h-5 md:h-7 w-5 md:w-7 shrink-0 items-center justify-center  rounded-full border border-red-prim hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 ">
+                                  <svg class="h-3 w-3 text-red-prim rounded-full " aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" d="M1 1h16" />
+                                  </svg>
+                                </button>
+                                <input type="text" id="counter-input" data-input-counter
+                                  class="p-1 md:p-2 w-8 md:w-10 shrink-0 border-0 bg-transparent text-center text-md md:text-lg font-semibold text-dark-1  focus:ring-0 "
+                                  placeholder="" value="0" required />
+                                <button type="button" id="increment-button" data-input-counter-increment="counter-input"
+                                  class="inline-flex h-5 md:h-7 w-5 md:w-7 text-red-prim rounded-full shrink-0 items-center justify-center  border border-red-prim hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 ">
+                                  <svg class="h-3 w-3 rounded-full " aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" d="M9 1v16M1 9h16" />
+                                  </svg>
+                                </button>
+                              </div>
+                              <div>
+                                <p class="text-md md:text-lg font-bold leading-tight text-dark-1">S/<span
+                                    th:text="${product.precio}"></span></p>
+                              </div>
+                            </div>
                           </div>
-                          <div>
-                            <p class="text-md md:text-lg font-bold leading-tight text-dark-1">S/<span th:text="${product.precio}"></span></p>
-                          </div>
-                        </div>
-                      </div>
                           <!-- End Cards Combos -->
-                        
+
                         </div>
                       </div>
                     </div>
@@ -180,12 +189,11 @@
             <!-- End Combos here -->
           </div>
 
-          <div class="hidden rounded-lg" id="settings" role="tabpanel"
-            aria-labelledby="settings-tab">
+          <div class="hidden rounded-lg" id="settings" role="tabpanel" aria-labelledby="settings-tab">
             <!-- Start Golosinas here -->
             <section class="bg-white font-roboto mx-4 mb-8 mt-2 antialiased dark:bg-dark-1">
               <div class="mx-auto max-w-screen-xl 2xl:px-0">
-    
+
                 <div class="md:gap-6 lg:flex lg:items-start xl:gap-8">
                   <div class="w-full flex-none lg:max-w-2xl xl:max-w-4xl">
                     <div class="space-y-6">
@@ -193,47 +201,51 @@
                         <h3 class="text-2xl font-semibold text-dark-1 ">Combos</h3>
                         <div class="mt-6 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:mt-8">
                           <!-- Start Cards Combos-->
-                           <!-- Thymeleaf para mostrar solo los combos -->
-                        <div th:each="product : ${product}" th:if="${product.categoria} == 'Golosina'"
-                        class="flex flex-col justify-between md:space-y-6 overflow-hidden rounded-md border  md:w-64 border-gray-200 bg-white p-2 md:p-4 shadow-sm ">
-                        <a href="#" class="overflow-hidden rounded">
-                          <img class="mx-auto md:h-[8rem]" th:src="@{/imgs/confiteria/{imagen}(imagen=${product.imagen})}" alt="imac image" />
-                        </a>
-                        
-                        <div>
-                          <h2 class="text-[16px] md:text-[18px] font-semibold font-roboto hover:underline  text-dark-1" th:text="${product.nombre}"></h2>
-                          <p class="mt-2 text-[12px] md:text-[14px] leading-4 font-normal text-dark-1"
-                          th:text="${product.descripcion}"></p>
-                        </div>
-                        <div class="mt-6 flex justify-between content-end items-end gap-2">
-                          <div class="flex items-center">
-                            <button type="button" id="decrement-button" data-input-counter-decrement="counter-input"
-                              class="inline-flex h-5 md:h-7 w-5 md:w-7 shrink-0 items-center justify-center  rounded-full border border-red-prim hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 ">
-                              <svg class="h-3 w-3 text-red-prim rounded-full " aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                  stroke-width="2" d="M1 1h16" />
-                              </svg>
-                            </button>
-                            <input type="text" id="counter-input" data-input-counter
-                              class="p-1 md:p-2 w-8 md:w-10 shrink-0 border-0 bg-transparent text-center text-md md:text-lg font-semibold text-dark-1  focus:ring-0 "
-                              placeholder="" value="0" required />
-                            <button type="button" id="increment-button" data-input-counter-increment="counter-input"
-                              class="inline-flex h-5 md:h-7 w-5 md:w-7 text-red-prim rounded-full shrink-0 items-center justify-center  border border-red-prim hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 ">
-                              <svg class="h-3 w-3 rounded-full " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 18 18">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                  stroke-width="2" d="M9 1v16M1 9h16" />
-                              </svg>
-                            </button>
+                          <!-- Thymeleaf para mostrar solo los combos -->
+                          <div th:each="product : ${product}" th:if="${product.categoria} == 'Golosina'"
+                            class="flex flex-col justify-between md:space-y-6 overflow-hidden rounded-md border  md:w-64 border-gray-200 bg-white p-2 md:p-4 shadow-sm ">
+                            <a href="#" class="overflow-hidden rounded">
+                              <img class="mx-auto md:h-[8rem]"
+                                th:src="@{/imgs/confiteria/{imagen}(imagen=${product.imagen})}" alt="imac image" />
+                            </a>
+
+                            <div>
+                              <h2
+                                class="text-[16px] md:text-[18px] font-semibold font-roboto hover:underline  text-dark-1"
+                                th:text="${product.nombre}"></h2>
+                              <p class="mt-2 text-[12px] md:text-[14px] leading-4 font-normal text-dark-1"
+                                th:text="${product.descripcion}"></p>
+                            </div>
+                            <div class="mt-6 flex justify-between content-end items-end gap-2">
+                              <div class="flex items-center">
+                                <button type="button" id="decrement-button" data-input-counter-decrement="counter-input"
+                                  class="inline-flex h-5 md:h-7 w-5 md:w-7 shrink-0 items-center justify-center  rounded-full border border-red-prim hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 ">
+                                  <svg class="h-3 w-3 text-red-prim rounded-full " aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" d="M1 1h16" />
+                                  </svg>
+                                </button>
+                                <input type="text" id="counter-input" data-input-counter
+                                  class="p-1 md:p-2 w-8 md:w-10 shrink-0 border-0 bg-transparent text-center text-md md:text-lg font-semibold text-dark-1  focus:ring-0 "
+                                  placeholder="" value="0" required />
+                                <button type="button" id="increment-button" data-input-counter-increment="counter-input"
+                                  class="inline-flex h-5 md:h-7 w-5 md:w-7 text-red-prim rounded-full shrink-0 items-center justify-center  border border-red-prim hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 ">
+                                  <svg class="h-3 w-3 rounded-full " aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" d="M9 1v16M1 9h16" />
+                                  </svg>
+                                </button>
+                              </div>
+                              <div>
+                                <p class="text-md md:text-lg font-bold leading-tight text-dark-1">S/<span
+                                    th:text="${product.precio}"></span></p>
+                              </div>
+                            </div>
                           </div>
-                          <div>
-                            <p class="text-md md:text-lg font-bold leading-tight text-dark-1">S/<span th:text="${product.precio}"></span></p>
-                          </div>
-                        </div>
-                      </div>
                           <!-- End Cards Golosinas -->
-                        
+
                         </div>
                       </div>
                     </div>
@@ -242,8 +254,8 @@
               </div>
             </section>
           </div>
-         <!-- End Golosinas here -->
-       
+          <!-- End Golosinas here -->
+
         </div>
       </div>
     </section>

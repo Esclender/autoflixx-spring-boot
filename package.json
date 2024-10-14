@@ -2,7 +2,11 @@
   "devDependencies": {
     "tailwindcss": "^3.4.12"
   },
+  "scripts": {
+    "format:watch": "npx tailwindcss -i ./styles/input.css -o ./src/main/resources/static/css/output.css --watch"
+  },
   "dependencies": {
+    "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.15",
     "flowbite": "^2.5.1"
   }

@@ -12,10 +12,9 @@ public class MovieModel {
     private Date fechaPub; // Fecha de ingreso de la película
     private String genero;
     private boolean disponible;
-    private Integer duracion; 
+    private Integer duracion; // Duración de la película en minutos
     private String director; 
-    private String cast; 
-	private String trailerUrl;
+    private String cast; // Lista de actores principales
 
     
     public Integer getId() {
@@ -83,12 +82,6 @@ public class MovieModel {
 	}
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
-	}
-	public String getTrailerUrl() {
-		return trailerUrl;
-	}
-	public void setTrailerUrl(String trailerUrl) {
-		this.trailerUrl = trailerUrl;
 	}
 
 }

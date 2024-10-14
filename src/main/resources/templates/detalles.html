@@ -27,14 +27,22 @@
 
 <!-- Modal toggle -->
 
-  <div class="w-full relative" data-modal-target="default-modal" data-modal-toggle="default-modal" >
-    <img th:src="@{/imgs/{imagen}(imagen=${movie.bannerImg})}" class="" alt="">
-    <div class="absolute top-1/2 left-1/2 h-12">
-        <img class="" th:src="@{/icons/boton-de-play.png}" alt="">
-        <p class="">Ver Trailer</p>
+<div class="w-full relative" data-modal-target="default-modal" data-modal-toggle="default-modal">
+    <!-- Contenedor de la imagen con capa oscura -->
+    <div class="relative">
+        <!-- Imagen del banner -->
+        <img th:src="@{/imgs/{imagen}(imagen=${movie.bannerImg})}" class="w-full h-auto" alt="">
+
+        <!-- Capa oscura -->
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        
+        <!-- Botón de Play centrado -->
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+            <img class="w-12 h-12" th:src="@{/icons/boton-de-play.png}" alt="Play Button">
+            <p class="text-white text-lg mt-2">Ver Trailer</p>
+        </div>
     </div>
-    
-  </div>
+</div>
   
   <!-- Main modal -->
   <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -55,9 +63,7 @@
               </div>
               <!-- Modal body -->
               <div class="p-4 md:p-5 space-y-4">
-                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                      With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
-                  </p>
+                  <!-- <video th:src=""></video> -->
                   <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                       The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
                   </p>

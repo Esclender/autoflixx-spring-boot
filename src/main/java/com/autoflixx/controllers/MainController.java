@@ -6,8 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-  @GetMapping("/confiteria")
-  public String getConfiteriaPage() {
-    return "steps/confiteria/index";
+  @GetMapping("/")
+  public String redirectHome() {
+    return "redirect:/movie/";
+  }
+
+  @GetMapping("/login")
+  public String redirectLogin() {
+    return "login";
   }
 }

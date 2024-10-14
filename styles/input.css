@@ -8,7 +8,7 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 .hero-tickets{
-    background-image: url('../imgs/Group-131.png');
+    background-image: url('../imgs/BAN-PEL-02.png');
     background-size: cover;
     background-position: center;
     position: relative;
@@ -38,3 +38,158 @@ body{
                 0px 0px 100px 50px rgba(0, 255, 0, 0.6), 
                 0px 0px 150px 75px rgba(0, 0, 255, 0.4);
   }
+/*Steps indicator*/
+
+.steps_icons__containers {
+    margin-bottom: -10%;
+    transform: scale(1.2);
+}
+
+.inactive_container  {
+    color: #7A7A7A;
+}
+
+.active_container  {
+    color: #fff;
+}
+
+/*Entradas*/
+.ticket-summary-container {
+    display: inline-block;
+    border: 1px solid #e5e5e5;
+    width: 100%;
+}
+
+.ticket-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.seat-number {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.seat-details {
+    font-size: 0.875rem;
+    color: #888;
+}
+
+.price {
+    color: #888;
+    font-size: 0.875rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.total-price {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.total-price span {
+    font-size: 1.125rem;
+}
+
+/*Parking selection*/
+.screen-container {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.screen {
+    height: 10px;
+    background-color: #4a4a4a; /* Dark gray for the screen */
+    border-radius: 10px 10px 0 0;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.screen-label {
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #666;
+}
+
+.screen::after {
+    content: '';
+    position: absolute;
+    top: 10px; /* Adjust based on the height of the screen */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+    border-radius: 10px;
+    z-index: 0;
+}
+
+/*Parking selectables*/
+.parking_selection__container {
+    display: grid;
+    grid-template-columns: repeat(4, 50px);
+    grid-auto-rows: minmax(80px, 80px);
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.cell {
+    background-color: lightgray;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.no-available {
+    background-color: white;
+}
+
+.cell.selected {
+    background-color: lightblue;
+}
+
+.cell.active {
+    background-color: #F03D3E;
+}
+
+
+
+/*Responsive sidebar and steps-indicator*/
+@media (max-width: 390px) {
+  
+    .steps-indicators h3{
+        font-size: .9rem;
+    }
+
+    .steps-indicators .steps_icons__containers{
+        transform: scale(0.7);
+        margin-bottom: -30%;
+
+    }
+
+    .steps__container {
+        justify-content: space-between;
+        margin-top: 15px;
+
+    }
+
+    .parking_selection__container {
+        width: 100%;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+  }
+  

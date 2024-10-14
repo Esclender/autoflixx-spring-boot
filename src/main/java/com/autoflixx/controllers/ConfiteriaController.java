@@ -16,14 +16,18 @@ import com.autoflixx.services.IConfiteriaService;
 @RequestMapping("/confiteria")
 public class ConfiteriaController {
 
-    @Autowired
-    private IConfiteriaService service;
- 
-	  @GetMapping("/")
-	  public String getConfiteriaPage(Model model) {
-		  List<ConfiteriaModel> product = service.getProducts();
-		  model.addAttribute("product", product);
-		  return "steps/confiteria/index";
-	  }
-  
+	@Autowired
+	private IConfiteriaService service;
+
+	@GetMapping("")
+	public String getConfiteriaPage(Model model) {
+		List<ConfiteriaModel> product = service.getProducts();
+
+		// Aquí imprimes en la consola del servidor los productos obtenidos
+		System.out.println("Productos obtenidos desde el backend:");
+		product.forEach(p -> System.out.println(p.toString()));
+		model.addAttribute("product", product);
+		return "steps/confiteria/index";
+	}
+
 }
