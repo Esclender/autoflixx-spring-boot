@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.autoflixx.models.MovieModel;
 import com.autoflixx.services.IMovieService;
 
-
 @Service
 public class MovieServiceImpl implements IMovieService {
 
@@ -26,7 +25,7 @@ public class MovieServiceImpl implements IMovieService {
             movie1.setNombre("Grease");
             movie1.setSinopsis("A musical about teens in love in the 1950s.");
             movie1.setPosterImg("PELI-03.png");
-            movie1.setBannerImg("BAN-PEL-03.png"); 
+            movie1.setBannerImg("BAN-PEL-03.png");
             movie1.setFechaPub(sdf.parse("08-10-2024"));
             movie1.setDisponible(true);
             movie1.setDirector("Randal Kleiser");
@@ -117,13 +116,13 @@ public class MovieServiceImpl implements IMovieService {
     }
 
     @Override
-	public MovieModel getMovieById(Integer idMovie) {
-		for (MovieModel v: movies) {
-			if(v.getId() == idMovie) {
-				return v;
-			}
-		}
-		return null;
-	}
+    public MovieModel getMovieById(Integer idMovie) {
+        for (MovieModel v : movies) {
+            if (v.getId() == idMovie) {
+                return v;
+            }
+        }
+        return null;
+    }
 
 }
