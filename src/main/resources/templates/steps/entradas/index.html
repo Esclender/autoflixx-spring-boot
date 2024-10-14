@@ -5,7 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Autoflixx - Home</title>
-  <link rel="stylesheet" th:href="@{css/output.css}">
+  <!-- Favicon -->
+  <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
+  <link rel="stylesheet" th:href="@{/css/output.css}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
@@ -18,17 +20,17 @@
   <div th:replace="fragments/header"></div>
   <main class="grid grid-cols-12 gap-2 h-auto antialiased">
     <!-- Start header -->
-    <section class="hero-tickets relative block col-start-1 col-span-full h-[500px]">
+    <section class="hero-tickets relative block col-start-1 col-span-full h-[500px] "
+      th:style="'background-image: url(' + @{/imgs/{imagen}(imagen=${movie.bannerImg})} + ')'">
 
       <div class="absolute grid grid-cols-10 bottom-2 w-full z-10">
         <div class="col-start-3 col-end-9 md:hidden">
-          <img th:src="@{/imgs/movies/PELI-02.png}" alt="" srcset="">
+          <img th:src="@{/imgs/movies/{imagen}(imagen=${movie.posterImg})}" alt="Movie image">
         </div>
         <div class="col-start-1 ml-9 my-2 md:ml-12  md:col-start-2 lg:col-start-4 col-end-13">
           <div class="flex md:space-x-10 items-end mb-5">
-            <h1
+            <h1 th:text="${movie.nombre}"
               class="max-w-2xl text-light-1 text-[48px] font-extrabold font-archivo tracking-tight leading-none md:text-[84px] xl:text-[84px]">
-              Deadpool
             </h1>
 
             <div class="w-[180px] h-15 md:rounded-md md:border px-4 md:border-light-1 drop-shadow-white-glow">
@@ -68,7 +70,7 @@
     <!-- Start parking details -->
     <section class="relative hidden lg:block col-start-1 col-end-5 h-96 row-span-2  ml-10">
       <div class="z-[100] top-[-45%] absolute w-[390px] h-[480px] flex flex-col items-end">
-        <img th:src="@{/imgs/movies/PELI-02.png}" alt="">
+        <img th:src="@{/imgs/movies/{imagen}(imagen=${movie.posterImg})}" alt="">
 
         <div id="toast-message-cta" class="w-full max-w-xs pt-4 text-gray-500 " role="alert">
 
