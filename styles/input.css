@@ -8,7 +8,6 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 .hero-tickets{
-    background-image: url('../imgs/BAN-PEL-02.png');
     background-size: cover;
     background-position: center;
     position: relative;
@@ -153,18 +152,26 @@ body{
     transition: background-color 0.3s;
 }
 
-.no-available {
+.spot-no-visible {
     background-color: white;
 }
 
 .cell.selected {
-    background-color: lightblue;
+    background-color: #ADD8E6;
 }
 
-.cell.active {
+.cell.no-available {
     background-color: #F03D3E;
+    cursor: default !important;
 }
 
+.no-layout-affect {
+    display: contents;
+}
+
+[type="submit"].bg-red-sec {
+    background-color: #F03D3E !important;
+}
 
 
 /*Responsive sidebar and steps-indicator*/

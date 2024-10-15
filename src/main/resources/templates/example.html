@@ -5,8 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Autoflixx - Home</title>
-  <!-- Favicon -->
-  <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
   <!-- En thymeleaf la ruta del css se escribe de la siguiente forma  -->
   <link rel="stylesheet" th:href="@{/css/output.css}">
   <!-- Favicon -->
@@ -22,11 +20,11 @@
 <body class="overflow-x-hidden">
   <div th:replace="fragments/header"></div>
   <main class="flex">
-    <div th:replace="fragments/sidebar :: sidebar(etapa)"></div>
+    <div th:replace="fragments/sidebar :: sidebar"></div>
     <section class="grow flex flex-col items-center">
-      <div th:replace="~{fragments/steps-indicator.html :: steps-indicator(steps=2)}"></div>
+      <div th:replace="fragments/steps-indicator.html"></div>
       <div class="grow">
-
+        <!--Content here-->
       </div>
     </section>
   </main>
