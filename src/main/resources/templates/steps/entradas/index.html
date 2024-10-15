@@ -44,7 +44,7 @@
             </div>
 
           </div>
-          <div class="flex flex-wrap mb-1 gap-1 lg:space-x-1.5 ">
+          <!-- <div class="flex flex-wrap mb-1 gap-1 lg:space-x-1.5 ">
             <a href="#"
               class="font-roboto items-center ml-1 justify-center font-medium rounded-full px-3.5 py-1.5  text-center text-[12px] uppercase text-light-1 md:border md:border-light-1   active:bg-red-prim active:text-white">
               Hoy 10/09
@@ -62,7 +62,7 @@
               Hoy 10/09
             </a>
 
-          </div>
+          </div> -->
 
         </div>
 
@@ -94,9 +94,8 @@
                 </div>
               </div>
 
-              <button type="submit"
-                class="w-auto bg-red-sec  justify-center items-center flex-shrink-0 text-white font-bold hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-12"
-                data-dismiss-target="#toast-message-cta" aria-label="Close">
+              <button type="submit" id="submit-button"
+                class="w-auto bg-red-sec  justify-center items-center flex-shrink-0 text-white font-bold hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-12">
                 <span>Siguiente</span>
 
               </button>
@@ -167,7 +166,6 @@
     document.querySelectorAll('.cell').forEach(cell => {
       cell.addEventListener('click', function () {
         if (cell.classList.contains('no-available')) return;
-        console.log('getting here');
         document.querySelectorAll('.cell').forEach(cell => {
           cell.classList.remove('selected');
         });
@@ -181,6 +179,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const parkingCells = document.querySelectorAll('.cell');
+
       parkingCells.forEach(cell => {
         if (cell.classList.contains('no-available')) return;
         cell.addEventListener('click', function () {

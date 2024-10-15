@@ -99,7 +99,10 @@ public class CompraController {
     Integer id = Integer.valueOf(productId);
     double precio = Double.valueOf(productPrecio);
     compraModel.setConfiteriaSelection(new ArrayList<Product>());
-    compraModel.addProduct(new Product(id, amount, productImage, precio, productNombre));
+
+    if (amount > 0) {
+      compraModel.addProduct(new Product(id, amount, productImage, precio, productNombre));
+    }
 
     model.addAttribute("parkingSpot", compraModel.getParkingSpot());
     model.addAttribute("movie", compraModel.getMovie());
