@@ -1,7 +1,7 @@
 <header th:fragment="header" class="col-span-10">
     <nav class="bg-dark-1 border-gray-200 px-4 md:px-6 py-2.5">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-            <a href="https://flowbite.com" class="flex items-center">
+            <a th:href="@{/movie/}" class="flex items-center">
                 <!-- Use Thymeleaf syntax for the image source -->
                 <img th:src="@{/imgs/resources/FLIXX_LOGO.svg}" class="h-12 md:h-16" alt="Flowbite Logo" />
             </a>
@@ -11,7 +11,7 @@
                     <img th:src="@{/icons/User.svg}" class="h-6 w-6" alt="User Icon" />
                 </a>
 
-                <a href="#"
+                <a th:href="@{/login}"
                     class="hidden md:order-1 font-roboto text-sm font-light bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-light-1 rounded-md px-2 md:px-3 py-2 md:py-2.5 mr-2 0 md:flex">Iniciar
                     Sesión</a>
 
@@ -33,7 +33,7 @@
                     </svg>
                 </button>
             </div>
-            <div class="hidden justify-between items-center text-sm w-full md:flex md:w-auto md:order-1"
+            <!-- <div class="hidden justify-between items-center text-sm w-full md:flex md:w-auto md:order-1"
                 id="mobile-menu-2">
                 <ul class="flex flex-col mt-4 font-medium md:flex-row md:space-x-8 md:mt-0">
                     <li>
@@ -58,7 +58,7 @@
                             class="font-roboto font-light text-center block py-2 pr-4 pl-3 text-light-1  hover:text-red-sec md:hover:bg-transparent md:border-0 md:hover:text-primary-700 md:p-0 ">Blog</a>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </nav>
 </header>

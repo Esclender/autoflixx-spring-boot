@@ -45,7 +45,7 @@
                                 class="max-w-96 mb-4 font-light text-light-1 h-[76px] md:h-auto lg:mb-6 md:text-lg lg:text-xl font-roboto">
                                 .</p>
 
-                            <a href="#"
+                            <a th:href="@{/movie/view/{id}/entradas (id=${movie.id})}"
                                 class="inline-flex items-center bg-red-prim justify-center rounded-lg px-5 py-1.5 font-light text-center text-lg text-light-1 hover:bg-transparent hover:border font-roboto">
                                 <img class="mr-2" th:src="@{/icons/entradas.svg}" alt="">
                                 Comprar

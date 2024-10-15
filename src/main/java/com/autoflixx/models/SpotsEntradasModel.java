@@ -6,12 +6,19 @@ public class SpotsEntradasModel {
   private int price;
   private boolean isAvailable;
 
+  public SpotsEntradasModel() {
+  }
+
   // Constructor
-  public SpotsEntradasModel(int column, int row, int price) {
+  public SpotsEntradasModel(int column, int row, boolean isAvailable) {
     this.column = column;
     this.row = row;
-    this.price = price;
-    this.isAvailable = true;
+    this.price = 50;
+    this.isAvailable = isAvailable;
+  }
+
+  public SpotsEntradasModel(int column, int row) {
+    this(column, row, true);
   }
 
   // Getters and Setters
