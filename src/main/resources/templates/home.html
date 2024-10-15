@@ -101,16 +101,16 @@
     <!-- End Content -->
 
     <!-- Gallery -->
-    <section class="mx-2 md:px-24 mt-6 mb-16 md:my-16 ">
+    <section class="mx-auto w-[70%] mt-6 mb-16 md:my-16 ">
         <h1 class="text-red-sec font-archivo text-[40px] md:text-[64px] xl:text-[84px] mb-4">Películas</h1>
 
         <!-- Grid para imágenes -->
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 md:gap-6">
 
-            <div th:each="movie: ${movie}" class="relative  group">
+            <div th:each="movie: ${movie}" class="aspect-[4/5] relative  group">
                 <a th:href="@{/movie/view/{id} (id=${movie.id})}">
                     <!-- Imagen de la película -->
-                    <img class="h-full max-w-full rounded-sm object-cover"
+                    <img class="h-full w-full rounded-sm object-cover"
                         th:src="@{/imgs/movies/{imagen}(imagen=${movie.posterImg})}" alt="Poster de la película">
                 </a>
 
