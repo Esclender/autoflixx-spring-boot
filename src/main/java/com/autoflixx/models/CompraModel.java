@@ -45,7 +45,7 @@ public class CompraModel {
     double total = 0;
     if (confiteriaSelection != null) {
       for (Product confiteria : confiteriaSelection)
-        total += confiteria.getPrecio();
+        total += confiteria.getPrecio() * confiteria.getAmount();
     }
     total += parkingSpot.getPrice();
     return total;

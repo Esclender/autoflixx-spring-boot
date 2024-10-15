@@ -10,6 +10,9 @@
   <title>Autoflixx - Pagos</title>
   <!-- En thymeleaf la ruta del css se escribe de la siguiente forma  -->
   <link rel="stylesheet" th:href="@{/css/output.css}">
+  <!-- Favicon -->
+  <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
+ 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
@@ -21,16 +24,16 @@
 <body class="overflow-x-hidden bg-gray-100 grid grid-cols-10 ">
   <div th:replace="fragments/header"></div>
   <div th:replace="fragments/sidebar :: sidebar(pago)"></div>
-  <main class="col-span-5 col-start-4 grow flex flex-col items-center">
+  <main class="col-span-5 col-start-4 grow flex flex-col items-center h-auto">
     <!-- steps-indicator -->
     <div th:replace="fragments/steps-indicator :: steps-indicator(3)"></div>
 
     <!-- pasarela de pagos -->
-    <form class="no-layout-affect" th:action="@{/movie/view/factura}" th:method="post">
+    <form class="no-layout-affect " th:action="@{/movie/view/factura}" th:method="post">
       <div class="mt-5 mb-7 w-[70%]">
         <h2 class="text-left text-4xl font-bold">Seleccionar método de pago</h2>
       </div>
-      <div class="w-[70%] ">
+      <div class="w-[70%] pb-20">
         <div id="accordion-color" data-accordion="collapse"
           data-active-classes="bg-blue-100 dark:bg-gray-800 text-blue-600 dark:text-white">
           <!-- paypal -->
@@ -157,8 +160,8 @@
         </div>
       </div>
     </form>
-    <button type="button"
-      class="mt-5 py-2.5 px-7 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Volver</button>
+    <!-- <button type="button"
+      class="mt-5 py-2.5 px-7 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Volver</button> -->
   </main>
 
   </div>
