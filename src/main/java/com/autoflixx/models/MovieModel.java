@@ -18,6 +18,15 @@ public class MovieModel {
 	private String director;
 	private String cast; // Lista de actores principales
 	private List<SpotsEntradasModel> spotsEntradas;
+	private String trailerUrl;
+
+	public String getTrailerUrl() {
+		return trailerUrl;
+	}
+
+	public void setTrailerUrl(String trailerUrl) {
+		this.trailerUrl = trailerUrl;
+	}
 
 	public Integer getId() {
 		return id;

@@ -2,6 +2,7 @@
 module.exports = {
   content: [
     "./src/main/resources/templates/**/*.{html,js}",
+    'node_modules/preline/dist/*.js'
   ],
   theme: {
     extend: {
@@ -28,14 +29,13 @@ module.exports = {
         roboto: ['Roboto', 'sans-serif'],
         
       },
-      boxShadow: {
-        'white-glow': '0 0 15px 5px rgba(255, 255, 255, 1)', // Sombra blanca difusa
-      },
     },
   },
   plugins: [
     require('@tailwindcss/typography'),
+    require('@tailwindcss/line-clamp'),
     require('flowbite/plugin'),
+    require('preline/plugin'),
   ],
 }
 
