@@ -4,14 +4,12 @@
     <li class="relative w-full mb-6">
       <div class="flex items-center ">
 
-        <!--Trace line-->
         <div class="flex flex-col grow md:mx-6  ">
           <h3 class="font-medium text-gray-400 ">Paso 1</h3>
           <h3 class="font-bold text-dark-2 ">Entradas</h3>
           <div class="flex w-full  h-2 rounded-md" th:classappend="${steps > 0} ? 'bg-red-sec' : 'bg-gray-200'"></div>
         </div>
 
-        <!--Check icon-->
         <div
           class="z-10 flex items-center justify-center w-9 h-9  rounded-full ring-0 ring-white sm:ring-8  shrink-0 steps_icons__containers"
           th:classappend="${steps > 0} ? 'bg-red-prim active_container' : 'bg-gray-200 inactive_container'">

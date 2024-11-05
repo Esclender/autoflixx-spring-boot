@@ -30,7 +30,6 @@ public class MovieController {
 	public String verDetalles(@PathVariable("id") int idMovie, Model model) {
 		MovieModel movie = service.getMovieById(idMovie);
 
-		System.out.println("id de pelicula" + movie);
 		model.addAttribute("movie", movie);
 
 		// Buscar los detalles de la vacante en ID BD

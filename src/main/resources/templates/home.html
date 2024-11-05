@@ -30,25 +30,25 @@
             <!-- Item 1 -->
             <div th:each="movie: ${movie}" th:if="${movie.disponible} == true"
                 class="duration-700 ease-in-out h-dvh w-full md:h-[30rem]" data-carousel-item>
-                <img th:src="@{/imgs/{imagen}(imagen=${movie.bannerImg})}"
-                    class="absolute block w-full object-cover h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                    alt="...">
-                <section
-                    class="absolute block w-full -translate-x-1/2 md:-translate-y-1/2  md:top-[45%] bottom-6 left-1/2">
-                    <div
-                        class=" grid max-w-screen-xl px-4 pt-6 pb-16 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+                <img th:src="@{/imgs/{imagen}(imagen=${movie.bannerImg})}" class="absolute block w-full object-cover h-full 
+                    -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <section class="absolute block w-full -translate-x-1/2 md:-translate-y-1/2  
+                    md:top-[45%] bottom-6 left-1/2">
+                    <div class=" grid max-w-screen-xl px-4 pt-6 pb-16 mx-auto lg:gap-8
+                         xl:gap-0 lg:py-16 lg:grid-cols-12">
                         <div class="mr-auto md:ml-16 place-self-center lg:col-span-7">
                             <h5 class="uppercase text-light-1 font-regular mb-1 text-sm md:text-md font-roboto">De 14 a
                                 20 de setiembre</h5>
-                            <h1 th:text="${movie.nombre}"
-                                class="max-w-2xl text-light-1 mb-2 text-[40px] font-extrabold font-archivo tracking-tight leading-none md:text-[64px] xl:text-[84px]">
+                            <h1 th:text="${movie.nombre}" class="max-w-2xl text-light-1 mb-2 text-[40px] font-extrabold 
+                                font-archivo tracking-tight leading-none md:text-[64px] xl:text-[84px]">
                             </h1>
                             <p th:text="${movie.sinopsis}"
                                 class="max-w-96 mb-4 font-light text-light-1 line-clamp-3 h-[76px] md:h-auto lg:mb-6 md:text-lg lg:text-xl font-roboto">
                                 .</p>
 
-                            <a th:href="@{/movie/view/{id}/entradas (id=${movie.id})}"
-                                class="inline-flex items-center bg-red-prim justify-center rounded-lg px-5 py-1.5 font-light text-center text-lg text-light-1 hover:bg-transparent hover:border font-roboto">
+                            <a th:href="@{/movie/view/{id}/entradas (id=${movie.id})}" class="inline-flex items-center bg-red-prim justify-center 
+                                rounded-lg px-5 py-1.5 font-light text-center text-lg 
+                                text-light-1 hover:bg-transparent hover:border font-roboto">
                                 <img class="mr-2" th:src="@{/icons/entradas.svg}" alt="">
                                 Comprar
                             </a>

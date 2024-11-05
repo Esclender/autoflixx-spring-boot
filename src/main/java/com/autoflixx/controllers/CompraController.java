@@ -3,9 +3,12 @@ package com.autoflixx.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,11 +24,13 @@ import com.autoflixx.models.SpotsEntradasModel;
 import com.autoflixx.services.IConfiteriaService;
 import com.autoflixx.services.IMovieService;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/movie")
@@ -65,7 +70,10 @@ public class CompraController {
   }
 
   @PostMapping("/view/confiteria")
-  public String seleccionarParkingSpot(@ModelAttribute("compraModel") CompraModel compraModel, Model model) {
+  public String seleccionarParkingSpot(
+      @ModelAttribute("compraModel") CompraModel compraModel,
+      Model model) {
+
     SpotsEntradasModel selectedParkingSpot = compraModel.getParkingSpot();
     compraModel.setParkingSpot(selectedParkingSpot);
 
@@ -131,5 +139,11 @@ public class CompraController {
 
     compraModel.setConfiteriaSelection(null);
     return "steps/factura/index";
+  }
+
+  @InitBinder
+  public void initBinder(WebDataBinder webDataBinder) {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
   }
 }
