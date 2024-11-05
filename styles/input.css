@@ -162,6 +162,7 @@ body{
 
 .cell.no-available {
     background-color: #F03D3E;
+    opacity: 60%;
     cursor: default !important;
 }
 
