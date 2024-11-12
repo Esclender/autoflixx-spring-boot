@@ -1,19 +1,37 @@
 package com.autoflixx.models;
 
 import java.util.List;
+
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 
+@Entity
+@Table(name = "compra")
 public class CompraModel {
-  private List<Product> confiteriaSelection;
-  private SpotsEntradasModel parkingSpot;
-  private MovieModel movie;
 
-  public CompraModel() {
-  }
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "compra_id")
+  private List<Product> confiteriaSelection = new ArrayList<>();
+
+  @ManyToOne
+  @JoinColumn(name = "parking_spot_id")
+  private SpotsEntradasModel parkingSpot;
+
+  @ManyToOne
+  @JoinColumn(name = "movie_id")
+  private MovieModel movie;
 
   public CompraModel(MovieModel movie) {
     this.movie = movie;
-    this.confiteriaSelection = new ArrayList<Product>();
+    this.confiteriaSelection = new ArrayList<>();
+  }
+
+  public CompraModel() {
   }
 
   // Getters and Setters

@@ -116,18 +116,18 @@
           <div class="w-[90%] flex gap-[10px] md:w-auto md:gap-[50px] mb-[88px] ">
             <div class="parking_selection__container">
               <div th:each="spot : ${firstHalfParkingSpots}" class="cell"
-                th:classappend="${spot.isAvailable} ? '': 'no-available' " th:data-row="${spot.row}"
-                th:data-column="${spot.column}" th:data-price="${spot.price}">
+                th:classappend="${spot.isAvailable} ? '': 'no-available' " th:data-row="${spot.fila}"
+                th:data-column="${spot.columna}" th:data-price="${spot.price}">
               </div>
             </div>
             <div class="parking_selection__container">
               <div th:each="spot : ${secondHalfParkingSpots}" class="cell"
-                th:classappend="${spot.isAvailable} ? '': 'no-available' " th:data-row="${spot.row - 6}"
-                th:data-column="${spot.column + 4}" th:data-price="${spot.price}">
+                th:classappend="${spot.isAvailable} ? '': 'no-available' " th:data-row="${spot.fila - 6}"
+                th:data-column="${spot.columna + 4}" th:data-price="${spot.price}">
               </div>
             </div>
-            <input type="hidden" th:field="*{parkingSpot.row}" id="selectedRow" />
-            <input type="hidden" th:field="*{parkingSpot.column}" id="selectedColumn" />
+            <input type="hidden" th:field="*{parkingSpot.fila}" id="selectedRow" />
+            <input type="hidden" th:field="*{parkingspot.columna}" id="selectedColumn" />
             <input type="hidden" th:field="*{parkingSpot.price}" id="selectedPrice" />
           </div>
 

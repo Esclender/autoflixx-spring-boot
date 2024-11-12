@@ -1,12 +1,18 @@
 package com.autoflixx.models;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name = "movie")
 public class MovieModel {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
 	private String nombre;
 	private String sinopsis;
 	private String posterImg;
@@ -17,17 +23,13 @@ public class MovieModel {
 	private Integer duracion; // Duración de la película en minutos
 	private String director;
 	private String cast; // Lista de actores principales
-	private List<SpotsEntradasModel> spotsEntradas;
 	private String trailerUrl;
 
-	public String getTrailerUrl() {
-		return trailerUrl;
-	}
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "movie_id")
+	private List<SpotsEntradasModel> spotsEntradas = new ArrayList<>();
 
-	public void setTrailerUrl(String trailerUrl) {
-		this.trailerUrl = trailerUrl;
-	}
-
+	// Getters and Setters
 	public Integer getId() {
 		return id;
 	}
@@ -84,6 +86,14 @@ public class MovieModel {
 		this.genero = genero;
 	}
 
+	public boolean isDisponible() {
+		return disponible;
+	}
+
+	public void setDisponible(boolean disponible) {
+		this.disponible = disponible;
+	}
+
 	public Integer getDuracion() {
 		return duracion;
 	}
@@ -108,16 +118,20 @@ public class MovieModel {
 		this.cast = cast;
 	}
 
-	public boolean isDisponible() {
-		return disponible;
+	public String getTrailerUrl() {
+		return trailerUrl;
 	}
 
-	public void setDisponible(boolean disponible) {
-		this.disponible = disponible;
+	public void setTrailerUrl(String trailerUrl) {
+		this.trailerUrl = trailerUrl;
 	}
 
 	public List<SpotsEntradasModel> getSpotsEntradas() {
 		return spotsEntradas;
+	}
+
+	public void setSpotsEntradas(List<SpotsEntradasModel> spotsEntradas) {
+		this.spotsEntradas = spotsEntradas;
 	}
 
 	public void setSpotsEntradasModels() {
@@ -132,5 +146,4 @@ public class MovieModel {
 
 		this.spotsEntradas = parkingSpots;
 	}
-
 }

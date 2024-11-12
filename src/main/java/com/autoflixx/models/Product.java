@@ -1,13 +1,24 @@
 package com.autoflixx.models;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "product")
 public class Product {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer productId;
+
   private String nombre;
   private double precio;
   private int amount;
   private String imagen;
 
   // Constructor, getters, and setters...
+
+  public Product() {
+  }
 
   public Product(Integer productId, int amount, String imagen, double precio, String nombre) {
     this.productId = productId;
@@ -56,5 +67,4 @@ public class Product {
   public void setImagen(String productoImagen) {
     this.imagen = productoImagen;
   }
-
 }

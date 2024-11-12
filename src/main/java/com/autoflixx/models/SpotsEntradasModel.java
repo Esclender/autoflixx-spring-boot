@@ -1,8 +1,17 @@
 package com.autoflixx.models;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "spots_entradas")
 public class SpotsEntradasModel {
-  private int column;
-  private int row;
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
+
+  private int columna;
+  private int fila;
   private int price;
   private boolean isAvailable;
 
@@ -10,32 +19,40 @@ public class SpotsEntradasModel {
   }
 
   // Constructor
-  public SpotsEntradasModel(int column, int row, boolean isAvailable) {
-    this.column = column;
-    this.row = row;
+  public SpotsEntradasModel(int columna, int fila, boolean isAvailable) {
+    this.columna = columna;
+    this.fila = fila;
     this.price = 50;
     this.isAvailable = isAvailable;
   }
 
-  public SpotsEntradasModel(int column, int row) {
-    this(column, row, true);
+  public SpotsEntradasModel(int columna, int fila) {
+    this(columna, fila, true);
   }
 
   // Getters and Setters
-  public int getColumn() {
-    return column;
+  public Integer getId() {
+    return id;
   }
 
-  public void setColumn(int column) {
-    this.column = column;
+  public void setId(Integer id) {
+    this.id = id;
   }
 
-  public int getRow() {
-    return row;
+  public int getcolumna() {
+    return columna;
   }
 
-  public void setRow(int row) {
-    this.row = row;
+  public void setcolumna(int columna) {
+    this.columna = columna;
+  }
+
+  public int getfila() {
+    return fila;
+  }
+
+  public void setfila(int fila) {
+    this.fila = fila;
   }
 
   public int getPrice() {
@@ -53,5 +70,4 @@ public class SpotsEntradasModel {
   public void setAvailable(boolean isAvailable) {
     this.isAvailable = isAvailable;
   }
-
 }
