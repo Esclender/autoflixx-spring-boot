@@ -29,10 +29,14 @@ public class MovieController {
 	@GetMapping("/view/{id}")
 	public String verDetalles(@PathVariable("id") int idMovie, Model model) {
 		MovieModel movie = service.getMovieById(idMovie);
-
 		model.addAttribute("movie", movie);
-
-		// Buscar los detalles de la vacante en ID BD
 		return "detalles";
+	}
+
+	@GetMapping("/admin")
+	public String getAllMoviesForAdmin(Model model) {
+		List<MovieModel> movies = service.getAllMovies();
+		model.addAttribute("movie", movies); // Añadimos la lista de películas
+		return "admin"; // Vista para el administrador
 	}
 }

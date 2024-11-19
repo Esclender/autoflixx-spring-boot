@@ -16,7 +16,7 @@ public class CompraModel {
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "compra_id")
-  private List<Product> confiteriaSelection = new ArrayList<>();
+  private List<ConfiteriaModel> confiteriaSelection = new ArrayList<>();
 
   @ManyToOne
   @JoinColumn(name = "parking_spot_id")
@@ -25,6 +25,8 @@ public class CompraModel {
   @ManyToOne
   @JoinColumn(name = "movie_id")
   private MovieModel movie;
+
+  public int amountToBuy = 0;
 
   public CompraModel(MovieModel movie) {
     this.movie = movie;
@@ -35,11 +37,11 @@ public class CompraModel {
   }
 
   // Getters and Setters
-  public List<Product> getConfiteriaSelection() {
+  public List<ConfiteriaModel> getConfiteriaSelection() {
     return confiteriaSelection;
   }
 
-  public void setConfiteriaSelection(List<Product> confiteriaSelection) {
+  public void setConfiteriaSelection(List<ConfiteriaModel> confiteriaSelection) {
     this.confiteriaSelection = confiteriaSelection;
   }
 
@@ -62,14 +64,14 @@ public class CompraModel {
   public double getTotal() {
     double total = 0;
     if (confiteriaSelection != null) {
-      for (Product confiteria : confiteriaSelection)
-        total += confiteria.getPrecio() * confiteria.getAmount();
+      for (ConfiteriaModel combo : confiteriaSelection)
+        total += combo.getPrecio() * amountToBuy;
     }
     total += parkingSpot.getPrice();
     return total;
   }
 
-  public void addProduct(Product product) {
-    confiteriaSelection.add(product);
+  public void addCombo(ConfiteriaModel combo) {
+    confiteriaSelection.add(combo);
   }
 }

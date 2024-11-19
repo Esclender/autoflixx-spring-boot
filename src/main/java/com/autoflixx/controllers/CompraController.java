@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -19,8 +21,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.autoflixx.models.CompraModel;
 import com.autoflixx.models.ConfiteriaModel;
 import com.autoflixx.models.MovieModel;
-import com.autoflixx.models.Product;
 import com.autoflixx.models.SpotsEntradasModel;
+import com.autoflixx.services.ICompraService;
 import com.autoflixx.services.IConfiteriaService;
 import com.autoflixx.services.IMovieService;
 
@@ -29,7 +31,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Random;
-import java.util.ArrayList;
 import java.util.Date;
 
 @Controller
@@ -43,27 +44,26 @@ public class CompraController {
   @Autowired
   private IConfiteriaService confiteriaService;
 
-  @ModelAttribute("producto")
-  public CompraModel ModeloProducto() {
+  @Autowired
+  private ICompraService compraService;
+
+  @ModelAttribute("compraModel")
+  public CompraModel initializeCompraModel() {
     return new CompraModel();
   }
 
   @GetMapping("/view/{id}/entradas")
-  public String getEntradasPreview(
-      Model model,
-      @PathVariable("id") int idMovie) {
+  public String getEntradasPreview(Model model, @PathVariable("id") int idMovie) {
     MovieModel movie = movieService.getMovieById(idMovie);
     movie.setSpotsEntradasModels();
 
     List<SpotsEntradasModel> parkingSpots = movie.getSpotsEntradas();
-
     int midIndex = parkingSpots.size() / 2;
     List<SpotsEntradasModel> firstHalfParkingSpots = parkingSpots.subList(0, midIndex);
     List<SpotsEntradasModel> secondHalfParkingSpots = parkingSpots.subList(midIndex, parkingSpots.size());
 
     model.addAttribute("firstHalfParkingSpots", firstHalfParkingSpots);
     model.addAttribute("secondHalfParkingSpots", secondHalfParkingSpots);
-
     model.addAttribute("movie", movie);
     model.addAttribute("compraModel", new CompraModel(movie));
 
@@ -71,46 +71,46 @@ public class CompraController {
   }
 
   @PostMapping("/view/confiteria")
-  public String seleccionarParkingSpot(
-      @ModelAttribute("compraModel") CompraModel compraModel,
-      Model model) {
-
+  public String seleccionarParkingSpot(@ModelAttribute("compraModel") CompraModel compraModel, Model model) {
     SpotsEntradasModel selectedParkingSpot = compraModel.getparkingSpot();
     compraModel.setparkingSpot(selectedParkingSpot);
 
-    List<ConfiteriaModel> product = confiteriaService.getProducts();
+    List<ConfiteriaModel> products = confiteriaService.getCombos();
 
-    model.addAttribute("product", product);
+    model.addAttribute("products", products);
     model.addAttribute("parkingSpot", compraModel.getparkingSpot());
     model.addAttribute("movie", compraModel.getMovie());
     model.addAttribute("total", compraModel.getTotal());
+
     return "steps/confiteria/index";
   }
 
   @GetMapping("/view/{id}/confiteria")
   public String getConfiteriaPage(@PathVariable("id") int idMovie, Model model) {
-    List<ConfiteriaModel> product = confiteriaService.getProducts();
+    List<ConfiteriaModel> products = confiteriaService.getCombos();
 
-    model.addAttribute("product", product);
+    model.addAttribute("products", products);
+
     return "steps/confiteria/index";
   }
 
   @PostMapping("/view/pago")
   public String addProduct(
-      @RequestParam("productId") String productId,
-      @RequestParam("productImage") String productImage,
-      @RequestParam("productPrecio") String productPrecio,
-      @RequestParam("productNombre") String productNombre,
-      @RequestParam("amount") int amount,
+      @RequestParam("comboId") String comboId,
+      @RequestParam("amount") int comboAmountToBuy,
       @ModelAttribute("compraModel") CompraModel compraModel,
+      BindingResult result,
       Model model) {
 
-    Integer id = Integer.valueOf(productId);
-    double precio = Double.valueOf(productPrecio);
-    compraModel.setConfiteriaSelection(new ArrayList<Product>());
+    if (result.hasErrors()) {
+      for (ObjectError error : result.getAllErrors()) {
+        System.out.println("Ocurrio un error: " + error.getDefaultMessage());
+      }
+      return "steps/confiteria/index";
+    }
 
-    if (amount > 0) {
-      compraModel.addProduct(new Product(id, amount, productImage, precio, productNombre));
+    if (comboAmountToBuy > 0) {
+      compraModel.addCombo(null);
     }
 
     model.addAttribute("parkingSpot", compraModel.getparkingSpot());
@@ -122,16 +122,18 @@ public class CompraController {
   }
 
   @PostMapping("/view/factura")
-  public String getFacturaView(Model model, @ModelAttribute("compraModel") CompraModel compraModel) {
-
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d 'de' MMMM, yyyy", new Locale("es", "ES"));
+  public String getFacturaView(
+      Model model,
+      @ModelAttribute("compraModel") CompraModel compraModel) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+        "d 'de' MMMM, yyyy",
+        Locale.of("es", "ES"));
     String formattedDate = LocalDate.now().format(formatter);
 
     Random random = new Random();
     int code = random.nextInt(900000) + 100000;
 
     model.addAttribute("code", code);
-
     model.addAttribute("parkingSpot", compraModel.getparkingSpot());
     model.addAttribute("movie", compraModel.getMovie());
     model.addAttribute("total", compraModel.getTotal());
@@ -139,9 +141,8 @@ public class CompraController {
     model.addAttribute("date", formattedDate);
 
     // Save the compraModel to the database
-    // compraService.save(compraModel);
+    compraService.saveCompra(compraModel);
 
-    compraModel.setConfiteriaSelection(null);
     return "steps/factura/index";
   }
 

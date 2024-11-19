@@ -68,13 +68,10 @@
                                   </button>
 
 
-                                  <input type="text" name="amount" id="counter-input" data-input-counter class="p-1 md:p-2 w-8 md:w-10 shrink-0 border-0 bg-transparent text-center 
+                                  <input type="text" name="comboId" id="counter-input" data-input-counter class="p-1 md:p-2 w-8 md:w-10 shrink-0 border-0 bg-transparent text-center 
                                     text-md md:text-lg font-semibold text-dark-1  focus:ring-0 " placeholder=""
                                     value="0" required />
                                   <input type="hidden" name="productId" th:value="${product.id}" />
-                                  <input type="hidden" name="productNombre" th:value="${product.nombre}" />
-                                  <input type="hidden" name="productImage" th:value="${product.imagen}" />
-                                  <input type="hidden" name="productPrecio" th:value="${product.precio}" />
 
                                   <button type="button" id="increment-button"
                                     data-input-counter-increment="counter-input" class="inline-flex h-5 md:h-7 w-5 md:w-7 text-red-prim rounded-full 
