@@ -1,5 +1,7 @@
 package com.autoflixx.controllers;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.autoflixx.models.MovieModel;
@@ -78,9 +82,53 @@ public class MovieController {
     }
 
     @PostMapping("/admin/update/{id}")
-    public String updateMovie(@PathVariable("id") int idMovie, @ModelAttribute("movie") MovieModel movie) {
+    public String updateMovie(@PathVariable("id") int idMovie, @ModelAttribute("movie") MovieModel movie,
+            @RequestParam(value = "posterImg", required = false) MultipartFile posterImg,
+            @RequestParam(value = "bannerImg", required = false) MultipartFile bannerImg, BindingResult result,
+            RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            for (ObjectError error : result.getAllErrors()) {
+                System.out.println("Ocurrio un error: " + error.getDefaultMessage());
+            }
+            return "admin/update-movie";
+        } else {
+            System.out.println("Movie: " + movie);
+        }
+
+        // Handle file uploads
+        if (posterImg != null && !posterImg.isEmpty()) {
+            // Save the poster image file
+            String posterImgPath = saveFile(posterImg);
+            movie.setPosterImg(posterImgPath);
+        } else if (movie.getPosterImg() == null || movie.getPosterImg().isEmpty()) {
+            movie.setPosterImg("empty-image.png");
+        }
+
+        if (bannerImg != null && !bannerImg.isEmpty()) {
+            // Save the banner image file
+            String bannerImgPath = saveFile(bannerImg);
+            movie.setBannerImg(bannerImgPath);
+        } else if (movie.getBannerImg() == null || movie.getBannerImg().isEmpty()) {
+            movie.setBannerImg("empty-image.png");
+        }
+
+        // Parse the date string to a Date object if it's not null
+        if (movie.getFechaPub() != null) {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                String fechaPubString = formatter.format(movie.getFechaPub()); // Convert Date to String
+                Date date = formatter.parse(fechaPubString); // Parse the String back to Date
+                movie.setFechaPub(date); // Assuming fechaPub is a Date field in MovieModel
+            } catch (ParseException e) {
+                e.printStackTrace();
+                result.rejectValue("fechaPubString", "error.movie", "Formato de fecha inválido");
+                return "admin/update-movie";
+            }
+        }
+
         movie.setId(idMovie); // Set the ID of the movie to the one from the path variable
         service.updateMovie(movie);
+        redirectAttributes.addFlashAttribute("msg", "Película actualizada con éxito");
         return "redirect:/movie/admin";
     }
 
@@ -123,6 +171,17 @@ public class MovieController {
     public void initBinder(WebDataBinder webDataBinder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+    }
+
+    private String saveFile(MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        String filePath = "path/to/save/directory/" + fileName;
+        try {
+            file.transferTo(new File(filePath)); // Guardar archivo físicamente
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return fileName;
     }
 
 }
