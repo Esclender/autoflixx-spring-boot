@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoflixx - Home</title>
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
+    <!-- En thymeleaf la ruta del css se escribe de la siguiente forma  -->
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+<body>
+  
+<section class="width-[80%] m-24">
+<form method="post" action="/movie/admin/add">
+    <div class="space-y-12">
+      <!-- Sección: Información básica -->
+      <div class="border-b border-gray-900/10 pb-12">
+        <h2 class="text-base font-semibold text-gray-900">Información de la Película</h2>
+        <p class="mt-1 text-sm text-gray-600">Completa la información principal sobre la película.</p>
+  
+        <div class="mt-10 grid grid-cols-1 gap-y-8 sm:grid-cols-6 gap-x-6">
+          <!-- Campo: Nombre -->
+          <div class="sm:col-span-4">
+            <label for="nombre" class="block text-sm font-medium text-gray-900">Nombre</label>
+            <input type="text" name="nombre" id="nombre" class="block w-full mt-2 rounded-md border-gray-300 shadow-sm sm:text-sm" placeholder="Nombre de la película">
+          </div>
+  
+          <!-- Campo: Sinopsis -->
+          <div class="col-span-full">
+            <label for="sinopsis" class="block text-sm font-medium text-gray-900">Sinopsis</label>
+            <textarea id="sinopsis" name="sinopsis" rows="4" class="block w-full mt-2 rounded-md border-gray-300 shadow-sm sm:text-sm" placeholder="Descripción breve de la película"></textarea>
+          </div>
+  
+          <!-- Campo: Poster -->
+          <div class="col-span-full">
+            <label for="posterImg" class="block text-sm font-medium text-gray-900">Imagen de Poster</label>
+            <input type="file" name="posterImg" id="posterImg" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm">
+          </div>
+  
+          <!-- Campo: Banner -->
+          <div class="col-span-full">
+            <label for="bannerImg" class="block text-sm font-medium text-gray-900">Imagen de Banner</label>
+            <input type="file" name="bannerImg" id="bannerImg" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm">
+          </div>
+  
+          <!-- Campo: Fecha de Publicación -->
+          <div class="sm:col-span-3">
+            <label for="fechaPub" class="block text-sm font-medium text-gray-900">Fecha de Publicación</label>
+            <input type="date" name="fechaPub" id="fechaPub" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm">
+          </div>
+  
+          <!-- Campo: Género -->
+          <div class="sm:col-span-3">
+            <label for="genero" class="block text-sm font-medium text-gray-900">Género</label>
+            <select id="genero" name="genero" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm">
+              <option value="romance">Romance</option>
+              <option value="comedia">Comedia</option>
+              <option value="drama">Drama</option>
+              <option value="terror">Terror</option>
+            </select>
+          </div>
+  
+          <!-- Campo: Disponible -->
+          <div class="sm:col-span-3">
+            <label for="disponible" class="block text-sm font-medium text-gray-900">Disponible</label>
+            <select id="disponible" name="disponible" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm">
+              <option value="true">Sí</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+  
+          <!-- Campo: Duración -->
+          <div class="sm:col-span-3">
+            <label for="duracion" class="block text-sm font-medium text-gray-900">Duración (min)</label>
+            <input type="number" name="duracion" id="duracion" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm" placeholder="120">
+          </div>
+  
+          <!-- Campo: Director -->
+          <div class="sm:col-span-4">
+            <label for="director" class="block text-sm font-medium text-gray-900">Director</label>
+            <input type="text" name="director" id="director" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm" placeholder="Nombre del director">
+          </div>
+  
+          <!-- Campo: Cast -->
+          <div class="col-span-full">
+            <label for="cast" class="block text-sm font-medium text-gray-900">Elenco Principal</label>
+            <textarea id="cast" name="cast" rows="3" class="block w-full mt-2 rounded-md border-gray-300 shadow-sm sm:text-sm" placeholder="Actores principales separados por comas"></textarea>
+          </div>
+  
+          <!-- Campo: URL del Tráiler -->
+          <div class="col-span-full">
+            <label for="trailerUrl" class="block text-sm font-medium text-gray-900">URL del Tráiler</label>
+            <input type="url" name="trailerUrl" id="trailerUrl" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm" placeholder="https://youtube.com/ejemplo">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Botón para enviar -->
+      <div class="mt-6">
+        <button type="submit" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Guardar Pelicula</button>
+      </div>
+    </div>
+  </form>
+</section>
+  <div th:replace="fragments/footer"></div>
+
+  <script src="../../../../node_modules/preline/dist/preline.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
+  
+</body>
+</html>

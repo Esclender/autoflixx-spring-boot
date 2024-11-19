@@ -1,13 +1,24 @@
 package com.autoflixx.controllers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.autoflixx.models.MovieModel;
 import com.autoflixx.services.IMovieService;
@@ -16,27 +27,92 @@ import com.autoflixx.services.IMovieService;
 @RequestMapping("/movie")
 public class MovieController {
 
-	@Autowired
-	private IMovieService service;
+    @Autowired
+    private IMovieService service;
 
-	@GetMapping("/")
-	public String getAllMovies(Model model) {
-		List<MovieModel> movie = service.getAllMovies();
-		model.addAttribute("movie", movie);
-		return "home";
-	}
+    @GetMapping("/")
+    public String getAllMovies(Model model) {
+        List<MovieModel> movie = service.getAllMovies();
+        System.out.println("Movie: " + movie);
+        model.addAttribute("movie", movie);
+        return "home";
+    }
 
-	@GetMapping("/view/{id}")
-	public String verDetalles(@PathVariable("id") int idMovie, Model model) {
-		MovieModel movie = service.getMovieById(idMovie);
-		model.addAttribute("movie", movie);
-		return "detalles";
-	}
+    @GetMapping("/view/{id}")
+    public String verDetalles(@PathVariable("id") int idMovie, Model model) {
+        MovieModel movie = service.getMovieById(idMovie);
+        model.addAttribute("movie", movie);
+        return "detalles";
+    }
 
-	@GetMapping("/admin")
-	public String getAllMoviesForAdmin(Model model) {
-		List<MovieModel> movies = service.getAllMovies();
-		model.addAttribute("movie", movies); // Añadimos la lista de películas
-		return "admin"; // Vista para el administrador
-	}
+    @GetMapping("/admin")
+    public String getAllMoviesForAdmin(Model model) {
+        List<MovieModel> movie = service.getAllMovies();
+        model.addAttribute("movie", movie); 
+        System.out.println("Movie: " + movie);
+        return "admin/home"; // Vista para el administrador
+    }
+
+    @GetMapping("/admin/add-movie")
+    public String saveMovie(Model model) {
+        List<MovieModel> movie = service.getAllMovies();
+        model.addAttribute("movie", movie); 
+        System.out.println("Movie: " + movie);
+        return "admin/movies/add-movie"; // Vista para el administrador
+    }
+
+    @GetMapping("/admin/delete/{id}")
+    public String deleteMovie(@PathVariable("id") int idMovie, Model model) {
+        service.deleteMovie(idMovie);
+        return "redirect:/movie/admin";
+    }
+
+    @GetMapping("/admin/update/{id}")
+    public String updateMovieForm(@PathVariable("id") int idMovie, Model model) {
+        MovieModel movie = service.getMovieById(idMovie);
+        model.addAttribute("movie", movie);
+        return "admin/movies/update";
+    }
+
+    @PostMapping("/admin/update/{id}")
+    public String updateMovie(@PathVariable("id") int idMovie, @ModelAttribute("movie") MovieModel movie) {
+    movie.setId(idMovie); // Set the ID of the movie to the one from the path variable
+    service.updateMovie(movie);
+    return "redirect:/movie/admin";
+}
+
+    @GetMapping("/admin/add")
+    public String addMovieForm(Model model) {
+        model.addAttribute("movie", new MovieModel());
+        return "admin/add-movie";
+    }
+
+    @PostMapping("/admin/add")
+    public String saveMovie(@ModelAttribute("movie") MovieModel movie, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            for (ObjectError error : result.getAllErrors()) {
+                System.out.println("Ocurrio un error: " + error.getDefaultMessage());
+            }
+            return "admin/add-movie";
+        } else {
+            System.out.println("Movie: " + movie);
+        }
+
+        // Parse the date string to a Date object
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            String fechaPubString = formatter.format(movie.getFechaPub()); // Convert Date to String
+            Date date = formatter.parse(fechaPubString); // Parse the String back to Date
+            movie.setFechaPub(date); // Assuming fechaPub is a Date field in MovieModel
+        } catch (ParseException e) {
+            e.printStackTrace();
+            result.rejectValue("fechaPubString", "error.movie", "Formato de fecha inválido");
+            return "admin/addMovie";
+        }
+
+        service.saveMovie(movie);
+        redirectAttributes.addFlashAttribute("msg", "Película guardada con éxito");
+        return "redirect:/movie/admin";
+    }
+
 }

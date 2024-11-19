@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Película</title>
+    <link rel="stylesheet" href="../../../../node_modules/preline/dist/preline.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css">
+</head>
+<body>
+<section>
+  <form th:action="@{/admin/update/{id}(id=${movie.id})}" th:object="${movie}" method="post">
+    <div class="shadow sm:rounded-md sm:overflow-hidden">
+      <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+        <!-- Campo: Nombre -->
+        <div class="sm:col-span-4">
+          <label for="nombre" class="block text-sm font-medium text-gray-900">Nombre</label>
+          <input type="text" name="nombre" id="nombre" th:value="*{nombre}" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm" placeholder="Nombre de la película">
+        </div>
+
+        <!-- Campo: Sinopsis -->
+        <div class="col-span-full">
+          <label for="sinopsis" class="block text-sm font-medium text-gray-900">Sinopsis</label>
+          <textarea id="sinopsis" name="sinopsis" rows="3" th:text="*{sinopsis}" class="block w-full mt-2 rounded-md border-gray-300 shadow-sm sm:text-sm" placeholder="Sinopsis de la película"></textarea>
+        </div>
+
+          <!-- Campo: Poster Img -->
+          <div class="col-span-full">
+            <label for="posterImg" class="block text-sm font-medium text-gray-900">Poster de la Película</label>
+            <input type="file" name="posterImg" id="posterImg" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm">
+          </div>
+  
+          <!-- Campo: Banner Img -->
+          <div class="col-span-full">
+            <label for="bannerImg" class="block text-sm font-medium text-gray-900">Banner de la Película</label>
+            <input type="file" name="bannerImg" id="bannerImg" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm">
+          </div>
+
+        <!-- Campo: Fecha de Publicación -->
+        <div class="sm:col-span-3">
+          <label for="fechaPub" class="block text-sm font-medium text-gray-900">Fecha de Publicación</label>
+          <input type="date" name="fechaPub" id="fechaPub" th:value="*{fechaPub}" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm">
+        </div>
+
+        <!-- Campo: Género -->
+        <div class="sm:col-span-3">
+          <label for="genero" class="block text-sm font-medium text-gray-900">Género</label>
+          <input type="text" name="genero" id="genero" th:value="*{genero}" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm" placeholder="Género de la película">
+        </div>
+
+        <!-- Campo: Disponible -->
+        <div class="sm:col-span-3">
+          <label for="disponible" class="block text-sm font-medium text-gray-900">Disponible</label>
+          <input type="checkbox" name="disponible" id="disponible" th:checked="*{disponible}" class="block mt-2 rounded-md border-gray-300 sm:text-sm">
+        </div>
+
+        <!-- Campo: Duración -->
+        <div class="sm:col-span-3">
+          <label for="duracion" class="block text-sm font-medium text-gray-900">Duración (min)</label>
+          <input type="number" name="duracion" id="duracion" th:value="*{duracion}" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm" placeholder="120">
+        </div>
+
+        <!-- Campo: Director -->
+        <div class="sm:col-span-4">
+          <label for="director" class="block text-sm font-medium text-gray-900">Director</label>
+          <input type="text" name="director" id="director" th:value="*{director}" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm" placeholder="Nombre del director">
+        </div>
+
+        <!-- Campo: Cast -->
+        <div class="col-span-full">
+          <label for="cast" class="block text-sm font-medium text-gray-900">Elenco Principal</label>
+          <textarea id="cast" name="cast" rows="3" th:text="*{cast}" class="block w-full mt-2 rounded-md border-gray-300 shadow-sm sm:text-sm" placeholder="Actores principales separados por comas"></textarea>
+        </div>
+
+        <!-- Campo: URL del Tráiler -->
+        <div class="col-span-full">
+          <label for="trailerUrl" class="block text-sm font-medium text-gray-900">URL del Tráiler</label>
+          <input type="url" name="trailerUrl" id="trailerUrl" th:value="*{trailerUrl}" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm" placeholder="https://youtube.com/ejemplo">
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón para enviar -->
+    <div class="mt-6">
+      <button type="submit" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Guardar Película</button>
+    </div>
+  </form>
+</section>
+<div th:replace="fragments/footer"></div>
+
+<script src="../../../../node_modules/preline/dist/preline.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
+</body>
+</html>

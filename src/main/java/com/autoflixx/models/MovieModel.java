@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "movie")
 public class MovieModel {
@@ -17,6 +19,7 @@ public class MovieModel {
 	private String sinopsis;
 	private String posterImg;
 	private String bannerImg; // URL o ruta de la imagen de banner, puede ser opcional
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaPub; // Fecha de ingreso de la película
 	private String genero;
 	private Boolean disponible;
@@ -29,6 +32,16 @@ public class MovieModel {
 	@JoinColumn(name = "movie_id")
 	private List<SpotsEntradasModel> spotsEntradas = new ArrayList<>();
 
+	// asignar imágenes por defecto si no se especifican
+	@PrePersist
+    public void setDefaultImages() {
+        if (this.posterImg == null || this.posterImg.isEmpty()) {
+            this.posterImg = "static/imgs/empty-image";
+        }
+        if (this.bannerImg == null || this.bannerImg.isEmpty()) {
+            this.bannerImg = "static/imgs/empty-image";
+        }
+    }
 	// Getters and Setters
 	public Integer getId() {
 		return id;
