@@ -14,35 +14,39 @@ public class CompraModel {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-  @JoinColumn(name = "compra_id")
-  private List<ConfiteriaModel> confiteriaSelection = new ArrayList<>();
-
-  @ManyToOne
-  @JoinColumn(name = "parking_spot_id")
-  private SpotsEntradasModel parkingSpot;
+  @OneToOne
+  @JoinColumn(name = "confiteria_id")
+  private ConfiteriaModel confiteriaSelection;
 
   @ManyToOne
   @JoinColumn(name = "movie_id")
   private MovieModel movie;
 
-  public int amountToBuy = 0;
+  private int columna; // Added columna directly here
+  private int fila; // Added fila directly here
+
+  private int cantidad;
 
   public CompraModel(MovieModel movie) {
     this.movie = movie;
-    this.confiteriaSelection = new ArrayList<>();
+    // this.confiteriaSelection = new ArrayList<>();
   }
 
   public CompraModel() {
   }
 
   // Getters and Setters
-  public List<ConfiteriaModel> getConfiteriaSelection() {
-    return confiteriaSelection;
-  }
+  // public List<ConfiteriaModel> getConfiteriaSelection() {
+  // return confiteriaSelection;
+  // }
 
-  public void setConfiteriaSelection(List<ConfiteriaModel> confiteriaSelection) {
-    this.confiteriaSelection = confiteriaSelection;
+  // public void setConfiteriaSelection(List<ConfiteriaModel> confiteriaSelection)
+  // {
+  // this.confiteriaSelection = confiteriaSelection;
+  // }
+
+  public ConfiteriaModel getConfiteriaSelection() {
+    return confiteriaSelection;
   }
 
   public MovieModel getMovie() {
@@ -53,25 +57,47 @@ public class CompraModel {
     this.movie = movie;
   }
 
-  public SpotsEntradasModel getparkingSpot() {
-    return parkingSpot;
+  public int getColumna() {
+    return columna;
   }
 
-  public void setparkingSpot(SpotsEntradasModel parkingSpot) {
-    this.parkingSpot = parkingSpot;
+  public void setColumna(int columna) {
+    this.columna = columna;
+  }
+
+  public int getFila() {
+    return fila;
+  }
+
+  public void setFila(int fila) {
+    this.fila = fila;
+  }
+
+  public int spotPrice() {
+    return 50;
   }
 
   public double getTotal() {
     double total = 0;
     if (confiteriaSelection != null) {
-      for (ConfiteriaModel combo : confiteriaSelection)
-        total += combo.getPrecio() * amountToBuy;
+      // for (ConfiteriaModel combo : confiteriaSelection)
+      // total += combo.getPrecio() * cantidad;
+      total += confiteriaSelection.getPrecio() * cantidad;
     }
-    total += parkingSpot.getPrice();
+    total += this.spotPrice(); // entrada price
     return total;
   }
 
+  public void setAmountOfProductsToBuy(int cantidad) {
+    this.cantidad = cantidad;
+  }
+
+  public int getAmountOfProductsToBuy() {
+    return cantidad;
+  }
+
   public void addCombo(ConfiteriaModel combo) {
-    confiteriaSelection.add(combo);
+    // confiteriaSelection.add(combo);
+    confiteriaSelection = combo;
   }
 }

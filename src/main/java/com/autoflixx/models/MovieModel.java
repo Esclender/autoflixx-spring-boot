@@ -28,9 +28,9 @@ public class MovieModel {
 	private String cast; // Lista de actores principales
 	private String trailerUrl;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "movie_id")
-	private List<SpotsEntradasModel> spotsEntradas = new ArrayList<>();
+	// @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	// @JoinColumn(name = "movie_id")
+	// private List<SpotsEntradasModel> spotsEntradas = new ArrayList<>();
 
 	// asignar imágenes por defecto si no se especifican
 	@PrePersist
@@ -139,15 +139,28 @@ public class MovieModel {
 		this.trailerUrl = trailerUrl;
 	}
 
+	// public List<SpotsEntradasModel> getSpotsEntradas() {
+	// return spotsEntradas;
+	// }
+
+	// public void setSpotsEntradas(List<SpotsEntradasModel> spotsEntradas) {
+	// this.spotsEntradas = spotsEntradas;
+	// }
+
+	// public void setSpotsEntradasModels() {
+	// List<SpotsEntradasModel> parkingSpots = new ArrayList<>();
+	// for (int i = 0; i < 48; i++) {
+	// SpotsEntradasModel model = new SpotsEntradasModel(i % 4 + 1, i / 4 + 1);
+	// if (Math.random() < 0.5) {
+	// model.setAvailable(false);
+	// }
+	// parkingSpots.add(model);
+	// }
+
+	// this.spotsEntradas = parkingSpots;
+	// }
+
 	public List<SpotsEntradasModel> getSpotsEntradas() {
-		return spotsEntradas;
-	}
-
-	public void setSpotsEntradas(List<SpotsEntradasModel> spotsEntradas) {
-		this.spotsEntradas = spotsEntradas;
-	}
-
-	public void setSpotsEntradasModels() {
 		List<SpotsEntradasModel> parkingSpots = new ArrayList<>();
 		for (int i = 0; i < 48; i++) {
 			SpotsEntradasModel model = new SpotsEntradasModel(i % 4 + 1, i / 4 + 1);
@@ -157,6 +170,6 @@ public class MovieModel {
 			parkingSpots.add(model);
 		}
 
-		this.spotsEntradas = parkingSpots;
+		return parkingSpots;
 	}
 }
