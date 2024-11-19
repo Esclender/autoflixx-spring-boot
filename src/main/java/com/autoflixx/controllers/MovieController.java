@@ -9,11 +9,14 @@ import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,7 +51,7 @@ public class MovieController {
     @GetMapping("/admin")
     public String getAllMoviesForAdmin(Model model) {
         List<MovieModel> movie = service.getAllMovies();
-        model.addAttribute("movie", movie); 
+        model.addAttribute("movie", movie);
         System.out.println("Movie: " + movie);
         return "admin/home"; // Vista para el administrador
     }
@@ -56,7 +59,7 @@ public class MovieController {
     @GetMapping("/admin/add-movie")
     public String saveMovie(Model model) {
         List<MovieModel> movie = service.getAllMovies();
-        model.addAttribute("movie", movie); 
+        model.addAttribute("movie", movie);
         System.out.println("Movie: " + movie);
         return "admin/movies/add-movie"; // Vista para el administrador
     }
@@ -76,10 +79,10 @@ public class MovieController {
 
     @PostMapping("/admin/update/{id}")
     public String updateMovie(@PathVariable("id") int idMovie, @ModelAttribute("movie") MovieModel movie) {
-    movie.setId(idMovie); // Set the ID of the movie to the one from the path variable
-    service.updateMovie(movie);
-    return "redirect:/movie/admin";
-}
+        movie.setId(idMovie); // Set the ID of the movie to the one from the path variable
+        service.updateMovie(movie);
+        return "redirect:/movie/admin";
+    }
 
     @GetMapping("/admin/add")
     public String addMovieForm(Model model) {
@@ -88,7 +91,8 @@ public class MovieController {
     }
 
     @PostMapping("/admin/add")
-    public String saveMovie(@ModelAttribute("movie") MovieModel movie, BindingResult result, RedirectAttributes redirectAttributes) {
+    public String saveMovie(@ModelAttribute("movie") MovieModel movie, BindingResult result,
+            RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             for (ObjectError error : result.getAllErrors()) {
                 System.out.println("Ocurrio un error: " + error.getDefaultMessage());
@@ -113,6 +117,12 @@ public class MovieController {
         service.saveMovie(movie);
         redirectAttributes.addFlashAttribute("msg", "Película guardada con éxito");
         return "redirect:/movie/admin";
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder webDataBinder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
     }
 
 }

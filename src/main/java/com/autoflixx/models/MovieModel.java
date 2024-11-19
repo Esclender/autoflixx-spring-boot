@@ -17,7 +17,7 @@ public class MovieModel {
 
 	private String nombre;
 	private String sinopsis;
-	private String posterImg;
+	private String posterImg; // URL o ruta de la imagen de poster, puede ser opcional
 	private String bannerImg; // URL o ruta de la imagen de banner, puede ser opcional
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaPub; // Fecha de ingreso de la película
@@ -34,14 +34,15 @@ public class MovieModel {
 
 	// asignar imágenes por defecto si no se especifican
 	@PrePersist
-    public void setDefaultImages() {
-        if (this.posterImg == null || this.posterImg.isEmpty()) {
-            this.posterImg = "static/imgs/empty-image";
-        }
-        if (this.bannerImg == null || this.bannerImg.isEmpty()) {
-            this.bannerImg = "static/imgs/empty-image";
-        }
-    }
+	public void setDefaultImages() {
+		if (this.posterImg == null || this.posterImg.isEmpty()) {
+			this.posterImg = "PEL-07.png";
+		}
+		if (this.bannerImg == null || this.bannerImg.isEmpty()) {
+			this.bannerImg = "BAN-PEL-06.png";
+		}
+	}
+
 	// Getters and Setters
 	public Integer getId() {
 		return id;
