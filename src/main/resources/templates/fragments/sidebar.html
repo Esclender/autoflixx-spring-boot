@@ -13,24 +13,24 @@
     <!-- Cart Item -->
     <div class="flex flex-col space-y-4">
       <div class="flex justify-between items-center">
-        <img th:src="@{'/imgs/movies/' + ${movie.posterImg}}" alt="Product" class="w-20 h-20 object-cover">
+        <img th:src="@{'/imgs/movies/' + ${movie.posterImg}}" alt="Combo" class="w-20 h-20 object-cover">
         <div class="flex flex-col space-y-1 flex-grow ml-4">
           <span class="text-gray-700 font-semibold" th:text="${movie.nombre}"></span>
-          <span class="text-sm text-gray-500" th:text="'Fila: ' + ${parkingSpot.getfila()}"></span>
-          <span class="text-sm text-gray-500" th:text="'Puesto: ' + ${parkingSpot.getcolumna()}"></span>
+          <span class="text-sm text-gray-500" th:text="'Fila: ' + ${fila}"></span>
+          <span class="text-sm text-gray-500" th:text="'Puesto: ' + ${columna}"></span>
         </div>
-        <span class="text-red-600 font-bold" th:text="@{'S/'+${parkingSpot.price}}"></span>
+        <span class="text-red-600 font-bold" th:text="@{'S/'+${spotPrice}}"></span>
       </div>
     </div>
 
-    <div th:each="product : ${productos}" class="flex justify-between items-center">
-      <img th:src="@{'/imgs/confiteria/' + ${product.imagen}}" alt="Product" class="w-20 h-20 object-cover">
+    <div th:each="combo : ${combosSelected}" class="flex justify-between items-center">
+      <img th:src="@{'/imgs/confiteria/' + ${combo.imagen}}" alt="Combo" class="w-20 h-20 object-cover">
       <div class="flex flex-col space-y-1 flex-grow ml-4">
-        <span class="text-gray-700 font-semibold" th:text="${product.nombre}"></span>
+        <span class="text-gray-700 font-semibold" th:text="${combo.nombre}"></span>
       </div>
       <div class="flex flex-col items-end">
-        <span class="text-red-600 font-bold" th:text="@{'S/'+${product.precio}}"></span>
-        <span class="text-red-600 font-bold" th:text="@{'X '+${product.amount}}"></span>
+        <span class="text-red-600 font-bold" th:text="@{'S/'+${combo.precio}}"></span>
+        <span class="text-red-600 font-bold" th:text="@{'X '+${combosAmountToBuy}}"></span>
       </div>
     </div>
 

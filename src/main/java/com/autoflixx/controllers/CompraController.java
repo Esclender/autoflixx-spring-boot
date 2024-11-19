@@ -1,6 +1,8 @@
 package com.autoflixx.controllers;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -29,8 +31,6 @@ import com.autoflixx.services.IMovieService;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-import java.util.Random;
 import java.util.Date;
 
 @Controller
@@ -53,9 +53,10 @@ public class CompraController {
   }
 
   @GetMapping("/view/{id}/entradas")
-  public String getEntradasPreview(Model model, @PathVariable("id") int idMovie) {
+  public String getEntradasPreview(@PathVariable("id") int idMovie,
+      @ModelAttribute("compraModel") CompraModel compraModel, Model model) {
     MovieModel movie = movieService.getMovieById(idMovie);
-    movie.setSpotsEntradasModels();
+    // movie.setSpotsEntradasModels();
 
     List<SpotsEntradasModel> parkingSpots = movie.getSpotsEntradas();
     int midIndex = parkingSpots.size() / 2;
@@ -65,20 +66,20 @@ public class CompraController {
     model.addAttribute("firstHalfParkingSpots", firstHalfParkingSpots);
     model.addAttribute("secondHalfParkingSpots", secondHalfParkingSpots);
     model.addAttribute("movie", movie);
-    model.addAttribute("compraModel", new CompraModel(movie));
+
+    compraModel.setMovie(movie);
 
     return "steps/entradas/index";
   }
 
   @PostMapping("/view/confiteria")
   public String seleccionarParkingSpot(@ModelAttribute("compraModel") CompraModel compraModel, Model model) {
-    SpotsEntradasModel selectedParkingSpot = compraModel.getparkingSpot();
-    compraModel.setparkingSpot(selectedParkingSpot);
+    List<ConfiteriaModel> combos = confiteriaService.getCombos();
 
-    List<ConfiteriaModel> products = confiteriaService.getCombos();
-
-    model.addAttribute("products", products);
-    model.addAttribute("parkingSpot", compraModel.getparkingSpot());
+    model.addAttribute("combos", combos);
+    model.addAttribute("columna", compraModel.getColumna());
+    model.addAttribute("fila", compraModel.getFila());
+    model.addAttribute("spotPrice", compraModel.spotPrice());
     model.addAttribute("movie", compraModel.getMovie());
     model.addAttribute("total", compraModel.getTotal());
 
@@ -86,10 +87,16 @@ public class CompraController {
   }
 
   @GetMapping("/view/{id}/confiteria")
-  public String getConfiteriaPage(@PathVariable("id") int idMovie, Model model) {
-    List<ConfiteriaModel> products = confiteriaService.getCombos();
+  public String getConfiteriaPage(@PathVariable("id") int idMovie,
+      @ModelAttribute("compraModel") CompraModel compraModel, Model model) {
+    List<ConfiteriaModel> combos = confiteriaService.getCombos();
 
-    model.addAttribute("products", products);
+    model.addAttribute("combos", combos);
+    model.addAttribute("columna", compraModel.getColumna());
+    model.addAttribute("fila", compraModel.getFila());
+    model.addAttribute("spotPrice", compraModel.spotPrice());
+    model.addAttribute("movie", compraModel.getMovie());
+    model.addAttribute("total", compraModel.getTotal());
 
     return "steps/confiteria/index";
   }
@@ -110,34 +117,40 @@ public class CompraController {
     }
 
     if (comboAmountToBuy > 0) {
-      compraModel.addCombo(null);
+      ConfiteriaModel combo = confiteriaService.getComboById(Integer.parseInt(comboId)).get();
+      compraModel.addCombo(combo);
+      compraModel.setAmountOfProductsToBuy(comboAmountToBuy);
     }
 
-    model.addAttribute("parkingSpot", compraModel.getparkingSpot());
+    model.addAttribute("columna", compraModel.getColumna());
+    model.addAttribute("fila", compraModel.getFila());
     model.addAttribute("movie", compraModel.getMovie());
     model.addAttribute("total", compraModel.getTotal());
-    model.addAttribute("productos", compraModel.getConfiteriaSelection());
+    model.addAttribute("spotPrice", compraModel.spotPrice());
+    model.addAttribute("combosSelected", compraModel.getConfiteriaSelection());//
+    model.addAttribute("combosAmountToBuy", compraModel.getAmountOfProductsToBuy());// combosAmountToBuy
 
     return "steps/pagos/pago";
   }
 
   @PostMapping("/view/factura")
   public String getFacturaView(
-      Model model,
-      @ModelAttribute("compraModel") CompraModel compraModel) {
+      @ModelAttribute("compraModel") CompraModel compraModel, Model model) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
         "d 'de' MMMM, yyyy",
         Locale.of("es", "ES"));
-    String formattedDate = LocalDate.now().format(formatter);
+    String formattedDate = LocalDate.parse("2007-10-03").format(formatter);
 
     Random random = new Random();
     int code = random.nextInt(900000) + 100000;
 
     model.addAttribute("code", code);
-    model.addAttribute("parkingSpot", compraModel.getparkingSpot());
+    model.addAttribute("columna", compraModel.getColumna());
+    model.addAttribute("fila", compraModel.getFila());
+    model.addAttribute("spotPrice", compraModel.spotPrice());
     model.addAttribute("movie", compraModel.getMovie());
     model.addAttribute("total", compraModel.getTotal());
-    model.addAttribute("productos", compraModel.getConfiteriaSelection());
+    model.addAttribute("combos", compraModel.getConfiteriaSelection());
     model.addAttribute("date", formattedDate);
 
     // Save the compraModel to the database

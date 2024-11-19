@@ -19,10 +19,7 @@ public class ConfiteriaServiceImpl implements IConfiteriaService {
 
     @Override
     public List<ConfiteriaModel> getCombos() {
-        Iterable<ConfiteriaModel> combos = confiteriaRepository.findAll();
-        List<ConfiteriaModel> confiteriaList = new LinkedList<>();
-        combos.forEach(confiteriaList::add);
-        return confiteriaList;
+        return confiteriaRepository.findAll();
     }
 
     @Override
