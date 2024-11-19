@@ -30,6 +30,7 @@ public class MovieModel {
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "movie_id")
+
 	private List<SpotsEntradasModel> spotsEntradas = new ArrayList<>();
 
 	// asignar imágenes por defecto si no se especifican

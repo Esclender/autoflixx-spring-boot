@@ -9,7 +9,7 @@
 </head>
 <body>
 <section>
-  <form th:action="@{/admin/update/{id}(id=${movie.id})}" th:object="${movie}" method="post">
+  <form th:action="@{/movie/admin/update/{id}(id=${movie.id})}" th:object="${movie}" method="post" enctype="multipart/form-data">
     <div class="shadow sm:rounded-md sm:overflow-hidden">
       <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
         <!-- Campo: Nombre -->
@@ -24,17 +24,17 @@
           <textarea id="sinopsis" name="sinopsis" rows="3" th:text="*{sinopsis}" class="block w-full mt-2 rounded-md border-gray-300 shadow-sm sm:text-sm" placeholder="Sinopsis de la película"></textarea>
         </div>
 
-          <!-- Campo: Poster Img -->
-          <div class="col-span-full">
-            <label for="posterImg" class="block text-sm font-medium text-gray-900">Poster de la Película</label>
-            <input type="file" name="posterImg" id="posterImg" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm">
-          </div>
-  
-          <!-- Campo: Banner Img -->
-          <div class="col-span-full">
-            <label for="bannerImg" class="block text-sm font-medium text-gray-900">Banner de la Película</label>
-            <input type="file" name="bannerImg" id="bannerImg" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm">
-          </div>
+        <!-- Campo: Poster Img -->
+        <div class="col-span-full">
+          <label for="posterImg" class="block text-sm font-medium text-gray-900">Poster de la Película</label>
+          <input type="text" name="posterImg" id="posterImg" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm">
+        </div>
+
+        <!-- Campo: Banner Img -->
+        <div class="col-span-full">
+          <label for="bannerImg" class="block text-sm font-medium text-gray-900">Banner de la Película</label>
+          <input type="text" name="bannerImg" id="bannerImg" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm">
+        </div>
 
         <!-- Campo: Fecha de Publicación -->
         <div class="sm:col-span-3">
