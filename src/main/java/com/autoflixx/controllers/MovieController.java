@@ -83,8 +83,9 @@ public class MovieController {
 
     @PostMapping("/admin/update/{id}")
     public String updateMovie(@PathVariable("id") int idMovie, @ModelAttribute("movie") MovieModel movie,
-            @RequestParam(value = "posterImg", required = false) MultipartFile posterImg,
-            @RequestParam(value = "bannerImg", required = false) MultipartFile bannerImg, BindingResult result,
+            // @RequestParam(value = "posterImg", required = false) MultipartFile posterImg,
+            // @RequestParam(value = "bannerImg", required = false) MultipartFile bannerImg,
+        BindingResult result,
             RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             for (ObjectError error : result.getAllErrors()) {
@@ -96,21 +97,21 @@ public class MovieController {
         }
 
         // Handle file uploads
-        if (posterImg != null && !posterImg.isEmpty()) {
-            // Save the poster image file
-            String posterImgPath = saveFile(posterImg);
-            movie.setPosterImg(posterImgPath);
-        } else if (movie.getPosterImg() == null || movie.getPosterImg().isEmpty()) {
-            movie.setPosterImg("empty-image.png");
-        }
+        // if (posterImg != null && !posterImg.isEmpty()) {
+        //     // Save the poster image file
+        //     String posterImgPath = saveFile(posterImg);
+        //     movie.setPosterImg(posterImgPath);
+        // } else if (movie.getPosterImg() == null || movie.getPosterImg().isEmpty()) {
+        //     movie.setPosterImg("empty-image.png");
+        // }
 
-        if (bannerImg != null && !bannerImg.isEmpty()) {
-            // Save the banner image file
-            String bannerImgPath = saveFile(bannerImg);
-            movie.setBannerImg(bannerImgPath);
-        } else if (movie.getBannerImg() == null || movie.getBannerImg().isEmpty()) {
-            movie.setBannerImg("empty-image.png");
-        }
+        // if (bannerImg != null && !bannerImg.isEmpty()) {
+        //     // Save the banner image file
+        //     String bannerImgPath = saveFile(bannerImg);
+        //     movie.setBannerImg(bannerImgPath);
+        // } else if (movie.getBannerImg() == null || movie.getBannerImg().isEmpty()) {
+        //     movie.setBannerImg("empty-image.png");
+        // }
 
         // Parse the date string to a Date object if it's not null
         if (movie.getFechaPub() != null) {

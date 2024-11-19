@@ -25,17 +25,16 @@
         </div>
 
         <!-- Campo: Poster Img -->
-        <div class="col-span-full">
-          <label for="posterImg" class="block text-sm font-medium text-gray-900">Poster de la Película</label>
-          <input type="text" name="posterImg" id="posterImg" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm">
+        <div class="sm:col-span-4">
+          <label for="nombre" class="block text-sm font-medium text-gray-900">Foto Poster</label>
+          <input type="text" name="posterImg" id="posterImg"  th:value="*{posterImg}" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm" placeholder="Nombre de la película">
         </div>
 
         <!-- Campo: Banner Img -->
-        <div class="col-span-full">
-          <label for="bannerImg" class="block text-sm font-medium text-gray-900">Banner de la Película</label>
-          <input type="text" name="bannerImg" id="bannerImg" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm">
+        <div class="sm:col-span-4">
+          <label for="nombre" class="block text-sm font-medium text-gray-900">Foto Banner</label>
+          <input type="text" name="bannerImg" id="bannerImg"  th:value="*{bannerImg}" class="block w-full mt-2 rounded-md border-gray-300 sm:text-sm" placeholder="Nombre de la película">
         </div>
-
         <!-- Campo: Fecha de Publicación -->
         <div class="sm:col-span-3">
           <label for="fechaPub" class="block text-sm font-medium text-gray-900">Fecha de Publicación</label>
