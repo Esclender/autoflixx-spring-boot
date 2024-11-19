@@ -11,8 +11,8 @@ public class Product {
   private Integer productId;
 
   private String nombre;
-  private double precio;
-  private int amount;
+  private Double precio;
+  private Integer amount;
   private String imagen;
 
   // Constructor, getters, and setters...

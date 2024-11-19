@@ -51,11 +51,11 @@ public class CompraModel {
     this.movie = movie;
   }
 
-  public SpotsEntradasModel getParkingSpot() {
+  public SpotsEntradasModel getparkingSpot() {
     return parkingSpot;
   }
 
-  public void setParkingSpot(SpotsEntradasModel parkingSpot) {
+  public void setparkingSpot(SpotsEntradasModel parkingSpot) {
     this.parkingSpot = parkingSpot;
   }
 

@@ -19,7 +19,7 @@ public class MovieModel {
 	private String bannerImg; // URL o ruta de la imagen de banner, puede ser opcional
 	private Date fechaPub; // Fecha de ingreso de la película
 	private String genero;
-	private boolean disponible;
+	private Boolean disponible;
 	private Integer duracion; // Duración de la película en minutos
 	private String director;
 	private String cast; // Lista de actores principales

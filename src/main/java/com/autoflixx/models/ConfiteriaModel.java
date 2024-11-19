@@ -12,7 +12,7 @@ public class ConfiteriaModel {
 
 	private String nombre;
 	private String descripcion;
-	private double precio;
+	private Double precio;
 	private Integer disponible;
 	private String categoria;
 	private String imagen;

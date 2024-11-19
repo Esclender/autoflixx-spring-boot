@@ -49,7 +49,8 @@ public class CompraController {
   }
 
   @GetMapping("/view/{id}/entradas")
-  public String getEntradasPreview(Model model,
+  public String getEntradasPreview(
+      Model model,
       @PathVariable("id") int idMovie) {
     MovieModel movie = movieService.getMovieById(idMovie);
     movie.setSpotsEntradasModels();
@@ -74,13 +75,13 @@ public class CompraController {
       @ModelAttribute("compraModel") CompraModel compraModel,
       Model model) {
 
-    SpotsEntradasModel selectedParkingSpot = compraModel.getParkingSpot();
-    compraModel.setParkingSpot(selectedParkingSpot);
+    SpotsEntradasModel selectedParkingSpot = compraModel.getparkingSpot();
+    compraModel.setparkingSpot(selectedParkingSpot);
 
     List<ConfiteriaModel> product = confiteriaService.getProducts();
 
     model.addAttribute("product", product);
-    model.addAttribute("parkingSpot", compraModel.getParkingSpot());
+    model.addAttribute("parkingSpot", compraModel.getparkingSpot());
     model.addAttribute("movie", compraModel.getMovie());
     model.addAttribute("total", compraModel.getTotal());
     return "steps/confiteria/index";
@@ -112,7 +113,7 @@ public class CompraController {
       compraModel.addProduct(new Product(id, amount, productImage, precio, productNombre));
     }
 
-    model.addAttribute("parkingSpot", compraModel.getParkingSpot());
+    model.addAttribute("parkingSpot", compraModel.getparkingSpot());
     model.addAttribute("movie", compraModel.getMovie());
     model.addAttribute("total", compraModel.getTotal());
     model.addAttribute("productos", compraModel.getConfiteriaSelection());
@@ -131,11 +132,14 @@ public class CompraController {
 
     model.addAttribute("code", code);
 
-    model.addAttribute("parkingSpot", compraModel.getParkingSpot());
+    model.addAttribute("parkingSpot", compraModel.getparkingSpot());
     model.addAttribute("movie", compraModel.getMovie());
     model.addAttribute("total", compraModel.getTotal());
     model.addAttribute("productos", compraModel.getConfiteriaSelection());
     model.addAttribute("date", formattedDate);
+
+    // Save the compraModel to the database
+    // compraService.save(compraModel);
 
     compraModel.setConfiteriaSelection(null);
     return "steps/factura/index";
