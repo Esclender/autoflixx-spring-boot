@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autoflixx - Home</title>
+  <!-- Favicon -->
+  <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
+  <link rel="stylesheet" th:href="@{/css/output.css}">
+  <!-- Favicon -->
+  <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
+  <link rel="stylesheet" th:href="@{/css/output.css}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div th:replace="fragments/header"></div>
+  <main class="grid grid-cols-12 gap-2 h-auto antialiased">
+    <!-- Start header -->
+    <section class="hero-tickets relative block col-start-1 col-span-full h-[500px] "
+      th:style="'background-image: url(' + @{/imgs/{imagen}(imagen=${movie.bannerImg})} + ')'">
+
+      <div class="absolute grid grid-cols-10 bottom-2 w-full z-10">
+        <div class="col-start-3 col-end-9 md:hidden">
+          <img th:src="@{/imgs/movies/{imagen}(imagen=${movie.posterImg})}" alt="Movie image">
+        </div>
+        <div class="col-start-1 ml-9 my-2 md:ml-12  md:col-start-2 lg:col-start-4 col-end-13">
+          <div class="flex md:space-x-10 items-end mb-5">
+            <h1 th:text="${movie.nombre}" class="max-w-2xl text-light-1 text-[48px] font-extrabold 
+              font-archivo tracking-tight leading-none md:text-[84px] xl:text-[84px]">
+            </h1>
+
+            <div class="w-[180px] h-15 md:rounded-md md:border px-4 
+              md:border-light-1 drop-shadow-white-glow">
+              <h2 class="text-white w-full text-[20px] md:text-[32px] 
+                text-center items-center font-extralight font-roboto">
+                10:25 pm
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+    <!-- End header -->
+
+    <!-- Start parking details -->
+    <form class="no-layout-affect" th:action="@{/movie/view/confiteria}" th:object="${compraModel}" method="post">
+      <section class="relative hidden lg:block col-start-1 col-end-5 h-96 row-span-2  ml-10">
+        <div class="z-[100] top-[-45%] absolute w-[390px] h-[480px] flex flex-col items-end">
+          <img th:src="@{/imgs/movies/{imagen}(imagen=${movie.posterImg})}" alt="">
+
+          <div id="toast-message-cta" class="w-full max-w-xs pt-4 text-gray-500 " role="alert">
+
+            <div class="flex flex-col gap-4">
+              <div class="ticket-summary-container bg-white rounded-lg shadow p-4">
+                <div class="ticket-info">
+                  <span id="seat-row" class="seat-number text-2xl font-semibold"></span>
+                  <span class="seat-details ml-1 text-sm">fila</span>
+                  <span id="seat-column" class="seat-number text-2xl font-semibold ml-3"></span>
+                  <span class="seat-details ml-1 text-sm">puesto</span>
+                  <span id="seat-price" class="price text-gray-500 text-sm ml-3"></span>
+                  <button class="close-btn text-gray-500 text-xl ml-3">&times;</button>
+                </div>
+                <div class="total-price mt-2">
+                  <span class="font-normal text-gray-500">Total:</span>
+                  <span id="total-price" class="font-bold text-xl ml-2"></span>
+                </div>
+              </div>
+
+              <button type="submit" id="submit-button"
+                class="w-auto bg-red-sec  justify-center items-center flex-shrink-0 text-white font-bold hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-12">
+                <span>Siguiente</span>
+
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+      <!-- End parking details -->
+
+      <!-- Start choose parking -->
+      <section class=" col-start-1 lg:col-start-5 col-span-full row-span-2 ">
+        <section class="grow flex flex-col items-center">
+          <div th:replace="~{fragments/steps-indicator.html :: steps-indicator(steps=1)}"></div>
+          <!--Legend-->
+          <div class="flex flex-wrap justify-center gap-6 text-dark-2 px-3 ">
+            <div class="flex gap-1 items-center">
+              <div class="bg-[#ADD8E6] rounded-full size-4"></div>
+              <span>Tu seleccion</span>
+            </div>
+            <div class="flex gap-1 items-center">
+              <div class="bg-red-sec rounded-full size-4"></div>
+              <span>No disponibles</span>
+            </div>
+            <div class="flex gap-1 items-center">
+              <div class=" bg-gray-400 rounded-full size-4"></div>
+              <span>Disponibles</span>
+            </div>
+          </div>
+
+          <!--Parking selection-->
+          <div class="screen-container w-[80%]">
+            <span class="screen-label">Pantalla</span>
+            <div class="screen"></div>
+          </div>
+
+          <div class="w-[90%] flex gap-[10px] md:w-auto md:gap-[50px] mb-[88px] ">
+
+
+            <div class="parking_selection__container">
+              <div th:each="spot : ${firstHalfParkingSpots}" class="cell"
+                th:classappend="${spot.isAvailable} ? '': 'no-available' " th:data-row="${spot.getfila()}"
+                th:data-column="${spot.getcolumna()}" th:data-price="${spot.price}">
+              </div>
+            </div>
+            <div class="parking_selection__container">
+              <div th:each="spot : ${secondHalfParkingSpots}" class="cell"
+                th:classappend="${spot.isAvailable} ? '': 'no-available' " th:data-row="${spot.getfila() - 6}"
+                th:data-column="${spot.getcolumna() + 4}" th:data-price="${spot.price}">
+              </div>
+            </div>
+            <input type="hidden" th:field="*{fila}" id="selectedRow" />
+            <input type="hidden" th:field="*{columna}" id="selectedColumn" />
+            <!-- <input type="hidden" th:field="*{parkingSpot.price}" id="selectedPrice" /> -->
+          </div>
+
+
+        </section>
+      </section>
+    </form>
+    <!-- End choose parking -->
+
+  </main>
+  <div th:replace="fragments/footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+  <script>
+
+    document.querySelectorAll('.cell').forEach(cell => {
+      cell.addEventListener('click', function () {
+        if (cell.classList.contains('no-available')) return;
+        document.querySelectorAll('.cell').forEach(cell => {
+          cell.classList.remove('selected');
+        });
+        this.classList.add('selected');
+      });
+    });
+
+  </script>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const parkingCells = document.querySelectorAll('.cell');
+
+      parkingCells.forEach(cell => {
+        if (cell.classList.contains('no-available')) return;
+        cell.addEventListener('click', function () {
+          const seatNumber = cell.getAttribute('data-seat-number');
+          const row = cell.getAttribute('data-row');
+          const column = cell.getAttribute('data-column');
+          const price = cell.getAttribute('data-price');
+          const columnPrefixes = {
+            1: '1er',
+            2: '2do',
+            3: '3ero',
+            4: '4to',
+            5: '5to',
+            6: '6to',
+            7: '7mo',
+            8: '8vo'
+          }
+          console.log(row, column, price);
+          document.getElementById('seat-column').textContent = `${columnPrefixes[column]}`;
+          document.getElementById('seat-row').textContent = `${row}°`;
+          document.getElementById('seat-price').textContent = `S/${price}`;
+          document.getElementById('total-price').textContent = `S/${price}`;
+
+          document.getElementById('selectedRow').value = row;
+          document.getElementById('selectedColumn').value = column;
+          document.getElementById('selectedPrice').value = price;
+        });
+      });
+    });
+  </script>
+
+
+
+
+</body>
+
+</html>

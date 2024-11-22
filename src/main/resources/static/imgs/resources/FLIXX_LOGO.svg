@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="250mm"
+   height="80mm"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91pre1_64bit "
+   viewBox="0 0 885.82671 283.46457"
+   sodipodi:docname="FLIXX_LOGO.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="353.15434"
+     inkscape:cy="291.3035"
+     inkscape:document-units="px"
+     inkscape:current-layer="g4145"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1369"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-768.89764)">
+    <g
+       id="g4145"
+       transform="matrix(1.3606466,0,0,1.106207,-141.23903,-94.948678)">
+      <text
+         transform="scale(0.92852391,1.0769782)"
+         id="text4137"
+         y="884.38116"
+         x="139.16379"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:127.05130005px;font-family:Archive;-inkscape-font-specification:Archive;opacity:0.98900003;fill:#f0f0f0;fill-opacity:1;stroke-width:0;stroke-miterlimit:2;stroke-dasharray:none"
+         xml:space="preserve"><tspan
+           y="884.38116"
+           x="139.16379"
+           id="tspan4139"
+           sodipodi:role="line">AUTO</tspan></text>
+      <text
+         transform="scale(0.86846175,1.1514612)"
+         id="text4141"
+         y="831.31793"
+         x="498.94934"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:124.25106812px;font-family:Archive;-inkscape-font-specification:Archive;opacity:0.528;fill:#ff5757;fill-opacity:1;stroke-width:0;stroke-miterlimit:2;stroke-dasharray:none"
+         xml:space="preserve"><tspan
+           y="831.31793"
+           x="498.94934"
+           id="tspan4143"
+           sodipodi:role="line">FLIXX</tspan></text>
+      <text
+         transform="scale(0.86846175,1.1514612)"
+         id="text4141-2"
+         y="827.30206"
+         x="493.53427"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:124.25106812px;font-family:Archive;-inkscape-font-specification:Archive;opacity:0.98900003;fill:#ff5757;fill-opacity:1;stroke-width:0;stroke-miterlimit:2;stroke-dasharray:none"
+         xml:space="preserve"><tspan
+           y="827.30206"
+           x="493.53427"
+           id="tspan4143-4"
+           sodipodi:role="line">FLIXX</tspan></text>
+    </g>
+  </g>
+</svg>

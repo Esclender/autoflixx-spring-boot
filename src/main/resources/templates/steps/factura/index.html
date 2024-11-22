@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoflixx - Home</title>
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
+    <!-- En thymeleaf la ruta del css se escribe de la siguiente forma  -->
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="overflow-x-hidden">
+    <div th:replace="fragments/header"></div>
+    <main class="flex">
+        <div th:replace="fragments/sidebar :: sidebar(factura)"></div>
+        <section class="grow flex flex-col items-center">
+            <div th:replace="fragments/steps-indicator.html :: steps-indicator(3)"></div>
+            <div class="grow">
+
+                <div class="max-w-lg w-full bg-white shadow-lg rounded-lg overflow-hidden">
+                    <!-- Encabezado del ticket -->
+                    <div class="text-black p-8 text-center" style="background-color: #b2f9c2;">
+                        <h1 class="text-2xl font-bold">Tu entrada será enviada a tu correo</h1>
+                        <p class="text-sm">Te llegará un boleto con todos los detalles</p>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="p-8 flex justify-between items-start">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <h2 class="text-lg font-semibold text-gray-800">Película:</h2>
+                                <p th:text="${movie.nombre}" class="text-sm text-gray-600"></p>
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-semibold text-gray-800">Código:</h2>
+                                <p th:text="${#strings.concat('#', code)}" class="text-sm text-gray-600"></p>
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-semibold text-gray-800">Fecha:</h2>
+                                <p th:text="${date}" class="text-sm text-gray-600"></p>
+                            </div>
+                        </div>
+
+                        <!-- Sección del QR -->
+                        <div class="ml-8 flex flex-col items-center">
+                            <h2 class="text-lg font-semibold text-gray-800">Parking</h2>
+                            <div class="w-24 h-24 bg-gray-300 flex items-center justify-center mt-2">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Commons_QR_code.png"
+                                    alt="qr" class="w-full h-full object-contain">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detalles del cine -->
+                    <div class="bg-gray-100 p-8 text-center text-sm text-gray-600">
+                        <p>Dirección: Av. Santiago de Surco, Lima</p>
+                        <p>Teléfono: (123) 456-7890</p>
+                        <p>www.autoflixx.com</p>
+                    </div>
+                </div>
+
+                <!-- Botones con espacio entre ellos -->
+                <div class="p-8 flex justify-center space-x-8">
+                    <a th:href="@{/movie/}"
+                        class="bg-gray-300 text-black px-4 py-2 rounded-md hover:bg-gray-400">Regresar al
+                        inicio</a>
+                    <a href="#" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Descargar
+                        entrada</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div th:replace="fragments/footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+</body>
+
+</html>
