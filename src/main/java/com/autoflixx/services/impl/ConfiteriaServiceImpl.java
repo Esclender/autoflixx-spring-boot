@@ -17,11 +17,13 @@ public class ConfiteriaServiceImpl implements IConfiteriaService {
     @Autowired
     private IConfiteriaRepository confiteriaRepository;
 
+    // Obtener todo los productos
     @Override
     public List<ConfiteriaModel> getCombos() {
         return confiteriaRepository.findAll();
     }
 
+    // Obtener un producto por id
     @Override
     public Optional<ConfiteriaModel> getComboById(Integer idCombo) {
         Optional<ConfiteriaModel> combo = confiteriaRepository.findById(idCombo);

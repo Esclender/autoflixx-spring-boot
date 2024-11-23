@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoflixx - Home</title>
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
+    <!-- En thymeleaf la ruta del css se escribe de la siguiente forma  -->
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="overflow-x-hidden bg-light-1">
+    <!-- Header -->
+    <div th:replace="fragments/header"></div>
+
+    <h1 class="text-red-sec font-archivo text-[40px] md:text-[44px] xl:text-[64px] mb-4">Crear Producto</h1>
+    <!-- Formulario -->
+    <form class="max-w-md mx-auto">
+        <!-- Nombre -->
+        <div class="mb-5">
+            <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900">Nombre</label>
+            <input type="text" id="nombre" name="nombre"
+                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="P. ej.: Promo de porcion de nachos + 2 helados" required />
+        </div>
+        <!-- Descripción -->
+        <div class="mb-5">
+            <label for="descripcion" class="block mb-2 text-sm font-medium text-gray-900">Descripción</label>
+            <input type="text" id="descripcion" name="descripcion" placeholder="Descripcion detallada del producto"
+                class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <!-- Precio -->
+        <div class="mb-5">
+            <label for="precio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio (soles)</label>
+            <input type="number" id="precio" name="precio"
+                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                required placeholder="P.ej.: 39.9"/>
+        </div>
+        <!-- Disponible -->
+        <div class="mb-5">
+            <label class="block mb-2 text-sm font-medium text-gray-900">Disponible</label>
+            <div class="flex items-center mb-1">
+                <input id="disponible-option-1" type="radio" name="disponible" value="1"
+                    class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
+                    checked>
+                <label for="disponible-option-1" class="mr-4 block ms-2  text-sm font-medium text-gray-900">
+                    Si
+                </label>
+                <input id="disponible-option-2" type="radio" name="disponible" value="0"
+                    class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
+                <label for="disponible-option-2" class="block ms-2 text-sm font-medium text-gray-900">
+                    No
+                </label>
+            </div>
+        </div>
+        </div>
+        <!-- Categorías -->
+        <div class="mb-5">
+            <label for="categoria"
+                class="block mb-2 text-sm font-medium text-gray-900">Categoría</label>
+            <select id="categoria" name="categoria"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                <option value="Promocion">Promoción</option>
+                <option value="Combo">Combo</option>
+                <option value="Golosina">Golosina</option>
+            </select>
+        </div>
+        <!-- Subir archivo -->
+        <div class="mb-5">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="imagen">Imagen del Producto</label>
+            <input
+                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="imagen" type="file" name="imagen">
+        </div>
+        <!-- Submit -->
+        <button type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Guardar
+            Producto</button>
+    </form>
+    <!-- End Gallery -->
+    <!-- Footer -->
+    <div th:replace="fragments/footer"></div>
+
+    <script src="../../../../node_modules/preline/dist/preline.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+</body>
+
+</html>
