@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.autoflixx.models.ConfiteriaModel;
 import com.autoflixx.models.MovieModel;
 import com.autoflixx.services.IConfiteriaService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -29,10 +32,16 @@ public class ConfiteriaController {
         return "admin/confiteria/home-confiteria";
     }
 
-    //Formulario de guardar y actualizar 
+    //Formulario-vista de guardar y actualizar 
     @GetMapping("/admin/add-confiteria")
-    public String guardarConfiteria(Model model) {
+    public String guardarConfiteriaVista(Model model) {
         return "admin/confiteria/add-confiteria";
+    }
+    
+    @PostMapping("/admin/add-product")
+    public String GuardarProductoConfi(@RequestBody ConfiteriaModel conteria) {
+        //confiteriaServ.crearProductoConfi();
+        return "";
     }
     
 }
