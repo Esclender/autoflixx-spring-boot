@@ -29,4 +29,10 @@ public class ConfiteriaServiceImpl implements IConfiteriaService {
         Optional<ConfiteriaModel> combo = confiteriaRepository.findById(idCombo);
         return combo;
     }
+
+    // Guardar producto
+    @Override
+    public void crearProductoConfi(ConfiteriaModel confiteria){
+        confiteriaRepository.save(confiteria);
+    }
 }

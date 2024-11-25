@@ -11,5 +11,5 @@ public interface IConfiteriaService {
 	Optional<ConfiteriaModel> getComboById(Integer idCombo);
 
 	// CREATE
-	
+	public void crearProductoConfi(ConfiteriaModel confiteria);
 }
