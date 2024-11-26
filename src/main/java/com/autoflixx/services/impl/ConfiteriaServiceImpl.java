@@ -35,4 +35,15 @@ public class ConfiteriaServiceImpl implements IConfiteriaService {
     public void crearProductoConfi(ConfiteriaModel confiteria){
         confiteriaRepository.save(confiteria);
     }
+
+    //borrar producto
+    @Override
+    public void borrarProductoConfi(Integer idConfiteria){
+        confiteriaRepository.deleteById(idConfiteria);
+    }
+
+    @Override
+    public boolean buscarProductoPorId(Integer idConfiteria){
+        return confiteriaRepository.existsById(idConfiteria);
+    }
 }

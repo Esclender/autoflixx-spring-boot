@@ -11,7 +11,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +22,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.autoflixx.models.ConfiteriaModel;
 import com.autoflixx.services.IConfiteriaService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 @RequestMapping("/confiteria")
@@ -30,12 +35,26 @@ public class ConfiteriaController {
 
     // Guardar imagen en el servidor
     public String saveImage(MultipartFile file) throws IOException {
-        String imageName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+
+        // Obtén el nombre original del archivo
+        String imageName = file.getOriginalFilename();
+
+        if (imageName == null || imageName.isEmpty()) {
+            throw new IOException("El archivo no tiene un nombre válido.");
+        }
+
         Path imagePath = Paths.get("src/main/resources/static/imgs/confiteria/" + imageName);
 
-        // Asegurarse de que el directorio exista
         Files.createDirectories(imagePath.getParent());
         Files.copy(file.getInputStream(), imagePath, StandardCopyOption.REPLACE_EXISTING);
+
+        // con esto se genera un codigo aleatorio antes de guardar la imagen para previnir duplicados
+        // String imageName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+        // Path imagePath = Paths.get("src/main/resources/static/imgs/confiteria/" + imageName);
+
+        // Asegurarse de que el directorio exista
+        // Files.createDirectories(imagePath.getParent());
+        // Files.copy(file.getInputStream(), imagePath, StandardCopyOption.REPLACE_EXISTING);
 
         return imageName;
     }
@@ -68,14 +87,8 @@ public class ConfiteriaController {
 
         // si el archivo esta vacio
         if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("error", "Debe seleccionar un archivo.");
-            System.out.println("Debe seleccionar un archivo.");
-            return "redirect:/confiteria/admin/add-confiteria";
-        }
-
-        if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("error", "Debe seleccionar un archivo.");
-            System.out.println("Debe seleccionar un archivo.");
+            redirectAttributes.addFlashAttribute("warning", "Debe seleccionar un archivo.");
+            System.out.println("Debes seleccionar una imagen.");
             return "redirect:/confiteria/admin/add-confiteria";
         }
 
@@ -101,7 +114,7 @@ public class ConfiteriaController {
             confiteriaServ.crearProductoConfi(confiteria);
             
             redirectAttributes.addFlashAttribute("success", "Producto creado exitosamente.");
-        System.out.println("Producto creado exitosamente.");
+            System.out.println("Producto creado exitosamente.");
 
         } catch (IOException e) {
             redirectAttributes.addFlashAttribute("error", "Ocurrió un error al guardar la imagen: " + e.getMessage());
@@ -112,5 +125,35 @@ public class ConfiteriaController {
         }
 
         return "redirect:/confiteria/admin/add-confiteria";
+    }
+
+    // Probando con DeleleteMapping no funciona, tienes que encontrar la forma de hacerlo
+    @GetMapping("/admin/borrar/{id}")
+    public String borrarProducto(@PathVariable("id") int idProducto, RedirectAttributes redirectAttributes) {
+
+        if (confiteriaServ.buscarProductoPorId(idProducto)) {
+            confiteriaServ.borrarProductoConfi(idProducto);
+            redirectAttributes.addFlashAttribute("success", "Producto borrado exitosamente.");
+        } else{
+            redirectAttributes.addFlashAttribute("error", "El producto seleccionado no existe.");
+        }
+        
+        // service.deleteMovie(idMovie);
+        return "redirect:/confiteria/admin";
+    }
+
+    //mostrar vista de edición de registro
+    // tienes que mostrar a la izquierda el registro original y a la derecha el nuevo registro que quieres cambiar
+    @GetMapping("/admin/editar/{id}")
+    public String editarProducto(@PathVariable("id") int idProducto) {
+        return new String();
+    }
+    
+    //crear controlador que reciba el formulario de edición con sus respectivas respuestas y alertar para su html
+    @PutMapping("path/{id}")
+    public String putMethodName(@PathVariable String id, @RequestBody String entity) {
+        //TODO: process PUT request
+        
+        return entity;
     }
 }

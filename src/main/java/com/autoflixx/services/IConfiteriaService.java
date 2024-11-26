@@ -12,4 +12,10 @@ public interface IConfiteriaService {
 
 	// CREATE
 	public void crearProductoConfi(ConfiteriaModel confiteria);
+
+	//DELETE
+	public void borrarProductoConfi(Integer idConfiteria);
+
+	//encontrar por id
+	public boolean buscarProductoPorId(Integer idConfiteria);
 }
