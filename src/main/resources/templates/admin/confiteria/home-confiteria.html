@@ -72,8 +72,14 @@
                 <td class="px-6 py-4 text-[17px]" th:text="${confiteriaAux.categoria}">
                 </td>
                 <td class="px-6 py-4 text-right bg-slate-100 flex flex-col justify-center align-middle">
-                    <a href="#"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2">📝 Editar</button></a>
-                    <a th:href="@{/confiteria/admin/borrar/{id}(id=${confiteriaAux.id})}"><button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2">❎ Eliminar</button></a>
+                    <a th:href="@{/confiteria/admin/editar/{id} (id=${confiteriaAux.id})}"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2">📝 Editar</button></a>
+                    <!-- para enviar una solicitud delete en lugar de get -->
+                    <form th:action="@{/confiteria/admin/borrar/{id} (id=${confiteriaAux.id})}" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2">
+                            ❎ Eliminar
+                        </button>
+                    </form>
                 </td>
             </tr>
         </tbody>
@@ -85,6 +91,35 @@
     <!-- Footer -->
     <div th:replace="fragments/footer"></div>
 
+    <!-- actualizar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('reload')) {
+                // Recarga la página para forzar la actualización de imágenes
+                window.location.href = window.location.pathname;
+            }
+        });
+    </script>
+
+
+    <!-- generar un delete en lugar de un get para el btn Borrar -->
+    <script>
+        function deleteProduct(productId) {
+            fetch(`/confiteria/admin/borrar/${productId}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/confiteria/admin';
+                } else {
+                    alert('Error al eliminar el producto');
+                }
+            });
+        }
+    </script>
+
+    <!-- alertas -->
     <script th:if="${success != null}" th:inline="javascript">
         Swal.fire({
             title: '¡Éxito!',
@@ -92,7 +127,8 @@
             icon: 'success',
             confirmButtonText: 'OK',
             confirmButtonColor: '#33cf14',
-            backdrop: `rgba(0, 0, 0, 0.4)`
+            backdrop: `rgba(0, 0, 0, 0.4)`,
+            footer: '<small>En caso agreges o edites una imagen y la imagen no este en su celda correspondiente, por favor, recarga la página. Proximamente se arreglaremos este detalle 🙏</small>'
         });
     </script>
     <script th:if="${error != null}" th:inline="javascript">
