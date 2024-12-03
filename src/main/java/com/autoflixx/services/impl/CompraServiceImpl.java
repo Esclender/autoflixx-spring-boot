@@ -13,7 +13,6 @@ public class CompraServiceImpl implements ICompraService {
   @Autowired
   private ICompraRepository compraRepository;
 
-  // give save compra method
   public CompraModel saveCompra(CompraModel compra) {
     return compraRepository.save(compra);
   }
