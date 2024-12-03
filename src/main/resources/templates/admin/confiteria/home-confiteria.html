@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoflixx - Home</title>
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
+    <!-- En thymeleaf la ruta del css se escribe de la siguiente forma  -->
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="overflow-x-hidden bg-light-1">
+    <!-- Header -->
+    <div th:replace="fragments/header"></div>
+
+        <div class="flex flex-row justify-center items-center">
+            <h1 class="text-red-sec font-archivo text-[40px] md:text-[64px] xl:text-[84px]">Confiteria Admin</h1>
+        </div>
+        <p class="text-black my-6 px-20">Esta vista presenta la tabla de productos disponibles en el sistema, mostrando cada uno de ellos con sus detalles principales. Cada fila incluye la imagen representativa del producto, su nombre, descripción, precio y demás características relevantes. Además, proporciona botones de acción para editar o eliminar productos directamente desde esta interfaz, facilitando la gestión y administración del catálogo de manera eficiente y visualmente clara.</p>
+        
+        <div class="flex flex-row justify-center items-center my-10">
+            <a th:href="@{/confiteria/admin/add-confiteria}"><button type="button" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300  shadow-lg shadow-lime-500/50 dark:shadow-lg font-semibold rounded-lg text-lg px-5 py-3 text-center me-2 mb-2">🍫 Agregar un Producto</button></a>
+        </div>
+        
+<div class="relative overflow-x-scroll shadow-md sm:rounded-lg max-h-[900px] px-12 ">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-700">
+        <thead class="text-xs text-white uppercase bg-gray-500">
+            <tr>
+                <th scope="col" class="px-6 py-5 text-center text-[18px]">
+                    Imagen
+                </th>
+                <th scope="col" class="px-6 py-5 text-center text-[18px]">
+                    Nombre
+                </th>
+                <th scope="col" class="px-6 py-5 text-center text-[18px]">
+                    Descripción
+                </th>
+                <th scope="col" class="px-6 py-5 text-center text-[18px]">
+                    Precio
+                </th>
+                <th scope="col" class="px-6 py-5 text-center text-[18px]">
+                    Categoría
+                </th>
+                <th scope="col" class="px-6 py-5 text-center text-[18px]">
+                    Acción
+                </th>
+            </tr>
+        </thead>
+        <!-- th:each - ConfiteriaAux -->
+        <tbody>
+            <tr th:each="confiteriaAux: ${confiterias}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td scope="row" class="px-3 py-2">
+                    <img th:src="@{/imgs/confiteria/{img} (img=${confiteriaAux.getImagen})}" alt="img-producto" class="w-40 bg-slate-200">
+                </td>
+                <td class="px-6 py-4 text-[17px]" th:text="${confiteriaAux.nombre}">
+                </td>
+                <td class="px-6 py-4 text-[17px]" th:text="${confiteriaAux.descripcion}">
+                </td>
+                <td class="px-6 py-4 text-[17px]" th:text="'S/ ' + ${confiteriaAux.precio} + 0">
+                </td>
+                <td class="px-6 py-4 text-[17px]" th:text="${confiteriaAux.categoria}">
+                </td>
+                <td class="px-6 py-4 text-right bg-slate-100 flex flex-col justify-center align-middle">
+                    <a th:href="@{/confiteria/admin/editar/{id} (id=${confiteriaAux.id})}"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2">📝 Editar</button></a>
+                    <!-- para enviar una solicitud delete en lugar de get -->
+                    <form th:action="@{/confiteria/admin/borrar/{id} (id=${confiteriaAux.id})}" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2">
+                            ❎ Eliminar
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+    <!-- End Gallery -->
+    <!-- Footer -->
+    <div th:replace="fragments/footer"></div>
+
+    <!-- actualizar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('reload')) {
+                // Recarga la página para forzar la actualización de imágenes
+                window.location.href = window.location.pathname;
+            }
+        });
+    </script>
+
+
+    <!-- generar un delete en lugar de un get para el btn Borrar -->
+    <script>
+        function deleteProduct(productId) {
+            fetch(`/confiteria/admin/borrar/${productId}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/confiteria/admin';
+                } else {
+                    alert('Error al eliminar el producto');
+                }
+            });
+        }
+    </script>
+
+    <!-- alertas -->
+    <script th:if="${success != null}" th:inline="javascript">
+        Swal.fire({
+            title: '¡Éxito!',
+            text: [[${ success }]],
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#33cf14',
+            backdrop: `rgba(0, 0, 0, 0.4)`,
+            footer: '<small>En caso agreges o edites una imagen y la imagen no este en su celda correspondiente, por favor, recarga la página. Proximamente se arreglaremos este detalle 🙏</small>'
+        });
+    </script>
+    <script th:if="${error != null}" th:inline="javascript">
+        Swal.fire({
+            title: 'Error',
+            text: [[${ error }]],
+            icon: 'error',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#ef4517',
+            backdrop: `rgba(0, 0, 0, 0.4)`
+        });
+    </script>
+
+    <script src="../../../../node_modules/preline/dist/preline.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+</body>
+
+</html>

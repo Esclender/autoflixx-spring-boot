@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoflixx - Home</title>
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
+    <!-- Favicon -->
+    <link rel="icon" th:href="@{/imgs/resources/FLIXX_ISO.svg}" type="image/x-icon">
+    <!-- En thymeleaf la ruta del css se escribe de la siguiente forma  -->
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+        <!-- librerias para las alertas -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<a class="overflow-x-hidden bg-light-1">
+    <!-- Header -->
+    <div th:replace="fragments/header"></div>
+    <!-- Formulario -->
+
+    <div class="flex flex-row justify-center items-center pt-14">
+        <h1 class="text-blue-600 font-roboto text-[55px] md:text-[59px] xl:text-[65px]">Crear Producto</h1>
+    </div>
+    <form class="max-w-md mx-auto mt-7 bg-white p-5 border-4 border-gray-400 rounded-xl shadow-xl shadow-gray-950/90" method="post" action="/confiteria/admin/add-product"
+        enctype="multipart/form-data">
+        <p class="text-gray-900 text-sm mb-6 font-roboto">
+            Rellena los campos del formulario para añadir un nuevo producto a la lista. Asegúrate de completar todos los
+            datos correctamente, incluyendo el nombre, descripción, precio y una imagen representativa.
+        </p>
+        <!-- Nombre -->
+        <div class="mb-5">
+            <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900">Nombre</label>
+            <input type="text" id="nombre" name="nombre"
+                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="P. ej.: Promo de porcion de nachos + 2 helados" required />
+        </div>
+        <!-- Descripción -->
+        <div class="mb-5">
+            <label for="descripcion" class="block mb-2 text-sm font-medium text-gray-900">Descripción</label>
+            <textarea id="descripcion" name="descripcion" rows="4"
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="P. ej.: Nachos con salsa criolla y chimirruri mas helados de crema Donofrio"
+                required></textarea>
+        </div>
+        <!-- Precio -->
+        <div class="mb-5">
+            <label for="precio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio
+                (soles)</label>
+            <input type="number" id="precio" name="precio" step="0.01" min="1"
+                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                required placeholder="P.ej.: 39.9" />
+        </div>
+        <!-- Disponible -->
+        <div class="mb-5">
+            <label class="block mb-2 text-sm font-medium text-gray-900">Disponible</label>
+            <div class="flex items-center mb-1">
+                <input id="disponible-option-1" type="radio" name="disponible" value="1"
+                    class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300" checked>
+                <label for="disponible-option-1" class="mr-4 block ms-2  text-sm font-medium text-gray-900">
+                    Si
+                </label>
+                <input id="disponible-option-2" type="radio" name="disponible" value="0"
+                    class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300">
+                <label for="disponible-option-2" class="block ms-2 text-sm font-medium text-gray-900">
+                    No
+                </label>
+            </div>
+        </div>
+        <!-- Categorías -->
+        <div class="mb-5">
+            <label for="categoria" class="block mb-2 text-sm font-medium text-gray-900">Categoría</label>
+            <select id="categoria" name="categoria"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                <option value="Promocion">Promoción</option>
+                <option value="Combo">Combo</option>
+                <option value="Golosina">Golosina</option>
+            </select>
+        </div>
+        <!-- Subir archivo -->
+        <div class="mb-5">
+            <label class="block mb-2 text-sm font-medium text-gray-900" for="imagen">Imagen del Producto <span
+                    class="text-gray-500 italic font-light tracking-wide text-xs">(imagen no mayor a 8mb)</span></label>
+            <input
+                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
+                id="imagen" type="file" name="imagen" accept="image/*">
+            <img id="imagenPrevia" class="mt-2 max-w-full max-h-48 hidden mx-auto border-2 border-gray-600" alt="Previsualización de la imagen">
+        </div>
+        <!-- Submit -->
+        <div class="flex flex-row justify-center items-center mt-14">
+            <button type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Guardar
+            Producto</button>
+        </div>
+        
+    </form>
+    <!-- Footer -->
+    <a th:href="@{/confiteria/admin}" class="ml-10"><button type="button"
+            class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-lg px-5 py-2.5 text-center me-2 mb-8 mt-8">Regresar</button></a>
+    <br>
+    <div th:replace="fragments/footer"></div>
+    <!-- alertas -->
+    <script th:if="${warning != null}" th:inline="javascript">
+        Swal.fire({
+            title: 'Advertencia',
+            text: [[${ warning }]],
+            icon: 'warning',
+            confirmButtonText: 'Reintentar',
+            confirmButtonColor: '#ff9b00',
+            backdrop: `rgba(0, 0, 0, 0.4)`
+        });
+    </script>
+    <script th:if="${error != null}" th:inline="javascript">
+        Swal.fire({
+            title: 'Error',
+            text: [[${ error }]],
+            icon: 'error',
+            confirmButtonText: 'Reintentar',
+            confirmButtonColor: '#ef4517',
+            backdrop: `rgba(0, 0, 0, 0.4)`
+        });
+    </script>
+    <!-- cargar imagen en el html -->
+    <script>
+        // evitar que el script manipule html aun no cargado
+        document.addEventListener('DOMContentLoaded', () => {
+            const imagenCargada = document.getElementById('imagen');
+            const imagenPrevia = document.getElementById('imagenPrevia');
+
+            imagenCargada.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        imagenPrevia.src = e.target.result;
+                        imagenPrevia.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    imagenPrevia.style.display = 'none';
+                    imagenPrevia.src = '';
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    </body>
+</html>

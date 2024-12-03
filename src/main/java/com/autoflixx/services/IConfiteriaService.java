@@ -10,4 +10,12 @@ public interface IConfiteriaService {
 
 	Optional<ConfiteriaModel> getComboById(Integer idCombo);
 
+	// CREATE
+	public void crearProductoConfi(ConfiteriaModel confiteria);
+
+	//DELETE
+	public void borrarProductoConfi(Integer idConfiteria);
+
+	//encontrar por id
+	public boolean buscarProductoPorId(Integer idConfiteria);
 }
