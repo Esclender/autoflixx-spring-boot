@@ -55,7 +55,7 @@ public class MovieController {
     @GetMapping("/admin")
     public String getAllMoviesForAdmin(Model model) {
         List<MovieModel> movie = service.getAllMovies();
-        model.addAttribute("movie", movie);
+        model.addAttribute("movies", movie);
         System.out.println("Movie: " + movie);
         return "admin/home"; // Vista para el administrador
     }
@@ -85,7 +85,7 @@ public class MovieController {
     public String updateMovie(@PathVariable("id") int idMovie, @ModelAttribute("movie") MovieModel movie,
             // @RequestParam(value = "posterImg", required = false) MultipartFile posterImg,
             // @RequestParam(value = "bannerImg", required = false) MultipartFile bannerImg,
-        BindingResult result,
+            BindingResult result,
             RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             for (ObjectError error : result.getAllErrors()) {
@@ -98,19 +98,19 @@ public class MovieController {
 
         // Handle file uploads
         // if (posterImg != null && !posterImg.isEmpty()) {
-        //     // Save the poster image file
-        //     String posterImgPath = saveFile(posterImg);
-        //     movie.setPosterImg(posterImgPath);
+        // // Save the poster image file
+        // String posterImgPath = saveFile(posterImg);
+        // movie.setPosterImg(posterImgPath);
         // } else if (movie.getPosterImg() == null || movie.getPosterImg().isEmpty()) {
-        //     movie.setPosterImg("empty-image.png");
+        // movie.setPosterImg("empty-image.png");
         // }
 
         // if (bannerImg != null && !bannerImg.isEmpty()) {
-        //     // Save the banner image file
-        //     String bannerImgPath = saveFile(bannerImg);
-        //     movie.setBannerImg(bannerImgPath);
+        // // Save the banner image file
+        // String bannerImgPath = saveFile(bannerImg);
+        // movie.setBannerImg(bannerImgPath);
         // } else if (movie.getBannerImg() == null || movie.getBannerImg().isEmpty()) {
-        //     movie.setBannerImg("empty-image.png");
+        // movie.setBannerImg("empty-image.png");
         // }
 
         // Parse the date string to a Date object if it's not null

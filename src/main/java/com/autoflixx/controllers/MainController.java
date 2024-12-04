@@ -19,10 +19,8 @@ public class MainController {
   }
 
   @PostMapping("/login")
-    public String processLogin(@RequestParam("email") String email, 
-                               @RequestParam("password") String password ) {
-       System.out.println("Email: " + email);
-        System.out.println("Password: " + password);
-        return "redirect:/login";
-    }
+  public String processLogin(@RequestParam("email") String email,
+      @RequestParam("password") String password) {
+    return "redirect:/movie/admin";
+  }
 }
