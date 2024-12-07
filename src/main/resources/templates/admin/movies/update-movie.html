@@ -73,7 +73,7 @@
         <label class="block mb-2 text-sm font-medium text-gray-900" for="imagenPrevia">Imagen del Producto</label>
         <img id="imagenPreviaOg" class="mt-2 max-w-full max-h-48 mx-auto border-2 border-gray-600"
           alt="imagen-registro-Og" th:src="@{/imgs/{imgOg} (imgOg=${movie.bannerImg})}">
-        <p class="text-center" th:text="${movie.imagen}"></p>
+        <p class="text-center" th:text="${movie.posterImg}"></p>
       </div>
     </form>
 
@@ -84,7 +84,7 @@
 
     <!-- REGISTRO NUEVO -->
     <form class="max-w-md p-5 bg-purple-200 border-4 border-purple-500 rounded-xl shadow-xl shadow-gray-950/90"
-      method="post" th:action="@{/confiteria/admin/edit-product/{id} (id=${movie.id})}" enctype="multipart/form-data">
+      method="post" th:action="@{/movie/admin/edit-product/{id} (id=${movie.id})}" enctype="multipart/form-data">
       <input type="hidden" name="_method" value="PUT">
       <div class="flex flex-row justify-center items-center pt-8">
         <h2 class="text-gray-900 font-sans font-semibold text-[25px] md:text-[29px] xl:text-[35px] mb-5">Registro Nuevo
@@ -139,7 +139,7 @@
   </div>
 
 
-  <a th:href="@{/confiteria/admin}" class="ml-10"><button type="button"
+  <a th:href="@{/movie/admin}" class="ml-10"><button type="button"
       class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-lg px-5 py-2.5 text-center me-2 mb-8 mt-8">Regresar</button></a>
   <br>
   <!-- Footer -->
