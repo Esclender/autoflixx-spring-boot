@@ -1,0 +1,36 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_autoflixx
+    environment:
+      MYSQL_ROOT_PASSWORD: ronaldomtlp125
+      MYSQL_DATABASE: autoflixx
+    ports:
+      - "3306:3306" # Puerto local:contenedor
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - autoflixx_network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: autoflixx_app
+    ports:
+      - "8080:8080" # Puerto local:contenedor
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/autoflixx?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ronaldomtlp125
+    depends_on:
+      - db
+    networks:
+      - autoflixx_network
+
+volumes:
+  db_data:
+
+networks:
+  autoflixx_network:
+    driver: bridge
