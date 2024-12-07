@@ -27,9 +27,9 @@
     <!-- Formulario -->
 
     <div class="flex flex-row justify-center items-center pt-14">
-        <h1 class="text-blue-600 font-roboto text-[55px] md:text-[59px] xl:text-[65px]">Crear Producto</h1>
+        <h1 class="text-red-sec font-archivo text-[55px] md:text-[59px] xl:text-[65px]">Crear Producto</h1>
     </div>
-    <form class="max-w-md mx-auto mt-7 bg-white p-5 border-4 border-gray-400 rounded-xl shadow-xl shadow-gray-950/90" method="post" action="/confiteria/admin/add-product"
+    <form class="w-[80%] max-w-md mx-auto mt-7 bg-white p-5 rounded-xl shadow-xl shadow-gray-950/90" method="post" action="/confiteria/admin/add-product"
         enctype="multipart/form-data">
         <p class="text-gray-900 text-sm mb-6 font-roboto">
             Rellena los campos del formulario para añadir un nuevo producto a la lista. Asegúrate de completar todos los
@@ -96,14 +96,14 @@
         <!-- Submit -->
         <div class="flex flex-row justify-center items-center mt-14">
             <button type="submit"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Guardar
+            class="text-white mx-auto bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-lg px-5 py-2.5 text-center me-2 mb-8">Guardar
             Producto</button>
         </div>
         
     </form>
     <!-- Footer -->
-    <a th:href="@{/confiteria/admin}" class="ml-10"><button type="button"
-            class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-lg px-5 py-2.5 text-center me-2 mb-8 mt-8">Regresar</button></a>
+    <!-- <a th:href="@{/confiteria/admin}" class="ml-10"><button type="button"
+            class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-lg px-5 py-2.5 text-center me-2 mb-8 mt-8">Regresar</button></a> -->
     <br>
     <div th:replace="fragments/footer"></div>
     <!-- alertas -->

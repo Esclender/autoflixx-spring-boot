@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,11 +34,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.autoflixx.models.ConfiteriaModel;
 import com.autoflixx.models.MovieModel;
 import com.autoflixx.services.IMovieService;
 
 @Controller
-@RequestMapping("/movie")
+@RequestMapping("/api/movie")
 public class MovieController {
 
     @Autowired
@@ -67,19 +69,27 @@ public class MovieController {
     }
 
     @GetMapping("/admin/add-movie")
-    public String saveMovie(Model model) {
-        List<MovieModel> movie = service.getAllMovies();
+        public String saveMovie(Model model) {
+        MovieModel movie = new MovieModel(); 
+        movie.setDisponible(true); 
         model.addAttribute("movie", movie);
-        System.out.println("Movie: " + movie);
-        return "admin/movies/add-movie"; // Vista para el administrador
+        System.out.println("New Movie Form: " + movie);
+        return "admin/movies/add-movie";
     }
 
-    @GetMapping("/admin/delete/{id}")
-    public String deleteMovie(@PathVariable("id") int idMovie, Model model) {
-        service.deleteMovie(idMovie);
-        return "redirect:/movie/admin";
+    @DeleteMapping("/admin/delete/{id}")
+    public String deleteMovie(@PathVariable("id") int idMovie, RedirectAttributes redirectAttributes) {
+        MovieModel movie = service.getMovieById(idMovie);
+        if (movie != null) {
+            service.deleteMovie(idMovie);
+            redirectAttributes.addFlashAttribute("success", "Película borrada exitosamente.");
+        } else {
+            redirectAttributes.addFlashAttribute("error", "La película seleccionada no existe.");
+        }
+        return "redirect:/api/movie/admin";
     }
 
+   
     @GetMapping("/admin/update/{id}")
     public String updateMovieForm(@PathVariable("id") int idMovie, Model model) {
         MovieModel movie = service.getMovieById(idMovie);
@@ -88,7 +98,7 @@ public class MovieController {
     }
 
     @PutMapping("/admin/edit-movie/{id}")
-public String updateMovie(
+    public String updateMovie(
         @PathVariable("id") int idMovie,
         @RequestParam("nombre") String tituloN,
         @RequestParam("sinopsis") String sinopsisN,
@@ -100,7 +110,7 @@ public String updateMovie(
 
     if (!movieOg.isPresent()) {
         redirectAttributes.addFlashAttribute("error", "La película no existe.");
-        return "redirect:/movie/admin";
+        return "redirect:/api/movie/admin";
     }
 
     try {
@@ -111,7 +121,7 @@ public String updateMovie(
             String nombreImgOg = fileN.getOriginalFilename();
             if (nombreImgOg == null || nombreImgOg.trim().isEmpty()) {
                 redirectAttributes.addFlashAttribute("warning", "El archivo de imagen debe tener un nombre válido.");
-                return "redirect:/movie/admin/edit/" + idMovie;
+                return "redirect:/api/movie/admin/edit/" + idMovie;
             }
 
             // Eliminar la imagen anterior y guardar la nueva
@@ -130,14 +140,14 @@ public String updateMovie(
         service.updateMovie(movieActualizada);
 
         redirectAttributes.addFlashAttribute("success", "Película actualizada exitosamente.");
-        return "redirect:/movie/admin";
+        return "redirect:/api/movie/admin";
 
     } catch (IOException e) {
         redirectAttributes.addFlashAttribute("error", "Error al procesar la imagen: " + e.getMessage());
         return "redirect:/movie/admin/update/" + idMovie;
     } catch (Exception e) {
         redirectAttributes.addFlashAttribute("error", "Error al actualizar la película: " + e.getMessage());
-        return "redirect:/movie/admin/update/" + idMovie;
+        return "redirect:/api/movie/admin/update/" + idMovie;
     }
 }
 
@@ -174,46 +184,59 @@ public boolean deleteImage(String nombreImg) {
             System.out.println("La imagen no existe: " + nombreImg);
             return false;
         }
-    } catch (IOException e) {
-        System.out.println("Error al intentar eliminar la imagen: " + e.getMessage());
-        return false;
+        } catch (IOException e) {
+            System.out.println("Error al intentar eliminar la imagen: " + e.getMessage());
+            return false;
+        }
     }
-}
-
     @GetMapping("/admin/add")
     public String addMovieForm(Model model) {
         model.addAttribute("movie", new MovieModel());
-        return "admin/add-movie";
+        return "/api/admin/add-movie";
     }
 
     @PostMapping("/admin/add-movie")
-    public String saveMovie(@ModelAttribute("movie") MovieModel movie, BindingResult result,
-            RedirectAttributes redirectAttributes) {
-        if (result.hasErrors()) {
-            for (ObjectError error : result.getAllErrors()) {
-                System.out.println("Ocurrio un error: " + error.getDefaultMessage());
-            }
-            return "admin/add-movie";
-        } else {
-            System.out.println("Movie: " + movie);
-        }
+    public String saveMovie(
+        @ModelAttribute("movie") MovieModel movie,
+        @RequestParam(value = "imagen", required = false) MultipartFile file,
+        BindingResult result,
+        RedirectAttributes redirectAttributes) {
 
-        // Parse the date string to a Date object
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            String fechaPubString = formatter.format(movie.getFechaPub()); // Convert Date to String
-            Date date = formatter.parse(fechaPubString); // Parse the String back to Date
-            movie.setFechaPub(date); // Assuming fechaPub is a Date field in MovieModel
-        } catch (ParseException e) {
-            e.printStackTrace();
-            result.rejectValue("fechaPubString", "error.movie", "Formato de fecha inválido");
-            return "admin/addMovie";
+    // Verificar si hay errores en el formulario
+    if (result.hasErrors()) {
+        for (ObjectError error : result.getAllErrors()) {
+            System.out.println("Ocurrió un error: " + error.getDefaultMessage());
         }
-
-        service.saveMovie(movie);
-        redirectAttributes.addFlashAttribute("msg", "Película guardada con éxito");
-        return "redirect:/movie/admin";
+        return "admin/movies/add-movie";
     }
+
+    try {
+        // Procesar la imagen si se envió
+        if (file != null && !file.isEmpty()) {
+            String nombreImg = file.getOriginalFilename();
+
+            if (nombreImg == null || nombreImg.trim().isEmpty()) {
+                redirectAttributes.addFlashAttribute("error", "El archivo de imagen no tiene un nombre válido.");
+                return "admin/movies/add-movie";
+            }
+            String rutaImg = saveImage(file);
+            movie.setPosterImg(rutaImg); // Establecer la ruta de la imagen en el modelo
+        }
+
+        // Guardar la película en el servicio
+        service.saveMovie(movie);
+        redirectAttributes.addFlashAttribute("msg", "Película guardada con éxito.");
+        return "redirect:/api/movie/admin";
+
+    } catch (IOException e) {
+        redirectAttributes.addFlashAttribute("error", "Error al guardar la imagen: " + e.getMessage());
+        return "admin/movies/add-movie";
+    } catch (Exception e) {
+        redirectAttributes.addFlashAttribute("error", "Error al guardar la película: " + e.getMessage());
+        return "admin/movies/add-movie";
+    }
+}
+
 
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder) {

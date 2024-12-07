@@ -24,12 +24,12 @@
     <div th:replace="fragments/header"></div>
     <!-- Formulario -->
     <div class="flex flex-row justify-center items-center pt-8">
-        <h1 class="text-purple-600 font-roboto font-semibold text-[60px] md:text-[64px] xl:text-[70px] mb-10">Editar Producto</h1>
+        <h1 class="text-red-sec font-archivo font-semibold text-[60px] md:text-[64px] xl:text-[70px] mb-10">Editar Producto</h1>
     </div>
     <!-- contenedor padre -->
     <div class="flex flex-col lg:flex-row justify-center align-middle items-center gap-8">
         <!-- REGISTRO ORIGINAL -->
-        <form class="max-w-md bg-gray-200 p-5 border-4 border-gray-900 rounded-xl shadow-xl shadow-gray-950/90">
+        <form class="w-full max-w-md p-5 h-[50rem] rounded-xl shadow-xl">
             <div class="flex flex-row justify-center items-center mb-3">
                 <h2 class="text-gray-600 font-sans font-semibold text-[25px] md:text-[29px] xl:text-[35px] mb-5">Registro Original
                 </h2>
@@ -98,7 +98,7 @@
         </div>
 
         <!-- REGISTRO NUEVO -->
-        <form class="max-w-md p-5 bg-purple-200 border-4 border-purple-500 rounded-xl shadow-xl shadow-gray-950/90" method="post" th:action="@{/confiteria/admin/edit-product/{id} (id=${confiteriaOg.id})}"
+        <form class="w-full max-w-lg p-5 h-[50rem] rounded-xl shadow-xl shadow-gray-950/90" method="post" th:action="@{/confiteria/admin/edit-product/{id} (id=${confiteriaOg.id})}"
             enctype="multipart/form-data">
             <input type="hidden" name="_method" value="PUT">
             <div class="flex flex-row justify-center items-center pt-8">

@@ -17,15 +17,15 @@ public class MovieModel {
 
 	private String nombre;
 	private String sinopsis;
-	private String posterImg; // URL o ruta de la imagen de poster, puede ser opcional
-	private String bannerImg; // URL o ruta de la imagen de banner, puede ser opcional
+	private String posterImg; 
+	private String bannerImg; 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date fechaPub; // Fecha de ingreso de la película
+	private Date fechaPub; 
 	private String genero;
 	private Boolean disponible;
-	private Integer duracion; // Duración de la película en minutos
+	private Integer duracion;
 	private String director;
-	private String cast; // Lista de actores principales
+	private String cast; 
 	private String trailerUrl;
 
 	// @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

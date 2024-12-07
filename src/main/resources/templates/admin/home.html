@@ -31,8 +31,8 @@
         precio y demás características relevantes. Además, proporciona botones de acción para editar o eliminar
         peliculas directamente desde esta interfaz, facilitando la gestión y administración del catálogo de manera
         eficiente y visualmente clara.</p>
-    <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-        <a th:href="@{/movie/admin/add-movie}" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+    <div class="flex flex-col mb-2 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+        <a th:href="@{/api/movie/admin/add-movie}" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
             <svg class="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg>
             Agregar pelicula
         </a> 
@@ -41,7 +41,7 @@
 
     <div class="relative overflow-x-scroll shadow-md sm:rounded-lg max-h-[900px] px-12 ">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="sticky top-0 z-10text-xs text-gray-200 font-roboto font-light bg-dark-1">
+            <thead class="sticky top-0 z-10 text-xs text-gray-200 font-roboto font-light bg-dark-1">
                 <tr>
                     <th scope="col" class="px-6 py-3 rounded-s-lg text-center text-[18px]">
                         Imagen
@@ -76,11 +76,11 @@
                     </td>
                     <td class="px-6 py-4 w-28 text-right flex align-middle">
                         <div class="h-48 grid grid-cols-1 content-center">
-                        <a th:href="@{/movie/admin/update/{id} (id=${movie.id})}"><button type="button"
+                        <a th:href="@{/api/movie/admin/update/{id} (id=${movie.id})}"><button type="button"
                                 class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2">📝
                                 Editar</button></a>
                         <!-- para enviar una solicitud delete en lugar de get -->
-                        <form th:action="@{/confiteria/admin/borrar/{id} (id=${movie.id})}" method="post">
+                        <form th:action="@{/api/movie/admin/delete/{id}(id=${movie.id})}" method="post">
                             <input type="hidden" name="_method" value="delete">
                             <button type="submit"
                                 class="w-full focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2">

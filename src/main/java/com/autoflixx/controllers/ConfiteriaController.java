@@ -48,7 +48,6 @@ public class ConfiteriaController {
         return "admin/confiteria/add-confiteria";
     }
 
-    // Recibir formulario
     @PostMapping("/admin/add-product")
     public String GuardarProductoConfi(
             @RequestParam("nombre") String nombre,
@@ -58,8 +57,7 @@ public class ConfiteriaController {
             @RequestParam("categoria") String categoria,
             @RequestParam("imagen") MultipartFile file,
             RedirectAttributes redirectAttributes
-    /* BindingResult result */) { // al no usar @ModelAtribute no es necesario y al contrario genera error
-
+    ) { 
         // si el archivo esta vacio
         if (file.isEmpty()) {
             redirectAttributes.addFlashAttribute("warning", "Debe seleccionar un archivo.");
