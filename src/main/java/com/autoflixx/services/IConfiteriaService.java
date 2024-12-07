@@ -18,4 +18,7 @@ public interface IConfiteriaService {
 
 	//encontrar por id
 	public boolean buscarProductoPorId(Integer idConfiteria);
+
+	//UPDATE
+	// public void editarProductoConfi(ConfiteriaModel confiteria);
 }
