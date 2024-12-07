@@ -32,7 +32,7 @@
         peliculas directamente desde esta interfaz, facilitando la gestión y administración del catálogo de manera
         eficiente y visualmente clara.</p>
     <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-        <a th:href="@{/confiteria/admin/add-confiteria}" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+        <a th:href="@{/movie/admin/add-movie}" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
             <svg class="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg>
             Agregar pelicula
         </a> 
@@ -50,7 +50,7 @@
                         Nombre
                     </th>
                     <th scope="col" class="px-6 py-3 text-center text-[18px]">
-                        Descripción
+                        Sinopsis
                     </th>
                     <th scope="col" class="px-6 py-3 text-center text-[18px]">
                         Duracion
@@ -64,7 +64,7 @@
             <tbody>
                 <tr th:each="movie: ${movies}" class=" border-b dark:bg-gray-800 dark:border-gray-700">
                     <td scope="row" class="px-6 py-2">
-                        <img th:src="@{/imgs/{img} (img=${movie.posterImg})}" alt="img-producto"
+                        <img th:src="@{/imgs/movies/{img} (img=${movie.posterImg})}" alt="img-movies"
                             class="w-40 bg-slate-200">
                     </td>
                     <td class="px-2 py-4 text-center text-[17px]" th:text="${movie.nombre}">

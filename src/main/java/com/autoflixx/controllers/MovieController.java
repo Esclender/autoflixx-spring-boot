@@ -90,10 +90,9 @@ public class MovieController {
     @PutMapping("/admin/edit-movie/{id}")
 public String updateMovie(
         @PathVariable("id") int idMovie,
-        @RequestParam("titulo") String tituloN,
-        @RequestParam("descripcion") String descripcionN,
-        @RequestParam("director") String directorN,
-        @RequestParam("genero") String generoN,
+        @RequestParam("nombre") String tituloN,
+        @RequestParam("sinopsis") String sinopsisN,
+        @RequestParam("disponible") Boolean disponibleN,
         @RequestParam(value = "imagen", required = false) MultipartFile fileN,
         RedirectAttributes redirectAttributes) {
 
@@ -124,9 +123,8 @@ public String updateMovie(
         MovieModel movieActualizada = new MovieModel();
         movieActualizada.setId(idMovie);
         movieActualizada.setNombre(tituloN);
-        movieActualizada.setSinopsis(descripcionN);
-        movieActualizada.setDirector(directorN);
-        movieActualizada.setGenero(generoN);
+        movieActualizada.setSinopsis(sinopsisN);
+        movieActualizada.setDisponible(disponibleN);
         movieActualizada.setPosterImg(imagenNueva);
 
         service.updateMovie(movieActualizada);
@@ -136,10 +134,10 @@ public String updateMovie(
 
     } catch (IOException e) {
         redirectAttributes.addFlashAttribute("error", "Error al procesar la imagen: " + e.getMessage());
-        return "redirect:/movie/admin/edit/" + idMovie;
+        return "redirect:/movie/admin/update/" + idMovie;
     } catch (Exception e) {
         redirectAttributes.addFlashAttribute("error", "Error al actualizar la película: " + e.getMessage());
-        return "redirect:/movie/admin/edit/" + idMovie;
+        return "redirect:/movie/admin/update/" + idMovie;
     }
 }
 
@@ -188,7 +186,7 @@ public boolean deleteImage(String nombreImg) {
         return "admin/add-movie";
     }
 
-    @PostMapping("/admin/add")
+    @PostMapping("/admin/add-movie")
     public String saveMovie(@ModelAttribute("movie") MovieModel movie, BindingResult result,
             RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {

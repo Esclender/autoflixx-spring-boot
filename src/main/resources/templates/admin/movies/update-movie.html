@@ -72,7 +72,7 @@
       <div class="mb-5">
         <label class="block mb-2 text-sm font-medium text-gray-900" for="imagenPrevia">Imagen del Producto</label>
         <img id="imagenPreviaOg" class="mt-2 max-w-full max-h-48 mx-auto border-2 border-gray-600"
-          alt="imagen-registro-Og" th:src="@{/imgs/{imgOg} (imgOg=${movie.bannerImg})}">
+          alt="imagen-registro-Og" th:src="@{/imgs/{imgOg} (imgOg=${movie.posterImg})}">
         <p class="text-center" th:text="${movie.posterImg}"></p>
       </div>
     </form>
@@ -84,7 +84,7 @@
 
     <!-- REGISTRO NUEVO -->
     <form class="max-w-md p-5 bg-purple-200 border-4 border-purple-500 rounded-xl shadow-xl shadow-gray-950/90"
-      method="post" th:action="@{/movie/admin/edit-product/{id} (id=${movie.id})}" enctype="multipart/form-data">
+      method="post" th:action="@{/movie/admin/edit-movie/{id} (id=${movie.id})}" enctype="multipart/form-data">
       <input type="hidden" name="_method" value="PUT">
       <div class="flex flex-row justify-center items-center pt-8">
         <h2 class="text-gray-900 font-sans font-semibold text-[25px] md:text-[29px] xl:text-[35px] mb-5">Registro Nuevo
@@ -99,8 +99,8 @@
       </div>
       <!-- Descripción -->
       <div class="mb-5">
-        <label for="descripcion" class="block mb-2 text-sm font-medium text-gray-900">Sinopsis</label>
-        <textarea id="descripcion" name="descripcion" rows="4" th:text="${movie.sinopsis}"
+        <label for="sinopsis" class="block mb-2 text-sm font-medium text-gray-900">Sinopsis</label>
+        <textarea id="descripcion" name="sinopsis" rows="4" th:text="${movie.sinopsis}"
           class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
           placeholder="P. ej.: Nombre de la pelicula" required></textarea>
       </div>
