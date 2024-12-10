@@ -23,70 +23,70 @@
 <body class="overflow-x-hidden bg-light-1">
     <!-- Header -->
     <div th:replace="fragments/header"></div>
-
-    <div class="flex flex-row justify-center items-center">
-        <h1 class="text-red-sec font-archivo text-[40px] md:text-[64px] xl:text-[84px]">Peliculas en cartelera</h1>
+    <div class="flex flex-col justify-center items-center">
+        <h1 class="text-red-sec mt-12 font-archivo text-[40px] md:text-[64px] xl:text-[84px]">Peliculas en cartelera</h1>
     </div>
-    <p class="text-black my-6 px-20">
-        Esta vista presenta la tabla de peliculas que estaran en cartelera en el sistema, mostrando cada una de ellas
+    <p class="mb-8 text-lg font-normal text-center text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"> Esta vista presenta la tabla de peliculas que estaran en cartelera en el sistema, mostrando cada una de ellas
         con sus detalles principales. Cada fila incluye la imagen representativa de la pelicula, su nombre, descripción,
         precio y demás características relevantes. Además, proporciona botones de acción para editar o eliminar
         peliculas directamente desde esta interfaz, facilitando la gestión y administración del catálogo de manera
-        eficiente y visualmente clara.
-    </p>
-
-    <div class="flex flex-row justify-center items-center my-10">
-        <a th:href="@{/confiteria/admin/add-confiteria}"><button type="button"
-                class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300  shadow-lg shadow-lime-500/50 dark:shadow-lg font-semibold rounded-lg text-lg px-5 py-3 text-center me-2 mb-2">🎥
-                Agregar pelicula</button></a>
+        eficiente y visualmente clara.</p>
+    <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+        <a th:href="@{/confiteria/admin/add-confiteria}" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+            <svg class="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg>
+            Agregar pelicula
+        </a> 
+        </div> 
     </div>
 
     <div class="relative overflow-x-scroll shadow-md sm:rounded-lg max-h-[900px] px-12 ">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-700">
-            <thead class="text-xs text-white uppercase bg-gray-500">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="sticky top-0 z-10text-xs text-gray-200 font-roboto font-light bg-dark-1">
                 <tr>
-                    <th scope="col" class="px-6 py-5 text-center text-[18px]">
+                    <th scope="col" class="px-6 py-3 rounded-s-lg text-center text-[18px]">
                         Imagen
                     </th>
-                    <th scope="col" class="px-6 py-5 text-center text-[18px]">
+                    <th scope="col" class="py-3 text-center text-[18px]">
                         Nombre
                     </th>
-                    <th scope="col" class="px-6 py-5 text-center text-[18px]">
+                    <th scope="col" class="px-6 py-3 text-center text-[18px]">
                         Descripción
                     </th>
-                    <th scope="col" class="px-6 py-5 text-center text-[18px]">
+                    <th scope="col" class="px-6 py-3 text-center text-[18px]">
                         Duracion
                     </th>
-                    <th scope="col" class="px-6 py-5 text-center text-[18px]">
+                    <th scope="col" class="px-6 py-3 rounded-e-lg text-center text-[18px]">
                         Acción
                     </th>
                 </tr>
             </thead>
             <!-- th:each - movie -->
             <tbody>
-                <tr th:each="movie: ${movies}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td scope="row" class="px-3 py-2">
-                        <img th:src="@{/imgs/{img} (img=${movie.bannerImg})}" alt="img-producto"
+                <tr th:each="movie: ${movies}" class=" border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td scope="row" class="px-6 py-2">
+                        <img th:src="@{/imgs/{img} (img=${movie.posterImg})}" alt="img-producto"
                             class="w-40 bg-slate-200">
                     </td>
-                    <td class="px-6 py-4 text-[17px]" th:text="${movie.nombre}">
+                    <td class="px-2 py-4 text-center text-[17px]" th:text="${movie.nombre}">
                     </td>
                     <td class="px-6 py-4 text-[17px]" th:text="${movie.sinopsis}">
                     </td>
 
                     <td class="px-6 py-4 text-[17px]" th:text="${movie.duracion}">
                     </td>
-                    <td class="px-6 py-4 text-right bg-slate-100 flex flex-col justify-center align-middle">
-                        <a th:href="@{/confiteria/admin/editar/{id} (id=${movie.id})}"><button type="button"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2">📝
+                    <td class="px-6 py-4 w-28 text-right flex align-middle">
+                        <div class="h-48 grid grid-cols-1 content-center">
+                        <a th:href="@{/movie/admin/update/{id} (id=${movie.id})}"><button type="button"
+                                class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2">📝
                                 Editar</button></a>
                         <!-- para enviar una solicitud delete en lugar de get -->
                         <form th:action="@{/confiteria/admin/borrar/{id} (id=${movie.id})}" method="post">
                             <input type="hidden" name="_method" value="delete">
                             <button type="submit"
-                                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2">
+                                class="w-full focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2 me-2 mb-2">
                                 ❎ Eliminar
                             </button>
+                        </div>
                         </form>
                     </td>
                 </tr>

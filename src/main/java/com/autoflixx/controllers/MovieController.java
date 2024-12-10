@@ -2,6 +2,10 @@ package com.autoflixx.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -9,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -22,6 +27,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -78,60 +84,103 @@ public class MovieController {
     public String updateMovieForm(@PathVariable("id") int idMovie, Model model) {
         MovieModel movie = service.getMovieById(idMovie);
         model.addAttribute("movie", movie);
-        return "admin/movies/update";
+        return "admin/movies/update-movie";
     }
 
-    @PostMapping("/admin/update/{id}")
-    public String updateMovie(@PathVariable("id") int idMovie, @ModelAttribute("movie") MovieModel movie,
-            // @RequestParam(value = "posterImg", required = false) MultipartFile posterImg,
-            // @RequestParam(value = "bannerImg", required = false) MultipartFile bannerImg,
-            BindingResult result,
-            RedirectAttributes redirectAttributes) {
-        if (result.hasErrors()) {
-            for (ObjectError error : result.getAllErrors()) {
-                System.out.println("Ocurrio un error: " + error.getDefaultMessage());
-            }
-            return "admin/update-movie";
-        } else {
-            System.out.println("Movie: " + movie);
-        }
+    @PutMapping("/admin/edit-movie/{id}")
+public String updateMovie(
+        @PathVariable("id") int idMovie,
+        @RequestParam("titulo") String tituloN,
+        @RequestParam("descripcion") String descripcionN,
+        @RequestParam("director") String directorN,
+        @RequestParam("genero") String generoN,
+        @RequestParam(value = "imagen", required = false) MultipartFile fileN,
+        RedirectAttributes redirectAttributes) {
 
-        // Handle file uploads
-        // if (posterImg != null && !posterImg.isEmpty()) {
-        // // Save the poster image file
-        // String posterImgPath = saveFile(posterImg);
-        // movie.setPosterImg(posterImgPath);
-        // } else if (movie.getPosterImg() == null || movie.getPosterImg().isEmpty()) {
-        // movie.setPosterImg("empty-image.png");
-        // }
+    Optional<MovieModel> movieOg = Optional.ofNullable(service.getMovieById(idMovie));
 
-        // if (bannerImg != null && !bannerImg.isEmpty()) {
-        // // Save the banner image file
-        // String bannerImgPath = saveFile(bannerImg);
-        // movie.setBannerImg(bannerImgPath);
-        // } else if (movie.getBannerImg() == null || movie.getBannerImg().isEmpty()) {
-        // movie.setBannerImg("empty-image.png");
-        // }
-
-        // Parse the date string to a Date object if it's not null
-        if (movie.getFechaPub() != null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                String fechaPubString = formatter.format(movie.getFechaPub()); // Convert Date to String
-                Date date = formatter.parse(fechaPubString); // Parse the String back to Date
-                movie.setFechaPub(date); // Assuming fechaPub is a Date field in MovieModel
-            } catch (ParseException e) {
-                e.printStackTrace();
-                result.rejectValue("fechaPubString", "error.movie", "Formato de fecha inválido");
-                return "admin/update-movie";
-            }
-        }
-
-        movie.setId(idMovie); // Set the ID of the movie to the one from the path variable
-        service.updateMovie(movie);
-        redirectAttributes.addFlashAttribute("msg", "Película actualizada con éxito");
+    if (!movieOg.isPresent()) {
+        redirectAttributes.addFlashAttribute("error", "La película no existe.");
         return "redirect:/movie/admin";
     }
+
+    try {
+        String imagenNueva = movieOg.get().getPosterImg();
+
+        // Validar si se subió una nueva imagen
+        if (fileN != null && !fileN.isEmpty()) {
+            String nombreImgOg = fileN.getOriginalFilename();
+            if (nombreImgOg == null || nombreImgOg.trim().isEmpty()) {
+                redirectAttributes.addFlashAttribute("warning", "El archivo de imagen debe tener un nombre válido.");
+                return "redirect:/movie/admin/edit/" + idMovie;
+            }
+
+            // Eliminar la imagen anterior y guardar la nueva
+            deleteImage(movieOg.get().getPosterImg());
+            imagenNueva = saveImage(fileN);
+        }
+
+        // Actualizar película
+        MovieModel movieActualizada = new MovieModel();
+        movieActualizada.setId(idMovie);
+        movieActualizada.setNombre(tituloN);
+        movieActualizada.setSinopsis(descripcionN);
+        movieActualizada.setDirector(directorN);
+        movieActualizada.setGenero(generoN);
+        movieActualizada.setPosterImg(imagenNueva);
+
+        service.updateMovie(movieActualizada);
+
+        redirectAttributes.addFlashAttribute("success", "Película actualizada exitosamente.");
+        return "redirect:/movie/admin";
+
+    } catch (IOException e) {
+        redirectAttributes.addFlashAttribute("error", "Error al procesar la imagen: " + e.getMessage());
+        return "redirect:/movie/admin/edit/" + idMovie;
+    } catch (Exception e) {
+        redirectAttributes.addFlashAttribute("error", "Error al actualizar la película: " + e.getMessage());
+        return "redirect:/movie/admin/edit/" + idMovie;
+    }
+}
+
+// Guardar Imagen
+public String saveImage(MultipartFile file) throws IOException {
+    String imageName = file.getOriginalFilename();
+
+    if (imageName == null || imageName.isEmpty()) {
+        throw new IOException("El archivo no tiene un nombre válido.");
+    }
+
+    Path rutaImg = Paths.get("src/main/resources/static/imgs/movies/" + imageName);
+    Files.createDirectories(rutaImg.getParent());
+    Files.copy(file.getInputStream(), rutaImg, StandardCopyOption.REPLACE_EXISTING);
+
+    return imageName;
+}
+
+// Borrar Imagen
+public boolean deleteImage(String nombreImg) {
+    if (nombreImg == null || nombreImg.isEmpty()) {
+        System.out.println("El nombre de la imagen no es válido.");
+        return false;
+    }
+
+    Path imgRuta = Paths.get("src/main/resources/static/imgs/movies/" + nombreImg);
+
+    try {
+        if (Files.exists(imgRuta)) {
+            Files.delete(imgRuta);
+            System.out.println("Imagen eliminada con éxito: " + nombreImg);
+            return true;
+        } else {
+            System.out.println("La imagen no existe: " + nombreImg);
+            return false;
+        }
+    } catch (IOException e) {
+        System.out.println("Error al intentar eliminar la imagen: " + e.getMessage());
+        return false;
+    }
+}
 
     @GetMapping("/admin/add")
     public String addMovieForm(Model model) {

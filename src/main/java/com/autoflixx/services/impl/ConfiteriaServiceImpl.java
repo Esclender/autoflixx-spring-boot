@@ -46,4 +46,9 @@ public class ConfiteriaServiceImpl implements IConfiteriaService {
     public boolean buscarProductoPorId(Integer idConfiteria){
         return confiteriaRepository.existsById(idConfiteria);
     }
+
+    // @Override
+    // public void editarProductoConfi(ConfiteriaModel confiteria) {
+    // confiteriaRepository.save(confiteria);
+    // }
 }
